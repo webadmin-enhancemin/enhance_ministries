@@ -352,6 +352,23 @@ h3 { font-size: 1.25rem; }
     background-color: var(--color-white);
     border-radius: var(--border-radius);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.stat-cite {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 0.7rem;
+    color: var(--color-text-light);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity var(--transition);
+}
+
+.stat-cite:hover {
+    opacity: 1;
+    color: var(--color-primary);
 }
 
 .stat-number {
