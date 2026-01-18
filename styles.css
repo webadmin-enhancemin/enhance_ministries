@@ -541,6 +541,81 @@ h3 { font-size: 1.25rem; }
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Golf Event Section */
+.event-badge {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.event-date {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.event-details {
+    list-style: none;
+    margin: var(--spacing-md) 0;
+    padding: 0;
+}
+
+.event-details li {
+    padding: var(--spacing-xs) 0;
+    color: var(--color-text-light);
+}
+
+.event-includes {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    font-style: italic;
+    margin-bottom: var(--spacing-md);
+}
+
+.event-cta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+@media (min-width: 768px) {
+    .event-cta {
+        flex-direction: row;
+    }
+}
+
+.golf-card {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: var(--color-white);
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.golf-icon {
+    margin-bottom: var(--spacing-md);
+    opacity: 0.9;
+}
+
+.golf-tagline {
+    font-size: 1rem;
+    opacity: 0.95;
+    max-width: 250px;
+}
+
 .team-img {
     width: 120px;
     height: 120px;
