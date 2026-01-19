@@ -6,7 +6,7 @@
     <meta name="description" content="Enhance Ministries provides coaching, consulting, and care to Pastors for life-long ministry.">
     <title>Enhance Ministries | Healthy Pastors Leading Thriving Churches</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -102,6 +102,53 @@
                     <h3>Care</h3>
                     <p>Genuine pastoral care for pastors and their families through retreats, check-ins, and a community that understands the unique challenges of ministry.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What People Are Saying</h2>
+                <p class="section-subtitle">Hear from pastors and ministry leaders we've partnered with.</p>
+            </div>
+            <div class="testimonial-carousel-wrapper">
+                <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&larr;</button>
+                <div class="testimonial-carousel">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"From my first interaction with Matt, I felt loved, included, and like I belonged. I have always felt a clear sense of the way the Lord has gifted Matt to lead others and the way he does it is empowering in a way that most leaders fail to achieve. Matt is a man of God who uses his unique giftedness to build bridges and help others succeed."</div>
+                        <div class="testimonial-author">Matt Johnson</div>
+                        <div class="testimonial-role">Cornerstone Church, Caledonia, IL</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"Matt has been an incredible coach and friend over the years. He has always offered me a unique perspective on life and ministry that has helped me grow as both a Christ-follower and a leader. He is kind, full of wisdom, and is a great listener. Having him as a coach in my life and ministry has made me better and those around me better."</div>
+                        <div class="testimonial-author">Phil Falla</div>
+                        <div class="testimonial-role">Logos Church, Passaic County, NJ</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"Matt Swigart is a trusted and effective ministry coach! His ability to join a ministry leader, to discern pressure points, and to offer wise guidance that follows Jesus and builds Christ's Kingdom is terrific. I highly recommend him."</div>
+                        <div class="testimonial-author">Rev. Dr. Jason Holt</div>
+                        <div class="testimonial-role">AFLC Presidential Ministry Associate</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"Matt has been a huge influence in my life as he models a biblical and relational style of discipleship focused on making disciples who make disciples. His love for the Lord, his family, ministry, and the church is obvious to those who know him. He is a great example of the Pauline strategy of multiplication and discipleship in the real world."</div>
+                        <div class="testimonial-author">John Anderson</div>
+                        <div class="testimonial-role">Berean Church, Owatonna, MN</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"Matt is an incredible ministry coach. He's helped me become a better leader and process situations biblically. Each coaching session has left me feeling encouraged and challenged to take the next step."</div>
+                        <div class="testimonial-author">Brian Booth</div>
+                        <div class="testimonial-role">Fellowship Missionary Church, Fort Wayne, IN</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"I am very thankful for my good friend Matt Swigart. Matt has so much passion and heart for Christ. His desire to coach, build up leaders and create disciples who follow Christ daily in life and in their community is inspiring to me! This led my organization to launch our full-time, short-term missions program locally."</div>
+                        <div class="testimonial-author">Chief Steven Officer</div>
+                        <div class="testimonial-role">Mercy Chefs Disaster Center, Portsmouth, VA</div>
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-btn-next" aria-label="Next">&rarr;</button>
+                <div class="carousel-hint">Swipe to see more</div>
             </div>
         </div>
     </section>
@@ -389,22 +436,24 @@
             }
         });
 
-        // Carousel navigation
-        const carousel = document.querySelector('.team-carousel');
-        const prevBtn = document.querySelector('.carousel-btn-prev');
-        const nextBtn = document.querySelector('.carousel-btn-next');
+        // Carousel navigation - handles multiple carousels
+        document.querySelectorAll('.team-carousel-wrapper, .testimonial-carousel-wrapper').forEach(wrapper => {
+            const carousel = wrapper.querySelector('.team-carousel, .testimonial-carousel');
+            const prevBtn = wrapper.querySelector('.carousel-btn-prev');
+            const nextBtn = wrapper.querySelector('.carousel-btn-next');
 
-        if (carousel && prevBtn && nextBtn) {
-            const scrollAmount = 300;
+            if (carousel && prevBtn && nextBtn) {
+                const scrollAmount = 350;
 
-            prevBtn.addEventListener('click', () => {
-                carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            });
+                prevBtn.addEventListener('click', () => {
+                    carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
 
-            nextBtn.addEventListener('click', () => {
-                carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            });
-        }
+                nextBtn.addEventListener('click', () => {
+                    carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+            }
+        });
     </script>
 </body>
 </html>
