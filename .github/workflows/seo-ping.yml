@@ -1,0 +1,82 @@
+# SEO Sitemap Ping Workflow
+# Automatically notifies search engines when the sitemap is updated
+
+name: SEO Sitemap Ping
+
+on:
+  # Run on push to main branch
+  push:
+    branches:
+      - main
+    paths:
+      - '**.html'
+      - 'sitemap.xml'
+      - 'robots.txt'
+
+  # Run on schedule - weekly on Sundays at 6 AM UTC
+  schedule:
+    - cron: '0 6 * * 0'
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  ping-search-engines:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update sitemap lastmod dates
+        run: |
+          # Get current date in ISO format
+          CURRENT_DATE=$(date +%Y-%m-%d)
+
+          # Update lastmod dates in sitemap.xml
+          sed -i "s/<lastmod>[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}<\/lastmod>/<lastmod>$CURRENT_DATE<\/lastmod>/g" sitemap.xml
+
+          echo "Updated sitemap.xml with date: $CURRENT_DATE"
+
+      - name: Commit sitemap changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add sitemap.xml
+          git diff --staged --quiet || git commit -m "Update sitemap lastmod dates [skip ci]"
+          git push || echo "No changes to push"
+
+      - name: Ping Google
+        run: |
+          echo "Pinging Google..."
+          curl -s "https://www.google.com/ping?sitemap=https://hogtai.github.io/enhance_ministries/sitemap.xml" || true
+          echo "Google ping complete"
+
+      - name: Ping Bing/IndexNow
+        run: |
+          echo "Pinging Bing..."
+          curl -s "https://www.bing.com/ping?sitemap=https://hogtai.github.io/enhance_ministries/sitemap.xml" || true
+          echo "Bing ping complete"
+
+      - name: Ping Yandex
+        run: |
+          echo "Pinging Yandex..."
+          curl -s "https://webmaster.yandex.com/ping?sitemap=https://hogtai.github.io/enhance_ministries/sitemap.xml" || true
+          echo "Yandex ping complete"
+
+      - name: Summary
+        run: |
+          echo "## SEO Ping Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Sitemap: https://hogtai.github.io/enhance_ministries/sitemap.xml" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Search Engines Notified:" >> $GITHUB_STEP_SUMMARY
+          echo "- Google" >> $GITHUB_STEP_SUMMARY
+          echo "- Bing" >> $GITHUB_STEP_SUMMARY
+          echo "- Yandex" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Steps for Manual Submission:" >> $GITHUB_STEP_SUMMARY
+          echo "- [Google Search Console](https://search.google.com/search-console)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Bing Webmaster Tools](https://www.bing.com/webmasters)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Run completed at: $(date -u)" >> $GITHUB_STEP_SUMMARY
