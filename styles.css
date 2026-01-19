@@ -173,6 +173,8 @@ h3 { font-size: 1.25rem; }
     z-index: 1000;
     background-color: transparent;
     transition: background-color var(--transition), box-shadow var(--transition);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .nav.scrolled {
@@ -1311,6 +1313,39 @@ h3 { font-size: 1.25rem; }
 .modal-close:hover {
     background-color: var(--color-text-light);
     color: var(--color-white);
+}
+
+/* Fixed Mobile Donate Button */
+.mobile-donate-btn {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 122, 61, 0.4);
+    transition: all var(--transition);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+.mobile-donate-btn:hover {
+    background: var(--color-primary-dark);
+    box-shadow: 0 6px 20px rgba(255, 122, 61, 0.5);
+    transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+    .mobile-donate-btn {
+        display: none;
+    }
 }
 
 /* Utility Classes */

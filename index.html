@@ -6,7 +6,7 @@
     <meta name="description" content="Enhance Ministries provides coaching, consulting, and care to Pastors for life-long ministry.">
     <title>Enhance Ministries | Healthy Pastors Leading Thriving Churches</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=5">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -176,6 +176,9 @@
             </iframe>
         </div>
     </div>
+
+    <!-- Fixed Mobile Donate Button -->
+    <button class="mobile-donate-btn" id="mobile-donate-btn">Donate</button>
 
     <!-- Golf Fundraiser Section -->
     <section id="golf" class="section">
@@ -421,8 +424,11 @@
             navToggle.classList.remove('active');
         };
 
+        const mobileDonateBtn = document.getElementById('mobile-donate-btn');
+
         openDonateBtn.addEventListener('click', openModal);
         navDonateBtn.addEventListener('click', openModal);
+        if (mobileDonateBtn) mobileDonateBtn.addEventListener('click', openModal);
 
         closeModalBtn.addEventListener('click', () => {
             donateModal.classList.remove('active');
