@@ -503,14 +503,11 @@
             e.preventDefault();
 
             const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
             const interest = document.getElementById('interest').value;
-            const message = document.getElementById('message').value;
 
             const subject = encodeURIComponent(`Contact from ${name} - ${interest}`);
-            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nI am a: ${interest}\n\nMessage:\n${message}`);
 
-            window.location.href = `mailto:info@enhancemin.com?subject=${subject}&body=${body}`;
+            window.location.href = `mailto:info@enhancemin.com?subject=${subject}`;
 
             formStatus.className = 'form-status success';
             formStatus.textContent = 'Opening your email client... If it doesn\'t open, please email info@enhancemin.com directly.';
