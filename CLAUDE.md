@@ -151,21 +151,52 @@ The site has comprehensive SEO optimization built in:
 
 ### Manual SEO Setup Required (One-Time)
 
-**IMPORTANT:** The following manual steps are needed to complete SEO setup:
+**WAIT:** If you plan to switch to a custom domain (e.g., `enhancemin.com`), complete the domain migration FIRST before doing these manual SEO steps. See "Custom Domain Migration" section below.
 
 1. **Google Search Console** (https://search.google.com/search-console)
-   - Add property: `https://hogtai.github.io/enhance_ministries/`
+   - Add property for your final domain
    - Verify ownership (HTML file or DNS)
-   - Submit sitemap: `https://hogtai.github.io/enhance_ministries/sitemap.xml`
+   - Submit sitemap URL
 
 2. **Bing Webmaster Tools** (https://www.bing.com/webmasters)
-   - Add site: `https://hogtai.github.io/enhance_ministries/`
+   - Add site for your final domain
    - Verify ownership
-   - Submit sitemap: `https://hogtai.github.io/enhance_ministries/sitemap.xml`
+   - Submit sitemap URL
 
 3. **Optional - Google Analytics**
    - Create GA4 property at https://analytics.google.com
    - Add tracking code to all HTML pages (in `<head>`)
+
+### Custom Domain Migration (enhancemin.com)
+
+When ready to switch from `hogtai.github.io/enhance_ministries/` to `enhancemin.com`:
+
+**Step 1: Configure DNS**
+- Add CNAME record: `www` → `hogtai.github.io`
+- For apex domain: Add A records pointing to GitHub Pages IPs (see GitHub docs)
+
+**Step 2: Configure GitHub Pages**
+- Go to repository Settings → Pages
+- Under "Custom domain", enter `enhancemin.com`
+- Enable "Enforce HTTPS"
+
+**Step 3: Update All URLs in Code**
+Update these files to replace `hogtai.github.io/enhance_ministries/` with `enhancemin.com/`:
+
+1. **All 4 HTML files** (`index.html`, `events.html`, `golf.html`, `missions.html`):
+   - Canonical URLs (`<link rel="canonical">`)
+   - Open Graph URLs (`og:url`, `og:image`)
+   - Twitter URLs (`twitter:url`, `twitter:image`)
+   - JSON-LD structured data URLs
+
+2. **sitemap.xml**: Update all `<loc>` URLs
+
+3. **robots.txt**: Update sitemap URL
+
+4. **.github/workflows/seo-ping.yml**: Update sitemap URLs in ping commands
+
+**Step 4: Complete Manual SEO Setup**
+Now complete the Google Search Console and Bing Webmaster Tools setup using `enhancemin.com`
 
 ### Updating SEO When Adding Pages
 When adding a new page:

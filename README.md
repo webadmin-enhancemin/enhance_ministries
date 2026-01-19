@@ -152,27 +152,44 @@ The site includes comprehensive SEO features:
 
 ### Manual Setup Required (One-Time)
 
-To complete SEO setup and accelerate indexing, these manual steps are needed:
+**IMPORTANT:** If you plan to migrate to a custom domain (e.g., `enhancemin.com`), complete the domain migration FIRST, then do these steps with your final domain.
 
 1. **Google Search Console**
    - Go to: https://search.google.com/search-console
-   - Add property: `https://hogtai.github.io/enhance_ministries/`
+   - Add property for your final domain
    - Verify ownership (HTML file upload or DNS TXT record)
-   - Submit sitemap URL: `https://hogtai.github.io/enhance_ministries/sitemap.xml`
+   - Submit sitemap URL
 
 2. **Bing Webmaster Tools**
    - Go to: https://www.bing.com/webmasters
-   - Add site: `https://hogtai.github.io/enhance_ministries/`
+   - Add site for your final domain
    - Verify ownership
-   - Submit sitemap URL: `https://hogtai.github.io/enhance_ministries/sitemap.xml`
+   - Submit sitemap URL
 
 3. **Optional: Google Analytics**
    - Create GA4 property at https://analytics.google.com
    - Add tracking code to `<head>` section of all HTML files
 
+### Custom Domain Migration
+
+When ready to switch from GitHub Pages URL to `enhancemin.com`:
+
+1. **Configure DNS** - Add CNAME record pointing to `hogtai.github.io`
+2. **GitHub Pages Settings** - Add custom domain in repository Settings → Pages
+3. **Update Code** - Replace all `hogtai.github.io/enhance_ministries/` URLs with `enhancemin.com/`:
+   - Canonical URLs in all HTML files
+   - Open Graph and Twitter meta tags
+   - JSON-LD structured data
+   - `sitemap.xml` URLs
+   - `robots.txt` sitemap reference
+   - `.github/workflows/seo-ping.yml` ping URLs
+4. **Complete SEO Setup** - Now do Google Search Console and Bing Webmaster Tools
+
+See [CLAUDE.md](CLAUDE.md) for detailed migration steps.
+
 ### Checking Indexing Status
-- Google: Search `site:hogtai.github.io/enhance_ministries`
-- Bing: Search `site:hogtai.github.io/enhance_ministries`
+- Google: Search `site:yourfinalomain.com`
+- Bing: Search `site:yourfinaldomain.com`
 
 ## Leadership Team
 
