@@ -836,7 +836,6 @@ h3 { font-size: 1.25rem; }
 /* Team Carousel */
 .team-carousel-wrapper {
     position: relative;
-    overflow: hidden;
 }
 
 .team-carousel {
