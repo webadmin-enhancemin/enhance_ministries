@@ -567,6 +567,54 @@ h3 { font-size: 1.25rem; }
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Story Section */
+.story-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.story-image {
+    text-align: center;
+}
+
+.story-img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.story-text p {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.8;
+}
+
+.story-text p:last-child {
+    margin-bottom: 0;
+}
+
+.story-intro {
+    font-size: 1.1rem;
+}
+
+@media (min-width: 768px) {
+    .story-content {
+        grid-template-columns: 300px 1fr;
+        text-align: left;
+    }
+
+    .story-img {
+        max-width: 100%;
+    }
+}
+
 /* Golf Event Section */
 .event-badge {
     display: inline-block;
@@ -1352,6 +1400,57 @@ h3 { font-size: 1.25rem; }
     .mobile-donate-btn {
         display: none;
     }
+}
+
+/* Form Status Messages */
+.form-status {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 500;
+    display: none;
+}
+
+.form-status:not(:empty) {
+    display: block;
+}
+
+.form-status.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.form-status.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* reCAPTCHA Container */
+.recaptcha-container {
+    display: flex;
+    justify-content: center;
+}
+
+.recaptcha-container .g-recaptcha {
+    transform-origin: center;
+}
+
+@media (max-width: 400px) {
+    .recaptcha-container .g-recaptcha {
+        transform: scale(0.85);
+        transform-origin: center;
+    }
+}
+
+/* Submit Button Disabled State */
+#submit-btn:disabled {
+    background-color: var(--color-text-light);
+    border-color: var(--color-text-light);
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
 /* Utility Classes */

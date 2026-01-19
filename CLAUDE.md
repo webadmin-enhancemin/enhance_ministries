@@ -1,57 +1,54 @@
 # CLAUDE.md
 
-Instructions for Claude Code when working on the Enhance Ministries website.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-This is a static website for Enhance Ministries, a 501(c)(3) nonprofit providing pastoral coaching and care. The site is hosted on GitHub Pages.
+Static website for Enhance Ministries, a 501(c)(3) nonprofit providing pastoral coaching and care. Hosted on GitHub Pages with no build process.
 
-## Key Files
+- **Live site:** https://hogtai.github.io/enhance_ministries/
+- **Repository:** https://github.com/hogtai/enhance_ministries
 
-| File | Purpose |
-|------|---------|
-| `index.html` | Main landing page with all sections |
-| `golf.html` | Annual golf fundraiser event page |
-| `styles.css` | All CSS styles (single file, no preprocessor) |
-| `assets/` | Images, logos, and team photos |
+## Architecture
 
-## Development Workflow
-
-### Making Changes
-1. Edit files locally in `S:\enhance_ministries\`
-2. Test changes by reviewing code logic
-3. Commit with descriptive message
-4. Push to `origin main`
-5. Verify deployment via curl or WebFetch
-
-### Cache Busting
-When updating CSS, increment the version parameter in both HTML files:
-```html
-<link rel="stylesheet" href="styles.css?v=X">
+```
+index.html          # Main landing page (hero, stats, services, testimonials, team, contact)
+golf.html           # Annual golf fundraiser event page
+styles.css          # All CSS (mobile-first, CSS custom properties)
+assets/             # Images, logos, team photos
 ```
 
-### Deployment Verification
+All JavaScript is inline at the bottom of each HTML file (no external JS files).
+
+## Development Commands
+
 ```bash
-# Check if changes are deployed
-curl -s "https://hogtai.github.io/enhance_ministries/" | grep "search-term"
+# Cache busting: increment version in BOTH HTML files when updating CSS
+<link rel="stylesheet" href="styles.css?v=X">
 
-# Check CSS deployment
+# Verify deployment
+curl -s "https://hogtai.github.io/enhance_ministries/" | grep "search-term"
 curl -s "https://hogtai.github.io/enhance_ministries/styles.css?v=X" | grep "css-rule"
+
+# Deploy
+git add . && git commit -m "message" && git push origin main
 ```
 
-## Code Patterns
+## Key Patterns
 
 ### CSS Custom Properties
-All colors and spacing use CSS variables defined in `:root`:
-```css
---color-primary: #FF7A3D;
---color-primary-dark: #FF5100;
---spacing-md: 1.5rem;
---spacing-lg: 2rem;
-```
+All colors, spacing, and common values in `:root`. Key variables:
+- Colors: `--color-primary` (#FF7A3D), `--color-primary-dark` (#FF5100), `--color-text`, `--color-bg-light`
+- Spacing: `--spacing-xs` through `--spacing-2xl`
+- Layout: `--max-width` (1200px), `--border-radius`, `--transition`
+
+### Responsive Breakpoints
+- Mobile: < 768px (single-card carousels, hamburger nav)
+- Tablet: 768px+ (two-card carousels, full nav)
+- Desktop: 1024px+ (multi-card carousels, carousel arrow buttons visible)
 
 ### Carousel Pattern
-Both team and testimonial carousels use the same structure:
+Both team and testimonial carousels share the same structure and JS handler:
 ```html
 <div class="[type]-carousel-wrapper">
     <button class="carousel-btn carousel-btn-prev">&larr;</button>
@@ -63,83 +60,49 @@ Both team and testimonial carousels use the same structure:
 </div>
 ```
 
-JavaScript handles all carousels with a single event listener loop.
+### Navigation
+- `index.html`: Uses `.nav` (transparent, becomes white on scroll via JS `.scrolled` class)
+- `golf.html`: Uses `.nav.nav-solid` (always white background)
+- **Both files share the same nav items** - update both when changing navigation
 
-### Responsive Approach
-- Mobile-first CSS with `min-width` media queries
-- Breakpoints: 768px (tablet), 1024px (desktop)
-- Carousels use `scroll-snap-type: x mandatory`
-- Navigation buttons hidden on mobile, visible on desktop
+### Donate Modal
+Three triggers open the same modal (`#donate-modal`):
+1. Nav "Donate" button (`.nav-donate-btn`)
+2. "Give" button in donate section (`#open-donate-modal`)
+3. Fixed mobile donate button (`#mobile-donate-btn`) - only visible on mobile
 
-### Section Alternating Backgrounds
-Sections alternate between white and light gray:
+### Section Backgrounds
+Alternate between white and light gray using `.section-alt`:
 ```html
-<section class="section">           <!-- White background -->
-<section class="section section-alt"> <!-- Light gray background -->
+<section class="section">           <!-- White -->
+<section class="section section-alt"> <!-- Light gray (#F8F5F4) -->
 ```
 
 ## Common Tasks
 
 ### Adding a Team Member
-1. Add photo to `assets/` folder
-2. Add team-card div in the team-carousel section of `index.html`
-3. If photo needs positioning adjustment, add inline style: `style="object-position: center X%;"`
+1. Add photo to `assets/`
+2. Add `team-card` div in `index.html` team-carousel
+3. For photo positioning: `style="object-position: center X%;"`
 
 ### Adding a Testimonial
-1. Add testimonial-card div in the testimonial-carousel section
-2. Include: `.testimonial-quote`, `.testimonial-author`, `.testimonial-role`
+Add `testimonial-card` with `.testimonial-quote`, `.testimonial-author`, `.testimonial-role`
 
-### Updating Statistics
-Statistics in "Why Enhance Ministries" section should have verifiable sources. Current sources:
-- Barna Group research (2017, 2022)
+### Updating Navigation
+Must update nav in **both** `index.html` and `golf.html`
 
-### Modifying Navigation
-Navigation items are in both `index.html` and `golf.html`. Update both files when changing nav structure.
+## External Integrations
 
-The home page uses `.nav` (transparent on hero, white on scroll).
-The golf page uses `.nav.nav-solid` (always white background).
-
-## External Services
-
-### Zeffy Integration
-- Donation form: Modal popup triggered by "Give" buttons
-- Golf registration: Iframe embed on golf.html
-- Do not modify Zeffy URLs without verifying they still work
+### Zeffy (Donation Platform)
+- Donation modal: Embedded iframe in `#donate-modal`
+- Golf registration: Iframe embed on `golf.html`
+- Verify URLs still work before modifying
 
 ### Google Fonts
-Font is loaded via Google Fonts CDN. The Inter font family is used throughout.
+Inter font family (weights 400, 500, 600, 700)
 
-## Important Notes
+## Deployment Notes
 
-1. **No build process** - This is a static site with no bundling or compilation
-2. **No JavaScript frameworks** - Vanilla JS only
-3. **Single CSS file** - All styles in `styles.css`
-4. **GitHub Pages hosting** - Deploys automatically from `main` branch
-5. **Mobile-first** - Always test mobile view when making changes
-
-## File Locations
-
-- Repository: `S:\enhance_ministries\`
-- Remote: `https://github.com/hogtai/enhance_ministries`
-- Live site: `https://hogtai.github.io/enhance_ministries/`
-
-## Commit Message Format
-
-Use descriptive commit messages:
-```
-Add [feature] to [location]
-
-- Detail 1
-- Detail 2
-
-Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
-```
-
-## Testing Checklist
-
-Before confirming changes are complete:
-- [ ] HTML deployed (check with curl/grep)
-- [ ] CSS deployed (check with curl/grep on styles.css?v=X)
-- [ ] Responsive behavior verified (check media queries)
-- [ ] Navigation works on both pages
-- [ ] External links/embeds functional
+- GitHub Pages deploys automatically from `main` branch
+- Always increment `styles.css?v=X` in both HTML files when changing CSS
+- Verify deployment with curl before confirming changes complete
