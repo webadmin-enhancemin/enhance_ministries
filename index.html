@@ -9,14 +9,16 @@
     <meta name="description" content="Enhance Ministries provides coaching, consulting, and care to Pastors for life-long ministry.">
     <title>Enhance Ministries | Providing coaching, consulting, and care to pastors for life-long ministry</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css?v=9">
+    <link rel="stylesheet" href="styles.css?v=10">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- EmailJS SDK -->
+    <!-- EmailJS SDK - Uncomment when you have API credentials
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <!-- Google reCAPTCHA v2 -->
+    -->
+    <!-- Google reCAPTCHA v2 - Uncomment when you have API credentials
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    -->
 </head>
 <body>
     <!-- Navigation -->
@@ -372,10 +374,6 @@
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="4" required></textarea>
                     </div>
-                    <div class="form-group recaptcha-container">
-                        <!-- Replace YOUR_RECAPTCHA_SITE_KEY with your actual site key -->
-                        <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
-                    </div>
                     <button type="submit" class="btn btn-primary btn-block" id="submit-btn">Send Message</button>
                     <div id="form-status" class="form-status"></div>
                 </form>
@@ -406,9 +404,6 @@
     </footer>
 
     <script>
-        // Initialize EmailJS - Replace YOUR_PUBLIC_KEY with your EmailJS public key
-        emailjs.init('YOUR_PUBLIC_KEY');
-
         // Mobile navigation toggle
         const navToggle = document.querySelector('.nav-toggle');
         const navMenu = document.querySelector('.nav-menu');
@@ -500,48 +495,25 @@
             }
         });
 
-        // Contact form submission with EmailJS and reCAPTCHA
+        // Contact form submission - opens email client with form data
         const contactForm = document.getElementById('contact-form');
-        const submitBtn = document.getElementById('submit-btn');
         const formStatus = document.getElementById('form-status');
 
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Check if reCAPTCHA is completed
-            const recaptchaResponse = grecaptcha.getResponse();
-            if (!recaptchaResponse) {
-                formStatus.className = 'form-status error';
-                formStatus.textContent = 'Please complete the reCAPTCHA verification.';
-                return;
-            }
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const interest = document.getElementById('interest').value;
+            const message = document.getElementById('message').value;
 
-            // Disable submit button and show loading state
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            formStatus.className = 'form-status';
-            formStatus.textContent = '';
+            const subject = encodeURIComponent(`Contact from ${name} - ${interest}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nI am a: ${interest}\n\nMessage:\n${message}`);
 
-            // Send email via EmailJS
-            // Replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID with your actual IDs
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-                .then(function() {
-                    // Success
-                    formStatus.className = 'form-status success';
-                    formStatus.textContent = 'Thank you! Your message has been sent successfully.';
-                    contactForm.reset();
-                    grecaptcha.reset();
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Send Message';
-                }, function(error) {
-                    // Error
-                    formStatus.className = 'form-status error';
-                    formStatus.textContent = 'Sorry, there was an error sending your message. Please try again or email us directly.';
-                    console.error('EmailJS error:', error);
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Send Message';
-                    grecaptcha.reset();
-                });
+            window.location.href = `mailto:info@enhancemin.com?subject=${subject}&body=${body}`;
+
+            formStatus.className = 'form-status success';
+            formStatus.textContent = 'Opening your email client... If it doesn\'t open, please email info@enhancemin.com directly.';
         });
     </script>
 </body>
