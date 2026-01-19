@@ -299,7 +299,7 @@ h3 { font-size: 1.25rem; }
 
 .hero-vision {
     color: var(--color-white);
-    margin-bottom: var(--spacing-md);
+    margin: 0 auto var(--spacing-md);
     max-width: 800px;
 }
 
