@@ -40,6 +40,14 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+/* Scroll offset for anchor links - accounts for fixed nav */
+section[id],
+[id].section,
+.mission-content-grid[id] {
+    scroll-margin-top: 100px;
 }
 
 body {

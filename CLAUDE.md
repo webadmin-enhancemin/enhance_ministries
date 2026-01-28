@@ -29,11 +29,11 @@ All JavaScript is inline at the bottom of each HTML file (no external JS files).
 
 ```bash
 # Cache busting: increment version in ALL 4 HTML files when updating CSS
-<link rel="stylesheet" href="styles.css?v=16">
+<link rel="stylesheet" href="styles.css?v=17">
 
 # Verify deployment
 curl -s "https://hogtai.github.io/enhance_ministries/" | grep "search-term"
-curl -s "https://hogtai.github.io/enhance_ministries/styles.css?v=16" | grep "css-rule"
+curl -s "https://hogtai.github.io/enhance_ministries/styles.css?v=17" | grep "css-rule"
 
 # Deploy
 git add . && git commit -m "message" && git push origin main
@@ -105,7 +105,7 @@ Must update nav in **all 4 HTML files**: `index.html`, `events.html`, `golf.html
 
 ### Updating CSS
 1. Make changes in `styles.css`
-2. Increment version parameter in all 4 HTML files: `styles.css?v=16`
+2. Increment version parameter in all 4 HTML files: `styles.css?v=17`
 3. Commit, push, and verify deployment
 
 ## External Integrations
