@@ -2284,6 +2284,36 @@ h3 { font-size: 1.25rem; }
     }
 }
 
+.cta-buttons-three {
+    gap: var(--spacing-md);
+}
+
+.cta-buttons-three .btn {
+    min-width: 160px;
+}
+
+@media (min-width: 768px) {
+    .cta-buttons-three {
+        flex-wrap: wrap;
+    }
+}
+
+.cta-subtext {
+    margin-top: var(--spacing-lg);
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.cta-subtext a {
+    color: var(--color-white);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.cta-subtext a:hover {
+    opacity: 0.8;
+}
+
 /* Mission Photo Gallery */
 .mission-photos {
     display: grid;
