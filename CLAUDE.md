@@ -16,7 +16,7 @@ index.html          # Main landing page (hero, stats, services, testimonials, te
 events.html         # Events hub page (links to golf and missions)
 golf.html           # Annual golf fundraiser event page
 missions.html       # Mission Experiences page (student and family trips)
-styles.css          # All CSS (mobile-first, CSS custom properties) - currently v=14
+styles.css          # All CSS (mobile-first, CSS custom properties) - currently v=15
 assets/             # Images, logos, team photos, mission trip images
 sitemap.xml         # XML sitemap for search engines
 robots.txt          # Crawler directives for search engines and AI bots
@@ -29,11 +29,11 @@ All JavaScript is inline at the bottom of each HTML file (no external JS files).
 
 ```bash
 # Cache busting: increment version in ALL 4 HTML files when updating CSS
-<link rel="stylesheet" href="styles.css?v=14">
+<link rel="stylesheet" href="styles.css?v=15">
 
 # Verify deployment
 curl -s "https://hogtai.github.io/enhance_ministries/" | grep "search-term"
-curl -s "https://hogtai.github.io/enhance_ministries/styles.css?v=14" | grep "css-rule"
+curl -s "https://hogtai.github.io/enhance_ministries/styles.css?v=15" | grep "css-rule"
 
 # Deploy
 git add . && git commit -m "message" && git push origin main
@@ -105,7 +105,7 @@ Must update nav in **all 4 HTML files**: `index.html`, `events.html`, `golf.html
 
 ### Updating CSS
 1. Make changes in `styles.css`
-2. Increment version parameter in all 4 HTML files: `styles.css?v=14`
+2. Increment version parameter in all 4 HTML files: `styles.css?v=15`
 3. Commit, push, and verify deployment
 
 ## External Integrations

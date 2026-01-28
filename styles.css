@@ -2091,6 +2091,42 @@ h3 { font-size: 1.25rem; }
     }
 }
 
+/* Compact pricing grid for 3 cards */
+@media (min-width: 768px) {
+    .pricing-grid.pricing-grid-compact {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .pricing-grid.pricing-grid-compact {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Pricing note */
+.pricing-note {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    background: var(--color-bg-light);
+    border-radius: var(--border-radius);
+}
+
+.pricing-note p {
+    margin: 0 0 var(--spacing-xs);
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+.pricing-note p:last-child {
+    margin-bottom: 0;
+}
+
 .pricing-card {
     background: var(--color-white);
     padding: var(--spacing-lg);
