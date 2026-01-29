@@ -1898,12 +1898,6 @@ h3 { font-size: 1.25rem; }
     padding: var(--spacing-lg);
     border-radius: var(--border-radius);
     text-align: center;
-    transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.coaching-benefit-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 .coaching-benefit-icon {
@@ -1943,12 +1937,6 @@ h3 { font-size: 1.25rem; }
     padding: var(--spacing-md);
     border-radius: var(--border-radius);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.consulting-service:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 .consulting-service svg {
