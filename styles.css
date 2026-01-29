@@ -210,9 +210,11 @@ h3 { font-size: 1.25rem; }
     transition: filter var(--transition), transform var(--transition), opacity var(--transition);
 }
 
-.nav-logo:hover img {
-    transform: scale(1.05);
-    opacity: 0.85;
+@media (hover: hover) {
+    .nav-logo:hover img {
+        transform: scale(1.05);
+        opacity: 0.85;
+    }
 }
 
 .nav.scrolled .nav-logo img,
