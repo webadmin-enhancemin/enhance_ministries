@@ -598,24 +598,37 @@
             const interest = document.getElementById('interest').value;
             const message = document.getElementById('message').value;
 
-            let subject = encodeURIComponent(`Contact from ${name} - ${interest}`);
-            let mailtoUrl = `mailto:info@enhancemin.com?subject=${subject}`;
+            const subjectText = `Contact from ${name} - ${interest}`;
+            let mailtoUrl = `mailto:info@enhancemin.com?subject=${encodeURIComponent(subjectText)}`;
 
-            // Add reply-to with user's email
-            mailtoUrl += `&cc=${encodeURIComponent(email)}`;
-
-            // Add message body if there's a message
+            // Build email body
+            let bodyText = `From: ${name}\nEmail: ${email}\nInterest: ${interest}`;
             if (message.trim()) {
-                const body = encodeURIComponent(`Message from ${name} (${email}):\n\n${message}`);
-                mailtoUrl += `&body=${body}`;
+                bodyText += `\n\nMessage:\n${message}`;
             }
+            mailtoUrl += `&body=${encodeURIComponent(bodyText)}`;
 
-            // Try window.location.href first (most reliable on Windows)
-            window.location.href = mailtoUrl;
+            // Store for copy function
+            window.pendingEmailData = {
+                to: 'info@enhancemin.com',
+                subject: subjectText,
+                body: bodyText
+            };
 
-            // Show status with clickable fallback link
+            // Try opening email client with window.open (works better on some systems)
+            const emailWindow = window.open(mailtoUrl, '_blank');
+
+            // Show comprehensive fallback options
             formStatus.className = 'form-status success';
-            formStatus.innerHTML = 'Opening your email client... If it doesn\'t open, <a href="' + mailtoUrl + '" style="color: var(--color-primary); text-decoration: underline;">click here to try again</a> or email <a href="mailto:info@enhancemin.com" style="color: var(--color-primary); text-decoration: underline;">info@enhancemin.com</a> directly.';
+            formStatus.innerHTML = `
+                <p style="margin-bottom: 10px;"><strong>Email client should be opening...</strong></p>
+                <p style="margin-bottom: 10px;">If nothing happened, your computer may not have an email app configured. Options:</p>
+                <p style="margin-bottom: 8px;">
+                    <button onclick="navigator.clipboard.writeText('To: ' + window.pendingEmailData.to + '\\nSubject: ' + window.pendingEmailData.subject + '\\n\\n' + window.pendingEmailData.body).then(() => this.textContent = 'Copied!')" style="background: var(--color-primary); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 8px;">Copy Email Details</button>
+                    <a href="${mailtoUrl}" style="color: var(--color-primary); text-decoration: underline;">Try Again</a>
+                </p>
+                <p style="font-size: 0.9rem; color: #666;">Or email directly: <strong>info@enhancemin.com</strong></p>
+            `;
         });
     </script>
 </body>
