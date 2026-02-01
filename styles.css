@@ -2590,6 +2590,25 @@ h3 { font-size: 1.25rem; }
     }
 }
 
+/* Single card centered grid variant */
+.media-grid-single {
+    max-width: 500px;
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .media-grid-single {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    .media-grid-single {
+        grid-template-columns: 1fr;
+    }
+}
+
 .media-card {
     background: var(--color-white);
     border-radius: var(--border-radius);
