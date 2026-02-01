@@ -12,15 +12,17 @@ Static website for Enhance Ministries, a 501(c)(3) nonprofit providing pastoral 
 ## Architecture
 
 ```
-index.html          # Main landing page (hero, stats, services, testimonials, team, contact)
-events.html         # Events hub page (links to golf and missions)
-golf.html           # Annual golf fundraiser event page
-missions.html       # Mission Experiences page (student and family trips)
-styles.css          # All CSS (mobile-first, CSS custom properties) - currently v=15
-assets/             # Images, logos, team photos, mission trip images
-sitemap.xml         # XML sitemap for search engines
-robots.txt          # Crawler directives for search engines and AI bots
-.github/workflows/  # GitHub Actions (SEO ping workflow)
+index.html              # Main landing page (hero, stats, services, testimonials, team, contact)
+coaching.html           # Coaching for Pastors & Consulting for Ministries page
+speaking_training.html  # Speaking & Training services page
+events.html             # Events hub page (links to golf and missions)
+golf.html               # Annual golf fundraiser event page
+missions.html           # Mission Experiences page (student and family trips)
+styles.css              # All CSS (mobile-first, CSS custom properties) - currently v=26
+assets/                 # Images, logos, team photos, mission trip images
+sitemap.xml             # XML sitemap for search engines
+robots.txt              # Crawler directives for search engines and AI bots
+.github/workflows/      # GitHub Actions (SEO ping workflow)
 ```
 
 All JavaScript is inline at the bottom of each HTML file (no external JS files).
@@ -28,8 +30,8 @@ All JavaScript is inline at the bottom of each HTML file (no external JS files).
 ## Development Commands
 
 ```bash
-# Cache busting: increment version in ALL 4 HTML files when updating CSS
-<link rel="stylesheet" href="styles.css?v=20">
+# Cache busting: increment version in ALL 6 HTML files when updating CSS
+<link rel="stylesheet" href="styles.css?v=26">
 
 # Verify deployment
 curl -s "https://hogtai.github.io/enhance_ministries/" | grep "search-term"
@@ -101,11 +103,11 @@ Alternate between white and light gray using `.section-alt`:
 Add `testimonial-card` with `.testimonial-quote`, `.testimonial-author`, `.testimonial-role`
 
 ### Updating Navigation
-Must update nav in **all 4 HTML files**: `index.html`, `events.html`, `golf.html`, `missions.html`
+Must update nav in **all 6 HTML files**: `index.html`, `coaching.html`, `speaking_training.html`, `events.html`, `golf.html`, `missions.html`
 
 ### Updating CSS
 1. Make changes in `styles.css`
-2. Increment version parameter in all 4 HTML files: `styles.css?v=20`
+2. Increment version parameter in all 6 HTML files: `styles.css?v=26`
 3. Commit, push, and verify deployment
 
 ## External Integrations
@@ -183,7 +185,7 @@ When ready to switch from `hogtai.github.io/enhance_ministries/` to `enhancemin.
 **Step 3: Update All URLs in Code**
 Update these files to replace `hogtai.github.io/enhance_ministries/` with `enhancemin.com/`:
 
-1. **All 4 HTML files** (`index.html`, `events.html`, `golf.html`, `missions.html`):
+1. **All 6 HTML files** (`index.html`, `coaching.html`, `speaking_training.html`, `events.html`, `golf.html`, `missions.html`):
    - Canonical URLs (`<link rel="canonical">`)
    - Open Graph URLs (`og:url`, `og:image`)
    - Twitter URLs (`twitter:url`, `twitter:image`)
@@ -208,8 +210,80 @@ When adding a new page:
 ## Deployment Notes
 
 - GitHub Pages deploys automatically from `main` branch (typically 10-15 seconds)
-- Always increment `styles.css?v=X` in **all 4 HTML files** when changing CSS
+- Always increment `styles.css?v=X` in **all 6 HTML files** when changing CSS
 - Verify deployment with curl before confirming changes complete
+
+---
+
+## Planned Features / Future Enhancements
+
+### Contact Form with Web3Forms (TODO)
+
+The current contact form uses a `mailto:` link which opens the user's email client. To implement a proper form submission with spam protection:
+
+**Service:** Web3Forms (free tier: 250 submissions/month, includes hCaptcha)
+
+**Setup Steps:**
+
+1. **Get Access Key:**
+   - Go to [web3forms.com](https://web3forms.com/)
+   - Enter `info@enhancemin.org` in the "Create Access Key" field
+   - Click "Create Access Key"
+   - Check email for the access key (format: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`)
+
+2. **Update the Contact Form in `index.html`:**
+
+   Replace the current form tag:
+   ```html
+   <form class="contact-form" id="contact-form">
+   ```
+
+   With:
+   ```html
+   <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+       <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+       <input type="hidden" name="subject" value="New Contact Form Submission - Enhance Ministries">
+       <input type="hidden" name="from_name" value="Enhance Ministries Website">
+       <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+   ```
+
+3. **Add hCaptcha (optional but recommended):**
+
+   Add before the submit button:
+   ```html
+   <div class="h-captcha" data-captcha="true"></div>
+   ```
+
+   Add to the `<head>`:
+   ```html
+   <script src="https://web3forms.com/client/script.js" async defer></script>
+   ```
+
+4. **Update the JavaScript:**
+
+   Replace the current `mailto:` approach with AJAX submission or let the form submit naturally with a redirect. For AJAX:
+   ```javascript
+   contactForm.addEventListener('submit', async function(e) {
+       e.preventDefault();
+       const formData = new FormData(this);
+       const response = await fetch('https://api.web3forms.com/submit', {
+           method: 'POST',
+           body: formData
+       });
+       const result = await response.json();
+       if (result.success) {
+           formStatus.className = 'form-status success';
+           formStatus.textContent = 'Message sent successfully! Matt will be in touch soon.';
+           contactForm.reset();
+       } else {
+           formStatus.className = 'form-status error';
+           formStatus.textContent = 'Something went wrong. Please try again or email info@enhancemin.org directly.';
+       }
+   });
+   ```
+
+5. **Update email references:**
+   - Change `info@enhancemin.com` to `info@enhancemin.org` in contact section display
 
 ---
 
@@ -265,7 +339,7 @@ This website can be easily maintained using Claude Code, Anthropic's AI coding a
 
 ### Important Reminders
 
-1. **CSS Changes**: When Claude updates `styles.css`, ensure it also increments the version in all 4 HTML files
+1. **CSS Changes**: When Claude updates `styles.css`, ensure it also increments the version in all 6 HTML files
 
 2. **Navigation**: Any nav changes must be applied to all 4 pages
 
