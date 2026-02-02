@@ -1,0 +1,24 @@
+{#
+  Donate Modal Component
+
+  Includes:
+  - Modal overlay with Zeffy donation iframe
+  - Fixed mobile donate button
+
+  Data source: src/_data/site.json (donateUrl)
+#}
+
+{# Donate Modal #}
+<div id="donate-modal" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" aria-label="Close">&times;</button>
+        <iframe
+            title="Donation form powered by Zeffy"
+            src="{{ site.donateUrl }}"
+            style="border: 0; width: 100%; height: 100%;">
+        </iframe>
+    </div>
+</div>
+
+{# Fixed Mobile Donate Button #}
+<button class="mobile-donate-btn" id="mobile-donate-btn">Donate</button>

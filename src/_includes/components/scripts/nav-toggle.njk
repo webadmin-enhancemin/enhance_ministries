@@ -1,0 +1,27 @@
+{#
+  Mobile Navigation Toggle Script
+
+  Handles:
+  - Hamburger menu open/close
+  - Close nav when clicking links (except dropdown toggles on mobile)
+#}
+
+// Mobile navigation toggle
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('.nav-menu');
+
+navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    navToggle.classList.toggle('active');
+});
+
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        // Don't close nav if clicking dropdown toggle on mobile
+        if (link.classList.contains('dropdown-toggle') && window.innerWidth < 1024) {
+            return;
+        }
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+    });
+});

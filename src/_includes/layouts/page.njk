@@ -1,0 +1,18 @@
+{#
+  Standard Page Layout
+  Extends base layout, used by most pages except homepage
+
+  Required front matter:
+  - title: Page title
+  - navStyle: 'solid' for white background nav
+
+  Optional front matter:
+  - description: Meta description
+  - keywords: Meta keywords
+  - hasDropdown: true if page has dropdown menus
+#}
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+{{ content | safe }}
+{% endblock %}

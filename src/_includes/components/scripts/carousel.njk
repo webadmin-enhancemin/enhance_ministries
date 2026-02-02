@@ -1,0 +1,36 @@
+{#
+  Testimonial Carousel Script
+
+  Handles:
+  - Scroll-based carousel navigation
+  - Prev/Next button functionality
+  - Responsive card display
+#}
+
+// Testimonial carousel
+const testimonialCarousel = document.querySelector('.testimonial-carousel');
+if (testimonialCarousel) {
+    const testimonialPrevBtn = testimonialCarousel.parentElement.querySelector('.carousel-btn-prev');
+    const testimonialNextBtn = testimonialCarousel.parentElement.querySelector('.carousel-btn-next');
+    const testimonialCards = testimonialCarousel.querySelectorAll('.testimonial-card');
+
+    let testimonialCardsVisible = window.innerWidth < 768 ? 1 : (window.innerWidth < 1024 ? 2 : 3);
+
+    function updateTestimonialCardsVisible() {
+        testimonialCardsVisible = window.innerWidth < 768 ? 1 : (window.innerWidth < 1024 ? 2 : 3);
+    }
+
+    window.addEventListener('resize', updateTestimonialCardsVisible);
+
+    if (testimonialPrevBtn && testimonialNextBtn) {
+        testimonialPrevBtn.addEventListener('click', () => {
+            const cardWidth = testimonialCards[0].offsetWidth + 24;
+            testimonialCarousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+
+        testimonialNextBtn.addEventListener('click', () => {
+            const cardWidth = testimonialCards[0].offsetWidth + 24;
+            testimonialCarousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+    }
+}

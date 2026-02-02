@@ -1,0 +1,37 @@
+{#
+  Navigation Component
+
+  Variables (from page front matter):
+  - navStyle: 'solid' for white background, omit for transparent (homepage)
+
+  Data source: src/_data/navigation.json
+#}
+<nav class="nav{% if navStyle == 'solid' %} nav-solid{% endif %}">
+    <div class="nav-container">
+        <a href="/" class="nav-logo">
+            <img src="/assets/logo.png" alt="{{ site.name }}"{% if navStyle != 'solid' %} width="129" height="40"{% endif %}>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            {% for item in navigation.main %}
+            <li{% if item.children %} class="nav-dropdown"{% endif %}>
+                {% if item.children %}
+                <a href="{{ item.url }}" class="dropdown-toggle">{{ item.label }}</a>
+                <ul class="dropdown-menu">
+                    {% for child in item.children %}
+                    <li><a href="{{ child.url }}">{{ child.label }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <a href="{{ item.url }}">{{ item.label }}</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+            <li><button class="btn btn-primary btn-sm nav-donate-btn">Donate</button></li>
+        </ul>
+    </div>
+</nav>
