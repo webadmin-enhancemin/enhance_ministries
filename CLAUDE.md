@@ -34,7 +34,7 @@ All JavaScript is inline at the bottom of each HTML file (no external JS files).
 
 ```bash
 # Cache busting: increment version in ALL 9 HTML files when updating CSS
-<link rel="stylesheet" href="styles.css?v=27">
+<link rel="stylesheet" href="styles.css?v=33">
 
 # Verify deployment
 curl -s "https://hogtai.github.io/enhance_ministries/" | grep "search-term"
@@ -110,7 +110,7 @@ Must update nav in **all 9 HTML files**: `index.html`, `coaching.html`, `speakin
 
 ### Updating CSS
 1. Make changes in `styles.css`
-2. Increment version parameter in all 9 HTML files: `styles.css?v=27`
+2. Increment version parameter in all 9 HTML files: `styles.css?v=33`
 3. Commit, push, and verify deployment
 
 ## External Integrations
@@ -215,6 +215,24 @@ When adding a new page:
 - GitHub Pages deploys automatically from `main` branch (typically 10-15 seconds)
 - Always increment `styles.css?v=X` in **all 9 HTML files** when changing CSS
 - Verify deployment with curl before confirming changes complete
+
+## Lighthouse Best Practices & Security Headers
+
+**Current Score:** 77/100 (as of Feb 2026)
+
+The site loses points on Lighthouse Best Practices due to:
+
+1. **Third-party cookies (71 cookies)** - From Zeffy donation iframe (Google reCAPTCHA, Stripe, HubSpot, LinkedIn, etc.). These are **expected and cannot be eliminated** without removing donation functionality.
+
+2. **Missing security headers** - GitHub Pages doesn't support custom HTTP headers:
+   - No Content Security Policy (CSP)
+   - No Cross-Origin-Opener-Policy (COOP)
+   - No X-Frame-Options
+   - HSTS missing `includeSubDomains` and `preload`
+
+**To improve the score:** Add Cloudflare (free) in front of GitHub Pages. See [docs/CLOUDFLARE_SETUP.md](docs/CLOUDFLARE_SETUP.md) for detailed setup instructions.
+
+**Note:** A 77 score is acceptable for a nonprofit site. The third-party cookie warnings will persist even with Cloudflare since they come from Zeffy's legitimate payment/security services.
 
 ---
 

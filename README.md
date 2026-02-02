@@ -61,15 +61,22 @@ A modern, responsive website for Enhance Ministries - a 501(c)(3) nonprofit orga
 ```
 enhance_ministries/
 ├── index.html              # Main landing page
+├── coaching.html           # Coaching & Consulting services
+├── speaking_training.html  # Speaking & Training services
 ├── events.html             # Events hub page
 ├── golf.html               # Golf event page
 ├── missions.html           # Mission Experiences page
-├── styles.css              # All styles (responsive, currently v=13)
+├── book.html               # Matt's Book page
+├── media.html              # Media (messages, podcasts, articles)
+├── partners.html           # Ministry Partners page
+├── styles.css              # All styles (responsive, currently v=33)
 ├── sitemap.xml             # XML sitemap for search engines
 ├── robots.txt              # Crawler directives (allows all search engines + AI bots)
 ├── .github/
 │   └── workflows/
 │       └── seo-ping.yml    # Automated search engine ping workflow
+├── docs/
+│   └── CLOUDFLARE_SETUP.md # Guide for adding Cloudflare security headers
 ├── assets/
 │   ├── logo.png            # Enhance Ministries logo
 │   ├── favicon.png         # Browser favicon
@@ -119,7 +126,7 @@ git push origin main
 Changes typically go live within 10-15 seconds.
 
 ### Cache Busting
-The stylesheet includes a version parameter (`styles.css?v=13`) to ensure browsers load the latest CSS after updates. When updating CSS, increment the version in **all 4 HTML files**.
+The stylesheet includes a version parameter (`styles.css?v=33`) to ensure browsers load the latest CSS after updates. When updating CSS, increment the version in **all 9 HTML files**.
 
 ## External Integrations
 
@@ -190,6 +197,30 @@ See [CLAUDE.md](CLAUDE.md) for detailed migration steps.
 ### Checking Indexing Status
 - Google: Search `site:yourfinalomain.com`
 - Bing: Search `site:yourfinaldomain.com`
+
+## Lighthouse & Security Headers
+
+**Current Lighthouse Scores (Feb 2026):**
+- Performance: 90+
+- Accessibility: 95+
+- Best Practices: 77
+- SEO: 100
+
+### Why Best Practices is 77
+
+The site loses points due to limitations outside our control:
+
+1. **Third-party cookies (71 cookies)** - From the Zeffy donation iframe (Google reCAPTCHA, Stripe, HubSpot, etc.). These are necessary for donation processing and cannot be removed.
+
+2. **Missing security headers** - GitHub Pages doesn't support custom HTTP headers like CSP, COOP, or X-Frame-Options.
+
+### Improving the Score (Optional)
+
+To improve the Best Practices score to 90+, you can add **Cloudflare** (free tier) in front of GitHub Pages to inject security headers at the edge.
+
+See [docs/CLOUDFLARE_SETUP.md](docs/CLOUDFLARE_SETUP.md) for detailed setup instructions.
+
+**Note:** A 77 score is acceptable for a nonprofit site. The third-party cookie warnings will persist even with Cloudflare since they come from Zeffy's legitimate payment and security services.
 
 ## Leadership Team
 
