@@ -64,6 +64,8 @@
     }
     </script>
     <link rel="stylesheet" href="styles.css?v=34">
+    <!-- Preload critical hero image for LCP -->
+    <link rel="preload" as="image" href="assets/hero-mountain.jpg" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -79,7 +81,7 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="#" class="nav-logo">
-                <img src="assets/logo.png" alt="Enhance Ministries">
+                <img src="assets/logo.png" alt="Enhance Ministries" width="129" height="40">
             </a>
             <button class="nav-toggle" aria-label="Toggle navigation">
                 <span></span>
@@ -138,7 +140,7 @@
             </div>
             <div class="story-content">
                 <div class="story-image">
-                    <img src="assets/matt-story.png" alt="Matt Swigart" class="story-img">
+                    <img src="assets/matt-story.png" alt="Matt Swigart" class="story-img" width="350" height="550">
                 </div>
                 <div class="story-text">
                     <p>In the late months of 2020, the Holy Spirit ignited a profound realization in Matt's heart—an understanding that the first two decades of his ministry were a divine preparation for the next 20 years and beyond. Fueled by this revelation, Matt, a seasoned coach, team-builder, and speaker, took a bold step of faith and launched Enhance Ministries as a 501c3 non-profit. Since that pivotal moment, God has been at work using Matt's gifts, to advance the sustainability of pastors.</p>
@@ -349,7 +351,7 @@
                 <div class="team-carousel">
                     <div class="team-card">
                         <div class="team-photo">
-                            <img src="assets/matt-headshot.jpeg" alt="Matt Swigart" class="team-img">
+                            <img src="assets/matt-headshot.jpeg" alt="Matt Swigart" class="team-img" width="200" height="200" loading="lazy">
                         </div>
                         <h3>Matt Swigart</h3>
                         <p class="team-role">Founder & Executive Director</p>
@@ -357,28 +359,28 @@
                     </div>
                     <div class="team-card">
                         <div class="team-photo">
-                            <img src="assets/adrianna-frelich.jpg" alt="Adrianna Frelich" class="team-img" style="object-position: center 30%;">
+                            <img src="assets/adrianna-frelich.jpg" alt="Adrianna Frelich" class="team-img" width="200" height="200" loading="lazy" style="object-position: center 30%;">
                         </div>
                         <h3>Adrianna Frelich</h3>
                         <p class="team-role">Marketing Director</p>
                     </div>
                     <div class="team-card">
                         <div class="team-photo">
-                            <img src="assets/tait-hoglund-new.png" alt="Tait Hoglund" class="team-img">
+                            <img src="assets/tait-hoglund-new.png" alt="Tait Hoglund" class="team-img" width="200" height="200" loading="lazy">
                         </div>
                         <h3>Tait Hoglund</h3>
                         <p class="team-role">Board Chair</p>
                     </div>
                     <div class="team-card">
                         <div class="team-photo">
-                            <img src="assets/cj-lloyd.jpg" alt="CJ Lloyd" class="team-img">
+                            <img src="assets/cj-lloyd.jpg" alt="CJ Lloyd" class="team-img" width="200" height="200" loading="lazy">
                         </div>
                         <h3>C.J. Lloyd</h3>
                         <p class="team-role">Treasurer</p>
                     </div>
                     <div class="team-card">
                         <div class="team-photo">
-                            <img src="assets/al-anderstrom.jpg" alt="Al Anderstrom" class="team-img">
+                            <img src="assets/al-anderstrom.jpg" alt="Al Anderstrom" class="team-img" width="200" height="200" loading="lazy">
                         </div>
                         <h3>Cam Fair</h3>
                         <p class="team-role">Secretary</p>
@@ -459,7 +461,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-top">
-                    <img src="assets/logo.png" alt="Enhance Ministries" class="footer-logo">
+                    <img src="assets/logo.png" alt="Enhance Ministries" class="footer-logo" width="100" height="31" loading="lazy">
                     <span class="footer-divider">|</span>
                     <span class="footer-tagline">Cultivating Healthy Leaders and Fruitful Ministries</span>
                     <span class="footer-divider">|</span>
