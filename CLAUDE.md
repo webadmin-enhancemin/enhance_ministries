@@ -11,22 +11,29 @@ Static website for Enhance Ministries, a 501(c)(3) nonprofit providing pastoral 
 
 ## Architecture
 
+The site uses **clean URLs** (no .html extensions) via folder-based structure:
+
 ```
-index.html              # Main landing page (hero, stats, services, testimonials, team, contact)
-coaching.html           # Coaching for Pastors & Consulting for Ministries page
-speaking_training.html  # Speaking & Training services page
-events.html             # Events hub page (links to golf and missions)
-golf.html               # Annual golf fundraiser event page
-missions.html           # Mission Experiences page (student and family trips)
-book.html               # Matt's Book - "What You Would Have Learned in Sunday School"
-media.html              # Media page (messages, podcasts, articles)
-partners.html           # Ministry Partners page
-styles.css              # All CSS (mobile-first, CSS custom properties) - currently v=27
-assets/                 # Images, logos, team photos, mission trip images
-sitemap.xml             # XML sitemap for search engines
-robots.txt              # Crawler directives for search engines and AI bots
-.github/workflows/      # GitHub Actions (SEO ping workflow)
+index.html                  # Main landing page (/)
+coaching/index.html         # Coaching for Pastors (/coaching)
+speaking-training/index.html # Speaking & Training (/speaking-training)
+events/index.html           # Events hub (/events)
+golf/index.html             # Golf Event (/golf)
+missions/index.html         # Mission Experiences (/missions)
+book/index.html             # Matt's Book (/book)
+media/index.html            # Media page (/media)
+partners/index.html         # Ministry Partners (/partners)
+styles.css                  # All CSS (mobile-first, CSS custom properties)
+assets/                     # Images, logos, team photos
+sitemap.xml                 # XML sitemap for search engines
+robots.txt                  # Crawler directives
+.github/workflows/          # GitHub Actions (SEO ping workflow)
 ```
+
+**URL Examples:**
+- `enhancemin.com/` → serves `index.html`
+- `enhancemin.com/golf` → serves `golf/index.html`
+- `enhancemin.com/coaching` → serves `coaching/index.html`
 
 All JavaScript is inline at the bottom of each HTML file (no external JS files).
 
@@ -106,7 +113,7 @@ Alternate between white and light gray using `.section-alt`:
 Add `testimonial-card` with `.testimonial-quote`, `.testimonial-author`, `.testimonial-role`
 
 ### Updating Navigation
-Must update nav in **all 9 HTML files**: `index.html`, `coaching.html`, `speaking_training.html`, `events.html`, `golf.html`, `missions.html`
+Must update nav in **all 9 HTML files**: `index.html`, `coaching/index.html`, `speaking-training/index.html`, `events/index.html`, `golf/index.html`, `missions/index.html`, `book/index.html`, `media/index.html`, `partners/index.html`
 
 ### Updating CSS
 1. Make changes in `styles.css`
