@@ -27,14 +27,14 @@
     <meta name="twitter:image" content="{{ site.url }}/assets/{{ ogImage or 'logo.png' }}">
 
     <title>{{ title }}{% if title %} | {% endif %}{{ site.name }}</title>
-    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="icon" type="image/png" href="{{ '/assets/favicon.png' | url }}">
 
     {% block structuredData %}{% endblock %}
 
-    <link rel="stylesheet" href="/styles.css?v={{ site.cssVersion }}">
+    <link rel="stylesheet" href="{{ '/styles.css' | url }}?v={{ site.cssVersion }}">
 
     {% if preloadHero %}
-    <link rel="preload" as="image" href="/assets/hero-mountain.webp" fetchpriority="high" type="image/webp">
+    <link rel="preload" as="image" href="{{ '/assets/hero-mountain.webp' | url }}" fetchpriority="high" type="image/webp">
     {% endif %}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

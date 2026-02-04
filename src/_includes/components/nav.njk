@@ -1,7 +1,7 @@
 <nav class="nav{% if navStyle == 'solid' %} nav-solid{% endif %}">
     <div class="nav-container">
-        <a href="/" class="nav-logo">
-            <img src="/assets/logo.png" alt="{{ site.name }}" width="129" height="40">
+        <a href="{{ '/' | url }}" class="nav-logo">
+            <img src="{{ '/assets/logo.png' | url }}" alt="{{ site.name }}" width="129" height="40">
         </a>
         <button class="nav-toggle" aria-label="Toggle navigation">
             <span></span>
@@ -12,14 +12,14 @@
             {% for item in navigation.items %}
             <li{% if item.dropdown %} class="nav-dropdown"{% endif %}>
                 {% if item.dropdown %}
-                <a href="{{ item.url }}" class="dropdown-toggle{% if item.active %} active{% endif %}">{{ item.text }}</a>
+                <a href="{{ item.url | url }}" class="dropdown-toggle{% if item.active %} active{% endif %}">{{ item.text }}</a>
                 <ul class="dropdown-menu">
                     {% for child in item.children %}
-                    <li><a href="{{ child.url }}"{% if child.active %} class="active"{% endif %}>{{ child.text }}</a></li>
+                    <li><a href="{{ child.url | url }}"{% if child.active %} class="active"{% endif %}>{{ child.text }}</a></li>
                     {% endfor %}
                 </ul>
                 {% else %}
-                <a href="{{ item.url }}">{{ item.text }}</a>
+                <a href="{{ item.url | url }}">{{ item.text }}</a>
                 {% endif %}
             </li>
             {% endfor %}
