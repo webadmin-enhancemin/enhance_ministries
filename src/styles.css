@@ -1512,7 +1512,7 @@ h3 { font-size: 1.25rem; }
     z-index: 999;
     background: var(--color-primary-accessible);
     color: var(--color-white);
-    border: none;
+    border: 2px solid var(--color-white);
     padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: 50px;
     font-size: 1rem;
