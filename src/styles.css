@@ -988,6 +988,8 @@ h3 { font-size: 1.25rem; }
     border-radius: 50%;
     object-fit: cover;
     object-position: center top;
+    display: block;
+    margin: 0 auto;
 }
 
 @media (min-width: 768px) {
