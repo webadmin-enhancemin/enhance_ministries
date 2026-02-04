@@ -25,7 +25,7 @@
     },
     {
       "text": "Resources",
-      "url": "#",
+      "url": "javascript:void(0)",
       "dropdown": true,
       "children": [
         { "text": "Matt's Book", "url": "/book.html" },
