@@ -1565,22 +1565,6 @@ h3 { font-size: 1.25rem; }
     border: 1px solid #f5c6cb;
 }
 
-/* reCAPTCHA Container */
-.recaptcha-container {
-    display: flex;
-    justify-content: center;
-}
-
-.recaptcha-container .g-recaptcha {
-    transform-origin: center;
-}
-
-@media (max-width: 400px) {
-    .recaptcha-container .g-recaptcha {
-        transform: scale(0.85);
-        transform-origin: center;
-    }
-}
 
 /* Submit Button Disabled State */
 #submit-btn:disabled {
