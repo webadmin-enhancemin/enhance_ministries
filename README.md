@@ -148,7 +148,7 @@ This website is designed to be maintained using **Claude Code**. See [CLAUDE.md]
 
 ## Contact
 
-- **Email:** info@enhancemin.com
+- **Email:** matt@enhancemin.com
 - **Phone:** (651) 503-0934
 - **Location:** Woodbury, MN
 

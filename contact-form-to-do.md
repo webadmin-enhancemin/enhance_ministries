@@ -7,7 +7,7 @@ The contact form on the homepage (`src/pages/index.njk`) uses a **`mailto:` link
 - Many users don't have a desktop email client configured
 - Mobile behavior is inconsistent
 - The form *feels* like it submits, but it just redirects to an email app
-- Currently points to `info@enhancemin.com`, not `matt@enhancemin.com`
+- Currently points to `matt@enhancemin.com`, not `matt@enhancemin.com`
 
 ## Goal
 
@@ -164,15 +164,15 @@ No new dependencies. No `npm install`. No server to maintain.
 
 ## Implementation Checklist
 
-- [ ] Choose a form service (Formspree, Web3Forms, FormSubmit, or EmailJS)
-- [ ] Create account / get API endpoint
-- [ ] Verify matt@enhancemin.com with the chosen service
-- [ ] Update form HTML in `src/pages/index.njk` (action, hidden fields)
-- [ ] Rewrite `contact-form.njk` to submit via `fetch()` with success/error handling
-- [ ] Add spam protection (honeypot field and/or CAPTCHA)
-- [ ] Test form submission locally with `npm run serve`
-- [ ] Test that email arrives at matt@enhancemin.com
+- [x] Choose a form service (Formspree, Web3Forms, FormSubmit, or EmailJS) — **Web3Forms chosen**
+- [x] Create account / get API endpoint
+- [x] Verify matt@enhancemin.com with the chosen service
+- [x] Update form HTML in `src/pages/index.njk` (action, hidden fields)
+- [x] Rewrite `contact-form.njk` to submit via `fetch()` with success/error handling
+- [x] Add spam protection (honeypot field and/or CAPTCHA)
+- [x] Test form submission locally with `npm run serve`
+- [x] Test that email arrives at matt@enhancemin.com
 - [ ] Test error handling (network failure, validation)
 - [ ] Test mobile responsiveness of any new UI elements
-- [ ] Commit and push to deploy via GitHub Actions
+- [x] Commit and push to deploy via GitHub Actions
 - [ ] Verify on live site: https://hogtai.github.io/enhance_ministries/#contact

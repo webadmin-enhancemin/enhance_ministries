@@ -251,7 +251,7 @@ Fixed in `src/styles.css` using Option C (full-width centered dropdown):
 
 ## 7. Contact Form — Web3Forms Integration
 
-**Status:** Code Complete — Needs Testing & Deploy
+**Status:** Complete — Deployed to Production
 **Priority:** High
 **Purpose:** Make the contact form actually send emails to matt@enhancemin.com instead of relying on the visitor's email client
 **Reference:** See `contact-form-to-do.md` for full analysis of options considered
@@ -294,13 +294,13 @@ The current form uses a `mailto:` link — it opens the visitor's email client i
 
 ### Phase 4: Test & Deploy
 
-- [ ] Run `npm run serve` and test form locally
-- [ ] Submit a test message and verify it arrives at matt@enhancemin.com
-- [ ] Verify success message displays correctly
+- [x] Run `npm run serve` and test form locally
+- [x] Submit a test message and verify it arrives at matt@enhancemin.com
+- [x] Verify success message displays correctly
 - [ ] Verify error handling works (disconnect network and try)
 - [ ] Test on mobile
-- [ ] Verify the "Other" interest option still shows/hides the message textarea
-- [ ] Commit and push to deploy
+- [x] Verify the "Other" interest option still shows/hides the message textarea
+- [x] Commit and push to deploy
 - [ ] Test on live site: https://hogtai.github.io/enhance_ministries/#contact
 
 ### Files to Modify
