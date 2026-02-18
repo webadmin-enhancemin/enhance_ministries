@@ -118,52 +118,19 @@
 
 ---
 
-## 4. Mobile Navigation UX Fix
+## ~~4. Mobile Navigation UX Fix~~ ✅ COMPLETED
 
-**Status:** Not Started
-**Priority:** Medium
-**Issue:** When clicking dropdown menus (Services, Events, Resources) on mobile, the parent menu item shifts left instead of staying centered
+**Status:** Completed
+**Completed:** February 2026
 
-### Current Behavior
+### Solution Implemented
 
-- Mobile menu opens
-- User taps "Services >"
-- "Services" shifts left, submenu appears indented below
-- Feels disorienting/unpolished
+Fixed in `src/styles.css` using Option C (full-width centered dropdown):
 
-### Desired Behavior
-
-- Parent menu item stays centered
-- Submenu appears smoothly below, also centered or clearly nested
-- No jarring shift in layout
-
-### Technical Details
-
-**Problem location:** `src/styles.css` lines 1631-1646
-
-```css
-/* Current code causing issue */
-@media (max-width: 767px) {
-    .nav-dropdown .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        background: transparent;
-        padding-left: var(--spacing-md);  /* This causes left shift */
-        display: none;
-    }
-}
-```
-
-### Tasks
-
-- [ ] Redesign mobile dropdown interaction (choose approach):
-  - Option A: Accordion style - parent stays put, children slide down below
-  - Option B: Slide-over panel - children slide in from right
-  - Option C: Full-width dropdown - children appear in centered list below
-- [ ] Update CSS in `src/styles.css`
-- [ ] Update JavaScript in `src/_includes/components/scripts/dropdown.njk` if needed
-- [ ] Test on multiple mobile devices/screen sizes
-- [ ] Verify desktop dropdown behavior unchanged
+- Removed `padding-left: var(--spacing-md)` that caused the left shift
+- Added `width: 100%` and `text-align: center` to `.nav-dropdown`
+- Changed to `padding: 0` on `.dropdown-menu`
+- Parent menu items now stay centered when expanded
 
 ---
 
@@ -194,15 +161,11 @@
 
 | Solution | Pros | Cons | Cost |
 |----------|------|------|------|
-| **Decap CMS** (formerly Netlify CMS) | Git-based, works with Eleventy, good UI | Requires identity provider setup | Free |
-| **TinaCMS** | Visual editing, Git-backed, modern | More complex setup, newer | Free tier available |
-| **CloudCannon** | Excellent Eleventy support, easy setup | Paid only | $45/mo+ |
-| **Forestry.io** | Simple UI | Deprecated, merged into Tina | N/A |
-| **Contentful** | Powerful, API-based | Requires code changes, overkill | Free tier available |
+| **Decap CMS** (formerly Netlify CMS) | Git-based, works with Eleventy, good UI | Requires identity
 
 ### Tasks (When Ready to Implement)
 
-- [ ] Choose CMS solution based on budget and needs
+- [X] Choose CMS solution based on budget and needs (Netlify is what we want to use)
 - [ ] Set up authentication (GitHub OAuth, Netlify Identity, etc.)
 - [ ] Define content models/schemas for:
   - [ ] Team members
@@ -217,14 +180,152 @@
 
 ---
 
+## 6. Blog Integration (Decap CMS + Netlify)
+
+**Status:** Not Started
+**Priority:** Medium
+**Purpose:** Allow Matt to write and publish blog posts through a simple web-based editor
+**Note:** Decap CMS also satisfies item 5 (Admin Panel) — once set up, the same admin interface can manage blog posts, team members, testimonials, and other content.
+
+### Strategy: Decap CMS on Netlify (Free)
+
+**Why this approach:**
+- Free (Netlify free tier + Decap CMS is open source)
+- Visual editor at `enhancemin.com/admin` — no code knowledge needed
+- Blog posts written in a simple WYSIWYG editor (similar to Word)
+- Content saved directly to GitHub as Markdown files
+- Integrates natively with current Eleventy setup
+- One system, one login
+
+### Phase 1: Migrate Hosting to Netlify
+
+- [ ] Create Netlify account at [netlify.com](https://netlify.com) (free tier)
+- [ ] Connect GitHub repo (`hogtai/enhance_ministries`) to Netlify
+- [ ] Configure build settings:
+  - Build command: `npm run build`
+  - Publish directory: `_site`
+- [ ] Verify site builds and deploys correctly on Netlify
+- [ ] Configure custom domain (`enhancemin.com`) on Netlify
+- [ ] Update DNS to point to Netlify (replaces GitHub Pages)
+- [ ] Enable HTTPS (automatic via Netlify)
+- [ ] Disable GitHub Pages deployment (remove or update `.github/workflows/deploy.yml`)
+
+### Phase 2: Set Up Decap CMS
+
+- [ ] Install Decap CMS: create `src/admin/index.html` and `src/admin/config.yml`
+- [ ] Enable Netlify Identity (free tier — up to 5 admin users)
+- [ ] Configure Netlify Identity widget for login
+- [ ] Define blog post collection in `config.yml`:
+  - Title, date, author, featured image, body
+  - Categories/tags (e.g., Coaching, Ministry Life, Missions, Devotional)
+- [ ] Set up editorial workflow (draft → review → publish) if desired
+- [ ] Test login and post creation at `/admin`
+
+### Phase 3: Build Blog in Eleventy
+
+- [ ] Create `src/blog/` directory for Markdown blog posts
+- [ ] Create `src/_includes/layouts/post.njk` template for individual posts
+- [ ] Create `src/pages/blog.njk` — blog listing page with post cards
+- [ ] Add pagination to blog listing if needed
+- [ ] Style blog pages to match existing site design
+- [ ] Add blog to `src/_data/navigation.json`
+- [ ] Add blog pages to `src/sitemap.xml`
+- [ ] Add RSS feed (`feed.xml`) for blog syndication
+
+### Phase 4: Content Editor Training
+
+- [ ] Create a simple 1-page guide for Matt: "How to Write a Blog Post"
+- [ ] Walk through: logging in, creating a post, adding images, publishing
+- [ ] Test with Matt to ensure he can publish independently
+- [ ] Document how to manage other content (team, testimonials) via Decap CMS
+
+### Considerations
+
+- **Netlify free tier** includes: 100GB bandwidth/mo, 300 build minutes/mo, Netlify Identity (5 users) — more than sufficient
+- **Images:** Blog images can be uploaded through Decap CMS and stored in `src/assets/blog/`
+- **SEO:** Each blog post gets its own URL, meta tags, and structured data — all good for search rankings
+- **Newsletter integration:** Can add email signup later (Mailchimp, ConvertKit, or Buttondown free tier)
+- **Relation to item 5:** Once Decap CMS is set up for the blog, extending it to manage team members, testimonials, and other JSON data is straightforward
+
+---
+
+## 7. Contact Form — Web3Forms Integration
+
+**Status:** Code Complete — Needs Testing & Deploy
+**Priority:** High
+**Purpose:** Make the contact form actually send emails to matt@enhancemin.com instead of relying on the visitor's email client
+**Reference:** See `contact-form-to-do.md` for full analysis of options considered
+
+### Why This Matters
+
+The current form uses a `mailto:` link — it opens the visitor's email client instead of sending a message. Many visitors (especially on mobile) don't have an email client configured, so messages are silently lost.
+
+### Service: Web3Forms (Free — 250 submissions/month)
+
+- No backend server needed (works with static GitHub Pages site)
+- Access key is safe to include in client-side HTML (not a secret)
+- Built-in spam protection (honeypot + hCaptcha option)
+- Emails delivered directly to matt@enhancemin.com
+
+### Phase 1: Get Access Key
+
+- [x] Go to https://web3forms.com
+- [x] Enter **matt@enhancemin.com** in the form
+- [x] Click "Create Access Key"
+- [x] Check Matt's email for the access key
+- [x] Save the access key
+
+### Phase 2: Update Form HTML (`src/pages/index.njk`)
+
+- [x] Added hidden access key field
+- [x] Added hidden honeypot field for spam protection
+- [x] Added hidden subject field
+- [x] Added hidden `from_name` field
+- [x] Renamed form field `name` attributes to match Web3Forms expected fields
+
+### Phase 3: Update Form JavaScript (`src/_includes/components/scripts/contact-form.njk`)
+
+- [x] Replaced `mailto:` logic with `fetch()` call to Web3Forms API
+- [x] Sends form data via POST request
+- [x] Success: shows green message, resets form
+- [x] Error: shows red message, preserves form data for retry
+- [x] Disables submit button during submission
+- [x] Shows "Sending..." loading state on button
+
+### Phase 4: Test & Deploy
+
+- [ ] Run `npm run serve` and test form locally
+- [ ] Submit a test message and verify it arrives at matt@enhancemin.com
+- [ ] Verify success message displays correctly
+- [ ] Verify error handling works (disconnect network and try)
+- [ ] Test on mobile
+- [ ] Verify the "Other" interest option still shows/hides the message textarea
+- [ ] Commit and push to deploy
+- [ ] Test on live site: https://hogtai.github.io/enhance_ministries/#contact
+
+### Files to Modify
+
+| File | Change |
+|------|--------|
+| `src/pages/index.njk` | Add hidden fields to form |
+| `src/_includes/components/scripts/contact-form.njk` | Replace `mailto:` with `fetch()` to Web3Forms API |
+
+No new dependencies. No `npm install`. No server to maintain.
+
+---
+
 ## Implementation Order
 
 **Recommended sequence:**
 
-1. **Cloudflare + DNS** (items 1 & 3) - Do together since Cloudflare becomes DNS provider
-2. **Clean URLs** (item 2) - Major code change, do after DNS is stable
-3. **Mobile Nav Fix** (item 4) - CSS-only change, can be done anytime
-4. **Admin Panel** (item 5) - Larger project, plan separately
+1. **Contact Form** (item 7) - Quick win, high impact — messages are being lost today
+2. **Cloudflare + DNS** (items 1 & 3) - Do together since Cloudflare becomes DNS provider
+3. **Clean URLs** (item 2) - Major code change, do after DNS is stable
+4. ~~**Mobile Nav Fix** (item 4)~~ ✅ Completed
+5. **Blog + Netlify Migration** (item 6) - Replaces GitHub Pages hosting, adds blog and CMS
+6. **Admin Panel** (item 5) - Mostly covered by item 6; extend Decap CMS to manage existing content
+
+**Note:** Migrating to Netlify (item 6) may simplify or replace items 1 & 3. Netlify provides its own CDN, SSL, custom domain support, and custom headers — making Cloudflare optional rather than required.
 
 ---
 
