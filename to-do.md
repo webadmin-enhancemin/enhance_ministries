@@ -206,11 +206,13 @@ Fixed in `src/styles.css` using Option C (full-width centered dropdown):
   - Publish directory: `_site`
 - [x] Verify site builds and deploys correctly on Netlify
 - [x] Remove `pathPrefix: "/enhance_ministries/"` from `.eleventy.js`
-- [x] Update GitHub Actions workflow: security scan gates Netlify deploy hook
+- [x] Update GitHub Actions workflow: build → security scan → deploy via Netlify API (true gate)
+- [x] Fix npm vulnerabilities: markdown-it (moderate) + minimatch (high via overrides)
+- [x] Stop Netlify auto-builds (GitHub Actions is sole deploy trigger)
 - [ ] Configure custom domain (`enhancemin.com`) on Netlify
 - [ ] Update DNS to point to Netlify (replaces GitHub Pages)
 - [ ] Enable HTTPS (automatic via Netlify)
-- [x] Disable GitHub Pages auto-deployment (replaced by Netlify deploy hook)
+- [x] Disable GitHub Pages auto-deployment
 
 ### Phase 2: Set Up Decap CMS
 
