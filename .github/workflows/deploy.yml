@@ -103,8 +103,15 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
-      - name: Deploy to Netlify
-        run: npx netlify-cli deploy --prod --dir=_site
+      - name: Deploy to Netlify via API
+        run: |
+          cd _site && zip -r ../deploy.zip . && cd ..
+          RESPONSE=$(curl -sf -X POST \
+            -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+            -H "Content-Type: application/zip" \
+            --data-binary @deploy.zip \
+            "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys")
+          echo "$RESPONSE" | jq -r '"Deploy ID: " + .id + "\nState: " + .state + "\nURL: " + (.ssl_url // .url // "pending")'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
