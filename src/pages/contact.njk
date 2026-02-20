@@ -1,0 +1,77 @@
+---
+layout: layouts/base.njk
+title: Contact
+navStyle: solid
+description: "Connect with Matt Swigart at Enhance Ministries. Fill out the contact form and Matt will follow up with you directly."
+keywords: "contact Enhance Ministries, Matt Swigart contact, pastoral coaching inquiry, speaking booking, ministry consulting"
+canonical: "/contact/"
+hasContactForm: true
+permalink: /contact/
+---
+
+<!-- Hero Section -->
+<header class="coaching-hero">
+    <div class="container">
+        <span class="event-badge">Get in Touch</span>
+        <h1>Connect with Matt</h1>
+        <p class="coaching-hero-text">Fill out with basic information and Matt will follow up with you directly.</p>
+    </div>
+</header>
+
+<!-- Contact Section -->
+<section class="section">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>Location</h3>
+                    <p>Woodbury, MN</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/EnhanceMinistries" target="_blank" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="https://www.instagram.com/enhanceministries/" target="_blank" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="contact-form">
+                <input type="hidden" name="access_key" value="ff5f576c-4d05-466a-af9d-4035f33d4445">
+                <input type="hidden" name="subject" value="Enhance Ministries Website - New Contact Request Follow Up">
+                <input type="hidden" name="from_name" value="Enhance Ministries Website">
+                <input type="checkbox" name="botcheck" style="display: none;">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" autocomplete="name" required minlength="2" pattern="[A-Za-z\s\-'.]+">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="interest">I am interested in...</label>
+                    <select id="interest" name="interest">
+                        <option value="booking Matt to speak for an event">booking Matt to speak for my event</option>
+                        <option value="an Enhance mission experience">an Enhance mission experience</option>
+                        <option value="recieving coaching / consulting from Matt">recieving coaching / consulting from Matt</option>
+                        <option value="booking Matt to train my team">booking Matt to train my team</option>
+                        <option value="becoming a donor of Enhance Ministries">becoming a donor of Enhance Ministries</option>
+                        <option value="partnering my ministry with Enhance">partnering my ministry with Enhance</option>
+                        <option value="the golf event">the golf event</option>
+                        <option value="Other (specify below)">Other (specify below)</option>
+                    </select>
+                </div>
+                <div class="form-group" id="message-group" style="display: none;">
+                    <label for="message">Please describe your inquiry</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="submit-btn">Send Message to Matt</button>
+                <div id="form-status" class="form-status"></div>
+            </form>
+        </div>
+    </div>
+</section>

@@ -22,50 +22,42 @@
 
 ---
 
-## 2. Clean URLs (Remove .html Extensions)
+## ~~2. Clean URLs (Remove .html Extensions)~~ ✅ COMPLETED
 
-**Status:** Not Started
-**Priority:** High
-**Dependency:** Complete after DNS is working
+**Status:** Completed
+**Completed:** February 2026
 
-### URL Mapping
+### Solution Implemented
 
-| Current URL | Target URL | Action Needed |
-|-------------|------------|---------------|
-| `/` | `/` | ✅ No change |
-| `/#contact` | `/contact` | Create new page from index section |
-| `/events.html` | `/events` | Change permalink |
-| `/golf.html` | `/golf` | Change permalink |
-| `/missions.html` | `/mission` | Rename file + change permalink |
-| `/#board` | `/leadership` | Create new page from index section |
-| `/#story` | `/about` | Create new page from index section |
-| `/#services` | `/services` | Create new page from index section |
-| `/coaching.html` | `/coaching` | Change permalink |
-| `/coaching.html#consulting` | `/consulting` | Create new page from coaching section |
-| `/speaking_training.html` | `/speaking` | Split page, rename |
-| `/speaking_training.html#workshops` | `/training` | Split page, link to workshops section |
-| `/book.html` | `/book` | Change permalink |
-| `/media.html` | `/media` | Change permalink |
-| `/partners.html` | `/partners` | Change permalink |
+All pages migrated to clean URL directory structure (`/page/` → `_site/page/index.html`):
 
-### Tasks
+| Old URL | New URL |
+|---------|---------|
+| `/` | `/` (unchanged) |
+| `/#contact` | `/contact/` |
+| `/events.html` | `/events/` |
+| `/golf.html` | `/golf/` |
+| `/missions.html` | `/mission/` |
+| `/#board` | `/leadership/` |
+| `/#story` | `/about/` |
+| `/#services` | `/services/` |
+| `/coaching.html` | `/coaching/` |
+| `/coaching.html#consulting` | `/consulting/` |
+| `/speaking_training.html` | `/speaking/` |
+| `/speaking_training.html#workshops` | `/training/` |
+| `/book.html` | `/book/` |
+| `/media.html` | `/media/` |
+| `/partners.html` | `/partners/` |
 
-- [ ] Update all existing page permalinks from `/page.html` to `/page/` (trailing slash)
-- [ ] Create new pages:
-  - [ ] `src/pages/contact.njk` - Extract from index.njk #contact section
-  - [ ] `src/pages/about.njk` - Extract from index.njk #story section
-  - [ ] `src/pages/leadership.njk` - Extract from index.njk #board section
-  - [ ] `src/pages/services.njk` - Extract from index.njk #services section
-  - [ ] `src/pages/consulting.njk` - Extract from coaching.njk #consulting section
-  - [ ] `src/pages/speaking.njk` - Split from speaking_training.njk (top half)
-  - [ ] `src/pages/training.njk` - Split from speaking_training.njk (workshops section)
-- [ ] Rename `missions.njk` to `mission.njk` and update permalink
-- [ ] Delete `speaking_training.njk` after splitting
-- [ ] Update `src/_data/navigation.json` with new URLs
-- [ ] Update `src/sitemap.xml` with new URLs
-- [ ] Update any internal links in page content
-- [ ] Set up redirects for old URLs (via Cloudflare Page Rules or `_redirects` file)
-- [ ] Test all navigation links work correctly
+- Updated all existing page permalinks and canonical URLs
+- Created 7 new standalone pages (contact, about, leadership, services, consulting, speaking, training)
+- Renamed `missions.njk` → `mission.njk`
+- Deleted `speaking_training.njk` (split into speaking.njk + training.njk)
+- Updated `navigation.json` with new clean URLs
+- Updated `sitemap.xml` with new URLs and `enhancemin.com` domain
+- Updated all internal links across all pages
+- Created `src/_redirects` for Netlify redirect rules (old .html → clean URLs)
+- Added `_redirects` passthrough copy to `.eleventy.js`
 
 ---
 

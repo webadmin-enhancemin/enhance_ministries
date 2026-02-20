@@ -1,0 +1,53 @@
+---
+layout: layouts/base.njk
+title: Leadership
+navStyle: solid
+description: "Meet the Enhance Ministries leadership team—committed Christ-followers passionate about pastoral and church health."
+keywords: "Enhance Ministries leadership, board members, Matt Swigart, ministry team, church health leaders"
+canonical: "/leadership/"
+hasCarousel: true
+permalink: /leadership/
+---
+
+<!-- Hero Section -->
+<header class="coaching-hero">
+    <div class="container">
+        <span class="event-badge">Our Team</span>
+        <h1>Leadership</h1>
+        <p class="coaching-hero-text">Guided by committed Christ-followers passionate about pastoral and church health.</p>
+    </div>
+</header>
+
+<!-- Team Section -->
+<section class="section">
+    <div class="container">
+        <div class="team-carousel-wrapper">
+            <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&larr;</button>
+            <div class="team-carousel">
+                {% for member in team.members %}
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="/assets/{{ member.image }}" alt="{{ member.name }}" class="team-img" width="200" height="200" loading="lazy"{% if member.objectPosition %} style="object-position: {{ member.objectPosition }};"{% endif %}>
+                    </div>
+                    <h3>{{ member.name }}</h3>
+                    <p class="team-role">{{ member.title }}</p>
+                    {% if member.bio %}<p class="team-bio">{{ member.bio }}</p>{% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-btn carousel-btn-next" aria-label="Next">&rarr;</button>
+            <div class="carousel-hint">Swipe to see more</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section section-cta">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Connect With Our Team</h2>
+            <p>Have questions about Enhance Ministries or how we can support your ministry?</p>
+            <a href="/contact/" class="btn btn-outline-white btn-lg">Contact Us</a>
+        </div>
+    </div>
+</section>

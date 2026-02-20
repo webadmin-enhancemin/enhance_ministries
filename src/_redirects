@@ -1,0 +1,10 @@
+# Redirects for old .html URLs to clean URLs
+/index.html             /                   301
+/events.html            /events/            301
+/golf.html              /golf/              301
+/missions.html          /mission/           301
+/coaching.html          /coaching/          301
+/speaking_training.html /speaking/          301
+/book.html              /book/              301
+/media.html             /media/             301
+/partners.html          /partners/          301

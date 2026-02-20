@@ -2,44 +2,44 @@
   "items": [
     {
       "text": "About",
-      "url": "/#story"
+      "url": "/about/"
     },
     {
       "text": "Services",
-      "url": "/#services",
+      "url": "/services/",
       "dropdown": true,
       "children": [
-        { "text": "Coaching for Pastors", "url": "/coaching.html" },
-        { "text": "Consulting for Ministries", "url": "/coaching.html#consulting" },
-        { "text": "Speaking & Training", "url": "/speaking_training.html" }
+        { "text": "Coaching for Pastors", "url": "/coaching/" },
+        { "text": "Consulting for Ministries", "url": "/consulting/" },
+        { "text": "Speaking & Training", "url": "/speaking/" }
       ]
     },
     {
       "text": "Events",
-      "url": "/events.html",
+      "url": "/events/",
       "dropdown": true,
       "children": [
-        { "text": "Golf Event", "url": "/golf.html" },
-        { "text": "Mission Experiences", "url": "/missions.html" }
+        { "text": "Golf Event", "url": "/golf/" },
+        { "text": "Mission Experiences", "url": "/mission/" }
       ]
     },
     {
       "text": "Resources",
-      "url": "/book.html",
+      "url": "/book/",
       "dropdown": true,
       "children": [
-        { "text": "Matt's Book", "url": "/book.html" },
-        { "text": "Media", "url": "/media.html" },
-        { "text": "Ministry Partners", "url": "/partners.html" }
+        { "text": "Matt's Book", "url": "/book/" },
+        { "text": "Media", "url": "/media/" },
+        { "text": "Ministry Partners", "url": "/partners/" }
       ]
     },
     {
       "text": "Leadership",
-      "url": "/#board"
+      "url": "/leadership/"
     },
     {
       "text": "Contact",
-      "url": "/#contact"
+      "url": "/contact/"
     }
   ]
 }
