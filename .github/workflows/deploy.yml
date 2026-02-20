@@ -86,6 +86,23 @@ jobs:
           name: site
           path: _site/
 
+      - name: Unlock Netlify production deploy
+        run: |
+          DEPLOY_ID=$(curl -sf \
+            -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+            "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID" | \
+            jq -r '.published_deploy.id // empty')
+          if [ -n "$DEPLOY_ID" ]; then
+            curl -sf -X POST \
+              -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+              "https://api.netlify.com/api/v1/deploys/$DEPLOY_ID/unlock" | jq -r '"Unlocked deploy: " + .id'
+          else
+            echo "No published deploy to unlock"
+          fi
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
       - name: Deploy to Netlify
         run: npx netlify-cli deploy --prod --dir=_site
         env:
