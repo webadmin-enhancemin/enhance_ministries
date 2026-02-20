@@ -199,16 +199,18 @@ Fixed in `src/styles.css` using Option C (full-width centered dropdown):
 
 ### Phase 1: Migrate Hosting to Netlify
 
-- [ ] Create Netlify account at [netlify.com](https://netlify.com) (free tier)
-- [ ] Connect GitHub repo (`hogtai/enhance_ministries`) to Netlify
-- [ ] Configure build settings:
+- [x] Create Netlify account at [netlify.com](https://netlify.com) (free tier)
+- [x] Connect GitHub repo (`webadmin-enhancemin/enhance_ministries`) to Netlify
+- [x] Configure build settings:
   - Build command: `npm run build`
   - Publish directory: `_site`
-- [ ] Verify site builds and deploys correctly on Netlify
+- [x] Verify site builds and deploys correctly on Netlify
+- [x] Remove `pathPrefix: "/enhance_ministries/"` from `.eleventy.js`
+- [x] Update GitHub Actions workflow: security scan gates Netlify deploy hook
 - [ ] Configure custom domain (`enhancemin.com`) on Netlify
 - [ ] Update DNS to point to Netlify (replaces GitHub Pages)
 - [ ] Enable HTTPS (automatic via Netlify)
-- [ ] Disable GitHub Pages deployment (remove or update `.github/workflows/deploy.yml`)
+- [x] Disable GitHub Pages auto-deployment (replaced by Netlify deploy hook)
 
 ### Phase 2: Set Up Decap CMS
 
