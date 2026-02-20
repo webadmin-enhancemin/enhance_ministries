@@ -32,6 +32,12 @@ jobs:
       - name: Build with Eleventy
         run: npm run build
 
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site/
+
   secure:
     runs-on: ubuntu-latest
     needs: build
@@ -74,5 +80,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: secure
     steps:
-      - name: Trigger Netlify Deploy
-        run: curl -s -X POST "${{ secrets.NETLIFY_DEPLOY_HOOK }}"
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site/
+
+      - name: Deploy to Netlify
+        run: npx netlify-cli deploy --prod --dir=_site
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
