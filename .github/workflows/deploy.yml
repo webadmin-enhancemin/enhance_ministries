@@ -1,4 +1,4 @@
-name: Build and Deploy to GitHub Pages
+name: Security Scan and Deploy
 
 on:
   push:
@@ -8,12 +8,9 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-  security-events: write
 
 concurrency:
-  group: "pages"
+  group: "deploy"
   cancel-in-progress: false
 
 jobs:
@@ -34,14 +31,6 @@ jobs:
 
       - name: Build with Eleventy
         run: npm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "_site"
 
   secure:
     runs-on: ubuntu-latest
@@ -82,12 +71,8 @@ jobs:
           ignore-unfixed: true
 
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: secure
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Trigger Netlify Deploy
+        run: curl -s -X POST "${{ secrets.NETLIFY_DEPLOY_HOOK }}"
