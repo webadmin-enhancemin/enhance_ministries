@@ -249,83 +249,19 @@ Fixed in `src/styles.css` using Option C (full-width centered dropdown):
 
 ---
 
-## 7. Contact Form — Web3Forms Integration
-
-**Status:** Complete — Deployed to Production
-**Priority:** High
-**Purpose:** Make the contact form actually send emails to matt@enhancemin.com instead of relying on the visitor's email client
-**Reference:** See `contact-form-to-do.md` for full analysis of options considered
-
-### Why This Matters
-
-The current form uses a `mailto:` link — it opens the visitor's email client instead of sending a message. Many visitors (especially on mobile) don't have an email client configured, so messages are silently lost.
-
-### Service: Web3Forms (Free — 250 submissions/month)
-
-- No backend server needed (works with static GitHub Pages site)
-- Access key is safe to include in client-side HTML (not a secret)
-- Built-in spam protection (honeypot + hCaptcha option)
-- Emails delivered directly to matt@enhancemin.com
-
-### Phase 1: Get Access Key
-
-- [x] Go to https://web3forms.com
-- [x] Enter **matt@enhancemin.com** in the form
-- [x] Click "Create Access Key"
-- [x] Check Matt's email for the access key
-- [x] Save the access key
-
-### Phase 2: Update Form HTML (`src/pages/index.njk`)
-
-- [x] Added hidden access key field
-- [x] Added hidden honeypot field for spam protection
-- [x] Added hidden subject field
-- [x] Added hidden `from_name` field
-- [x] Renamed form field `name` attributes to match Web3Forms expected fields
-
-### Phase 3: Update Form JavaScript (`src/_includes/components/scripts/contact-form.njk`)
-
-- [x] Replaced `mailto:` logic with `fetch()` call to Web3Forms API
-- [x] Sends form data via POST request
-- [x] Success: shows green message, resets form
-- [x] Error: shows red message, preserves form data for retry
-- [x] Disables submit button during submission
-- [x] Shows "Sending..." loading state on button
-
-### Phase 4: Test & Deploy
-
-- [x] Run `npm run serve` and test form locally
-- [x] Submit a test message and verify it arrives at matt@enhancemin.com
-- [x] Verify success message displays correctly
-- [ ] Verify error handling works (disconnect network and try)
-- [ ] Test on mobile
-- [x] Verify the "Other" interest option still shows/hides the message textarea
-- [x] Commit and push to deploy
-- [ ] Test on live site: https://hogtai.github.io/enhance_ministries/#contact
-
-### Files to Modify
-
-| File | Change |
-|------|--------|
-| `src/pages/index.njk` | Add hidden fields to form |
-| `src/_includes/components/scripts/contact-form.njk` | Replace `mailto:` with `fetch()` to Web3Forms API |
-
-No new dependencies. No `npm install`. No server to maintain.
-
----
-
 ## Implementation Order
 
 **Recommended sequence:**
 
-1. **Contact Form** (item 7) - Quick win, high impact — messages are being lost today
-2. **Cloudflare + DNS** (items 1 & 3) - Do together since Cloudflare becomes DNS provider
-3. **Clean URLs** (item 2) - Major code change, do after DNS is stable
-4. ~~**Mobile Nav Fix** (item 4)~~ ✅ Completed
-5. **Blog + Netlify Migration** (item 6) - Replaces GitHub Pages hosting, adds blog and CMS
-6. **Admin Panel** (item 5) - Mostly covered by item 6; extend Decap CMS to manage existing content
+1. ~~**Contact Form** (item 7)~~ — Completed: Web3Forms integration, validation, spam prevention
+2. ~~**Mobile Nav Fix** (item 4)~~ — Completed: Full-width centered dropdown
+3. **Cloudflare + DNS** (items 1 & 3) - Set up Cloudflare as DNS provider + security headers + CDN
+4. **Netlify Migration** (item 6, Phase 1) - Move hosting from GitHub Pages to Netlify
+5. **Clean URLs** (item 2) - Major code change, do after hosting is stable on Netlify
+6. **Blog + CMS** (item 6, Phases 2-4) - Add Decap CMS + blog on Netlify
+7. **Admin Panel** (item 5) - Extend Decap CMS to manage existing content (team, testimonials, etc.)
 
-**Note:** Migrating to Netlify (item 6) may simplify or replace items 1 & 3. Netlify provides its own CDN, SSL, custom domain support, and custom headers — making Cloudflare optional rather than required.
+**Architecture:** Cloudflare (DNS + CDN + security headers + DDoS protection) → Netlify (hosting + builds + Decap CMS + Identity). Both free tier. Cloudflare proxies traffic to Netlify, adding security headers and edge caching that Netlify's free tier doesn't include.
 
 ---
 
