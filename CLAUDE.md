@@ -4,267 +4,117 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static website for Enhance Ministries, a 501(c)(3) nonprofit providing pastoral coaching and care. Built with **Eleventy (11ty)** static site generator and hosted on GitHub Pages.
+Static website for Enhance Ministries, a 501(c)(3) nonprofit providing pastoral coaching and care. Built with **Eleventy (11ty)** and hosted on **Netlify**.
 
-- **Live site:** https://hogtai.github.io/enhance_ministries/
-- **Repository:** https://github.com/hogtai/enhance_ministries
-
-## Architecture
-
-The site uses a **modular component-based architecture** with Nunjucks templates:
-
-```
-enhance_ministries/
-├── .eleventy.js              # Eleventy configuration
-├── package.json              # Node.js dependencies
-├── .github/workflows/
-│   ├── deploy.yml            # Build & deploy to GitHub Pages
-│   └── seo-ping.yml          # SEO sitemap ping workflow
-│
-├── src/                      # Source files
-│   ├── _includes/
-│   │   ├── layouts/
-│   │   │   └── base.njk      # Base HTML template (meta tags, nav, footer, scripts)
-│   │   │
-│   │   └── components/
-│   │       ├── nav.njk       # Navigation (data-driven from navigation.json)
-│   │       ├── footer.njk    # Footer
-│   │       ├── donate-modal.njk  # Donation modal + mobile button
-│   │       └── scripts/      # JavaScript components
-│   │           ├── nav-toggle.njk     # Mobile hamburger menu
-│   │           ├── modal.njk          # Donate modal logic
-│   │           ├── dropdown.njk       # Mobile dropdown toggle
-│   │           ├── carousel.njk       # Carousel navigation
-│   │           ├── smooth-scroll.njk  # Anchor link smooth scroll
-│   │           ├── nav-scroll.njk     # Navbar background on scroll
-│   │           └── contact-form.njk   # Contact form submission
-│   │
-│   ├── _data/
-│   │   ├── site.json         # Site config (name, URL, CSS version)
-│   │   ├── navigation.json   # Nav menu structure
-│   │   ├── team.json         # Leadership team members
-│   │   └── testimonials.json # Testimonial quotes
-│   │
-│   ├── pages/                # Page templates (content only)
-│   │   ├── index.njk         # Homepage
-│   │   ├── coaching.njk      # Coaching for Pastors
-│   │   ├── speaking_training.njk  # Speaking & Training
-│   │   ├── events.njk        # Events hub
-│   │   ├── golf.njk          # Golf Event
-│   │   ├── missions.njk      # Mission Experiences
-│   │   ├── book.njk          # Matt's Book
-│   │   ├── media.njk         # Media (podcasts, messages)
-│   │   └── partners.njk      # Ministry Partners
-│   │
-│   ├── assets/               # Images (copied to _site/)
-│   ├── styles.css            # All CSS
-│   ├── sitemap.xml           # SEO sitemap
-│   └── robots.txt            # Crawler directives
-│
-└── _site/                    # Build output (auto-generated, gitignored)
-```
+- **Repository:** https://github.com/webadmin-enhancemin/enhance_ministries
+- **Target domain:** https://enhancemin.com
 
 ## Development Commands
 
 ```bash
-# Install dependencies (first time)
-npm install
-
-# Start development server with live reload
-npm run serve
-
-# Build site for production
-npm run build
-
-# Deploy (push to main triggers GitHub Actions)
-git add . && git commit -m "message" && git push origin main
+npm install        # First time setup
+npm run serve      # Dev server with live reload (localhost:8080)
+npm run build      # Production build → _site/
 ```
 
-## Key Patterns
+Always run `npm run build` to verify changes compile before committing.
 
-### Page Template Structure
+## Architecture
 
-Each page template only contains the **page-specific content**. The base layout automatically includes nav, footer, modal, and scripts:
+Modular component-based architecture. Eleventy reads from `src/`, outputs to `_site/` (gitignored).
+
+**Config:** `.eleventy.js` — defines passthrough copies, input/output dirs, shortcodes.
+
+**Data layer** (`src/_data/`):
+- `site.json` — site name, URL, `cssVersion` (bump after every CSS change), donation URL
+- `navigation.json` — all nav links; editing this updates every page automatically
+- `team.json` — leadership team members (carousel on homepage + `/leadership/`)
+- `testimonials.json` — testimonial quotes (carousel on coaching + homepage)
+
+**Base layout** (`src/_includes/layouts/base.njk`) — outputs full HTML page: meta/OG tags, nav, `{{ content | safe }}`, footer, donate modal, and conditional scripts. Pages never include nav/footer/modal themselves.
+
+**Scripts are conditionally included** in the base layout based on frontmatter flags — only load what each page needs:
+
+| Frontmatter flag | Script loaded |
+|-----------------|---------------|
+| `hasDropdown: true` | Mobile dropdown toggle |
+| `hasCarousel: true` | Carousel navigation |
+| `hasContactForm: true` | Contact form (Web3Forms) |
+| `hasSmoothScroll: true` | Anchor smooth scroll |
+| `hasNavScroll: true` | Navbar background on scroll |
+
+## Page Template Structure
+
+All pages use clean URL permalinks (`/page/` → `_site/page/index.html`):
 
 ```njk
 ---
 layout: layouts/base.njk
 title: Page Title
-navStyle: solid              # 'solid' or omit for transparent
+navStyle: solid              # 'solid' or omit for transparent hero nav
 description: "SEO description"
 keywords: "keyword1, keyword2"
-canonical: "/page.html"
-hasDropdown: true            # Include dropdown toggle script
-hasCarousel: true            # Include carousel navigation script
-hasContactForm: true         # Include contact form script
-hasSmoothScroll: true        # Include smooth scroll for anchors
-hasNavScroll: true           # Include navbar scroll background
-permalink: /page.html
+canonical: "/page/"
+hasDropdown: true            # Only include flags needed by this page
+permalink: /page/
 ---
 
-{# Page content goes here - no nav/footer/modal needed #}
-<header class="hero">...</header>
-<section class="section">...</section>
+{# Page-specific HTML only — no nav/footer/modal #}
 ```
 
-### Data Files
+**Current pages** (`src/pages/`):
 
-Update content by editing JSON files in `src/_data/`:
+| File | URL | Notes |
+|------|-----|-------|
+| `index.njk` | `/` | Homepage with all major sections |
+| `about.njk` | `/about/` | Story + pastor crisis stats |
+| `services.njk` | `/services/` | Services carousel overview |
+| `coaching.njk` | `/coaching/` | Coaching + free coaching sections |
+| `consulting.njk` | `/consulting/` | Consulting services (split from coaching) |
+| `speaking.njk` | `/speaking/` | Speaking themes + event types |
+| `training.njk` | `/training/` | Interactive workshops |
+| `events.njk` | `/events/` | Events hub |
+| `golf.njk` | `/golf/` | Golf fundraiser + Zeffy registration iframe |
+| `mission.njk` | `/mission/` | Student + Family + Win Your Jerusalem trips |
+| `book.njk` | `/book/` | Matt's book |
+| `media.njk` | `/media/` | Messages, podcasts, articles |
+| `partners.njk` | `/partners/` | Ministry partners |
+| `leadership.njk` | `/leadership/` | Team carousel |
+| `contact.njk` | `/contact/` | Contact form (Web3Forms) |
 
-| File | Purpose |
-|------|---------|
-| `site.json` | Site name, URL, tagline, CSS version, donation URL |
-| `navigation.json` | Menu structure (items, dropdowns, links) |
-| `team.json` | Leadership team members |
-| `testimonials.json` | Testimonial quotes |
+**Old `.html` URL redirects** are in `src/_redirects` (Netlify rules, copied to `_site/` at build time).
 
-### CSS Custom Properties
+## Deployment Pipeline
 
-All colors, spacing, and common values in `:root`. Key variables:
-- Colors: `--color-primary` (#FF7A3D), `--color-primary-dark` (#FF5100), `--color-text`, `--color-bg-light`
+Push to `main` triggers GitHub Actions (`.github/workflows/deploy.yml`):
+
+1. **Build** — `npm ci` + `npm run build` → uploads `_site/` as artifact
+2. **Security scan** — `npm audit` (high+) + Trivy secret scan + Trivy vuln scan — **must pass before deploy**
+3. **Deploy** — zips `_site/`, POSTs to Netlify API (`NETLIFY_AUTH_TOKEN`, `NETLIFY_SITE_ID` secrets)
+
+Netlify auto-builds are **disabled** — GitHub Actions is the sole deploy trigger.
+
+## CSS
+
+All styles in `src/styles.css`. CSS custom properties in `:root`:
+- Colors: `--color-primary` (#FF7A3D), `--color-primary-dark` (#FF5100)
 - Spacing: `--spacing-xs` through `--spacing-2xl`
-- Layout: `--max-width` (1200px), `--border-radius`, `--transition`
+- Layout: `--max-width` (1200px)
 
-### Responsive Breakpoints
-- Mobile: < 768px (single-card carousels, hamburger nav)
-- Tablet: 768px+ (two-card carousels, full nav)
-- Desktop: 1024px+ (multi-card carousels, carousel arrow buttons visible)
+Breakpoints: mobile < 768px, tablet 768px+, desktop 1024px+
 
-## Common Tasks
+**After any CSS change:** increment `cssVersion` in `src/_data/site.json` (cache busting).
 
-### Updating Navigation
-Edit `src/_data/navigation.json` - changes apply to all pages automatically.
+## Adding a New Page
 
-### Adding a Team Member
-Edit `src/_data/team.json`:
-```json
-{
-  "name": "New Person",
-  "title": "Role Title",
-  "image": "photo-filename.webp",
-  "bio": "Optional bio text",
-  "objectPosition": "center 30%"  // Optional: for photo cropping
-}
-```
-
-### Adding a Testimonial
-Edit `src/_data/testimonials.json`:
-```json
-{
-  "quote": "The testimonial text...",
-  "author": "Person Name",
-  "role": "Church Name, Location"
-}
-```
-
-### Updating CSS
-1. Edit `src/styles.css`
-2. Increment `cssVersion` in `src/_data/site.json`
-3. Build and deploy
-
-### Adding a New Page
-1. Create `src/pages/newpage.njk` with frontmatter
-2. Add link to `src/_data/navigation.json`
+1. Create `src/pages/newpage.njk` with frontmatter (`permalink: /newpage/`)
+2. Add to `src/_data/navigation.json`
 3. Add to `src/sitemap.xml`
-4. Build and deploy
+4. Use absolute internal links (e.g. `href="/coaching/"` not `href="coaching.html"`)
 
 ## External Integrations
 
-### Zeffy (Donation Platform)
-- Donation modal: Embedded iframe (URL in `site.json`)
-- Golf registration: Iframe embed on golf page
-
-### Jotform (Mission Trip Registration)
-- Student mission trip registration on missions page
-- URL: `https://form.jotform.com/251803686050051`
-
-### Google Fonts
-Inter font family (weights 400, 500, 600, 700)
-
-### Social Links
-- Facebook: https://www.facebook.com/EnhanceMinistries
-- Instagram: https://www.instagram.com/enhanceministries/
-
-## SEO & Search Engine Indexing
-
-### Automated SEO Features
-- Meta tags, Open Graph, Twitter Cards (via base.njk template)
-- JSON-LD structured data (per-page via `structuredData` block)
-- `sitemap.xml` and `robots.txt` (copied during build)
-
-### GitHub Actions Workflows
-- **deploy.yml**: Builds with Eleventy, deploys to GitHub Pages on push to main
-- **seo-ping.yml**: Pings search engines when content changes
-
-## Deployment
-
-GitHub Pages deployment is fully automated:
-
-1. Push changes to `main` branch
-2. GitHub Actions runs `npm run build`
-3. The `_site/` folder is deployed to GitHub Pages
-4. Site is live at https://hogtai.github.io/enhance_ministries/
-
-## Lighthouse Best Practices & Security Headers
-
-**Current Score:** 77/100
-
-The site loses points due to:
-1. **Third-party cookies** - From Zeffy donation iframe (expected, cannot be eliminated)
-2. **Missing security headers** - GitHub Pages limitation
-
-To improve: Add Cloudflare in front of GitHub Pages for custom headers.
-
----
-
-## Benefits of Modular Architecture
-
-| Task | Before | After |
-|------|--------|-------|
-| Update navigation | Edit 9 files | Edit 1 JSON file |
-| Update footer | Edit 9 files | Edit 1 component |
-| Bump CSS version | Edit 9 files | Edit 1 JSON file |
-| Add new page | Copy ~600 lines | Create ~50 lines |
-| Update donate URL | Edit 9 files | Edit 1 JSON file |
-| Add team member | Edit HTML | Edit 1 JSON file |
-| Add testimonial | Edit HTML | Edit 1 JSON file |
-
----
-
-## Guide for New Maintainers (Using Claude Code)
-
-### Prerequisites
-1. **Claude Code** - Install: `npm install -g @anthropic-ai/claude-code`
-2. **Node.js** - Required for building the site
-3. **Git** - For version control
-
-### Getting Started
-
-```bash
-cd path/to/enhance_ministries
-npm install  # First time only
-claude       # Start Claude Code
-```
-
-### Common Requests
-
-| Task | Example Request |
-|------|-----------------|
-| Update event dates | "Change the golf event date to July 25, 2026" |
-| Add team member | "Add Sarah Johnson as Marketing Director - photo is sarah-johnson.webp" |
-| Update CSS | "Make the primary color more orange" |
-| Add testimonial | "Add a testimonial from Pastor Mike at Community Church" |
-| Fix navigation | "Add a new dropdown item for the Resources menu" |
-
-### Important Reminders
-
-1. **Run `npm run build`** to verify changes compile correctly
-2. **Edit data files** for content changes (not page templates)
-3. **Commit with descriptive messages** explaining what changed
-4. **Push to main** to trigger automated deployment
-
-### Getting Help
-
-- **Claude Code Issues**: https://github.com/anthropics/claude-code/issues
-- **Eleventy Docs**: https://www.11ty.dev/docs/
-- **Website Questions**: Contact the Enhance Ministries team
+- **Zeffy** — donation modal iframe (URL in `site.json`); golf registration iframe on `/golf/`
+- **Jotform** — student mission trip registration on `/mission/`
+- **Web3Forms** — contact form (access key hardcoded in contact form HTML; key: `ff5f576c-...`)
+- **Google Fonts** — Inter (400/500/600/700), loaded via `<link>` in base layout
