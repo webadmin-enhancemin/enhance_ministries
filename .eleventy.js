@@ -8,6 +8,13 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/_redirects");
   eleventyConfig.addPassthroughCopy("src/admin");
 
+  // Blog collection — excludes future-dated posts so scheduled publishing works
+  eleventyConfig.addCollection("blog", function(collectionApi) {
+    const now = new Date();
+    return collectionApi.getFilteredByTag("blog")
+      .filter(post => new Date(post.data.date) <= now);
+  });
+
   // Date filters for blog
   eleventyConfig.addFilter("readableDate", (dateObj) => {
     return new Intl.DateTimeFormat('en-US', {
