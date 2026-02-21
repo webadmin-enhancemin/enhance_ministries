@@ -1,9 +1,27 @@
 backend:
   name: git-gateway
   branch: main
+  commit_messages:
+    create: 'Add blog post: "{{slug}}"'
+    update: 'Update blog post: "{{slug}}"'
+    delete: 'Delete blog post: "{{slug}}"'
+    uploadMedia: 'Upload media: "{{path}}"'
+    deleteMedia: 'Delete media: "{{path}}"'
+
+site_url: https://enhancemin.com
+
+logo:
+  src: /assets/logo.png
+  show_in_header: true
+
+show_preview_links: false
 
 media_folder: "src/assets/blog"
 public_folder: "/assets/blog"
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
 
 collections:
   - name: "blog"
@@ -12,8 +30,28 @@ collections:
     folder: "src/blog"
     create: true
     slug: "{{slug}}"
+    preview_path: "blog/{{slug}}/"
     summary: "{{date}} · {{title}} [{{category}}]"
     sortable_fields: ["date", "title", "category"]
+    view_filters:
+      - label: "Coaching"
+        field: category
+        pattern: "Coaching"
+      - label: "Ministry Life"
+        field: category
+        pattern: "Ministry Life"
+      - label: "Missions"
+        field: category
+        pattern: "Missions"
+      - label: "Devotional"
+        field: category
+        pattern: "Devotional"
+      - label: "Leadership"
+        field: category
+        pattern: "Leadership"
+    view_groups:
+      - label: "Category"
+        field: category
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - label: "Publish Date"
@@ -37,5 +75,9 @@ collections:
         name: "featuredImage"
         widget: "image"
         required: false
-        hint: "Optional. Click 'Choose an image' to select from previously uploaded assets in the Media Library, or upload a new image."
-      - { label: "Body", name: "body", widget: "markdown" }
+        choose_url: false
+        hint: "Optional. Upload a new image or select one from the Media Library."
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        modes: ["rich_text", "raw"]
