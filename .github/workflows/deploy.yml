@@ -108,12 +108,18 @@ jobs:
       - name: Deploy to Netlify via API
         run: |
           cd _site && zip -r ../deploy.zip . && cd ..
-          RESPONSE=$(curl -sf -X POST \
+          HTTP_STATUS=$(curl -s -o /tmp/netlify_response.json -w "%{http_code}" -X POST \
             -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
             -H "Content-Type: application/zip" \
             --data-binary @deploy.zip \
             "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys")
-          echo "$RESPONSE" | jq -r '"Deploy ID: " + .id + "\nState: " + .state + "\nURL: " + (.ssl_url // .url // "pending")'
+          echo "HTTP status: $HTTP_STATUS"
+          if [ "$HTTP_STATUS" -ge 400 ]; then
+            echo "Netlify API error response:"
+            cat /tmp/netlify_response.json
+            exit 1
+          fi
+          cat /tmp/netlify_response.json | jq -r '"Deploy ID: " + .id + "\nState: " + .state + "\nURL: " + (.ssl_url // .url // "pending")'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
