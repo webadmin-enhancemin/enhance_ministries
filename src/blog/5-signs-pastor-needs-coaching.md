@@ -46,6 +46,3 @@ Pastoral transitions, staff challenges, church conflict, personal discernment â€
 
 A coaching relationship provides a thinking partner who asks good questions and helps you gain clarity before acting.
 
----
-
-*If any of these resonate, you're not alone â€” and you don't have to stay there. Enhance Ministries offers confidential coaching grounded in Scripture and real pastoral experience. [Reach out today.](/contact/)*

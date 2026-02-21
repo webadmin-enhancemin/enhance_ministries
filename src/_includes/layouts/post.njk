@@ -6,11 +6,11 @@ ogType: article
 ---
 
 <!-- Post Hero -->
-<header class="coaching-hero">
+<header class="blog-hero">
+    <img src="/assets/hero-mountain.webp" alt="" class="hero-bg-img" width="1920" height="1080">
     <div class="container">
-        {% if category %}<span class="event-badge">{{ category }}</span>{% endif %}
         <h1>{{ title }}</h1>
-        <p class="coaching-hero-text">{{ date | readableDate }}{% if author %} &middot; {{ author }}{% endif %}</p>
+        <p class="blog-hero-meta">{{ date | readableDate }}{% if author %} &middot; {{ author }}{% endif %}</p>
     </div>
 </header>
 
@@ -25,19 +25,5 @@ ogType: article
         <div class="blog-post-body">
             {{ content | safe }}
         </div>
-        <div class="blog-post-footer">
-            <a href="/blog/" class="btn btn-outline">&larr; Back to Blog</a>
-        </div>
     </div>
 </article>
-
-<!-- CTA -->
-<section class="section section-cta">
-    <div class="container">
-        <div class="cta-content">
-            <h2>Found This Helpful?</h2>
-            <p>Share it with a pastor or ministry leader who could use some encouragement today.</p>
-            <a href="/contact/" class="btn btn-outline-white btn-lg">Connect With Enhance</a>
-        </div>
-    </div>
-</section>
