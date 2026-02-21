@@ -1,120 +1,153 @@
 # Enhance Ministries Website
 
-A modern, responsive website for Enhance Ministries - a 501(c)(3) nonprofit organization dedicated to Cultivating Healthy Leaders and Fruitful Ministries.
+A modern, responsive website for Enhance Ministries — a 501(c)(3) nonprofit dedicated to Cultivating Healthy Leaders and Fruitful Ministries.
 
-**Live Site:** [https://hogtai.github.io/enhance_ministries/](https://hogtai.github.io/enhance_ministries/)
+**Live Site:** [https://enhancemin.com](https://enhancemin.com)
+**Repository:** [github.com/webadmin-enhancemin/enhance_ministries](https://github.com/webadmin-enhancemin/enhance_ministries)
 
 ## Tech Stack
 
-- **Eleventy (11ty)** - Static site generator with Nunjucks templates
-- **HTML5/CSS3** - Semantic markup, custom properties, Flexbox, Grid
-- **Vanilla JavaScript** - No frameworks or dependencies
-- **GitHub Actions** - Automated build and deployment
-- **Google Fonts** - Inter font family
-- **Zeffy** - Donation and event registration forms
-- **Jotform** - Mission trip registration
+- **Eleventy (11ty)** — Static site generator with Nunjucks templates
+- **Netlify** — Hosting, Identity (auth), and Git Gateway
+- **Decap CMS** — Web-based content editor at `/admin/`
+- **GitHub Actions** — Automated build, security scan, and deploy pipeline
+- **HTML5/CSS3** — Semantic markup, custom properties, Flexbox, Grid
+- **Vanilla JavaScript** — No frameworks
+- **Google Fonts** — Inter font family
+- **Zeffy** — Donation and event registration forms
+- **Jotform** — Mission trip registration
+- **Web3Forms** — Contact form backend
 
 ## Project Structure
 
 ```
 enhance_ministries/
-├── .eleventy.js              # Eleventy configuration
-├── package.json              # Node.js dependencies
+├── .eleventy.js              # Eleventy config (filters, passthroughs, shortcodes)
+├── package.json
 ├── .github/workflows/
-│   ├── deploy.yml            # Build & deploy to GitHub Pages
-│   └── seo-ping.yml          # SEO sitemap ping workflow
+│   └── deploy.yml            # Build → security scan → deploy to Netlify
 │
-├── src/                      # Source files
+├── src/
 │   ├── _includes/
 │   │   ├── layouts/
-│   │   │   └── base.njk      # Base HTML template
-│   │   └── components/
-│   │       ├── nav.njk       # Navigation component
-│   │       ├── footer.njk    # Footer component
-│   │       ├── donate-modal.njk
-│   │       └── scripts/      # JavaScript components
+│   │   │   ├── base.njk      # Base HTML template (meta, nav, footer, scripts)
+│   │   │   └── post.njk      # Blog post layout (chains to base.njk)
+│   │   └── components/       # nav, footer, donate-modal, scripts
 │   │
 │   ├── _data/
-│   │   ├── site.json         # Site config (name, URL, CSS version)
-│   │   ├── navigation.json   # Nav menu structure
+│   │   ├── site.json         # Site name, URL, cssVersion, donation URL
+│   │   ├── navigation.json   # Nav menu structure (edit to add/remove links)
 │   │   ├── team.json         # Leadership team members
 │   │   └── testimonials.json # Testimonial quotes
 │   │
-│   ├── pages/                # Page templates
-│   │   ├── index.njk         # Homepage
-│   │   ├── coaching.njk      # Coaching for Pastors
-│   │   ├── speaking_training.njk
-│   │   ├── events.njk        # Events hub
-│   │   ├── golf.njk          # Golf Event
-│   │   ├── missions.njk      # Mission Experiences
-│   │   ├── book.njk          # Matt's Book
-│   │   ├── media.njk         # Media page
-│   │   └── partners.njk      # Ministry Partners
+│   ├── pages/                # Page templates (Nunjucks)
+│   ├── blog/                 # Blog posts (Markdown) — managed via Decap CMS
+│   │   └── blog.11tydata.js  # Sets layout + tag for all posts
+│   ├── admin/
+│   │   ├── index.html        # Decap CMS entry point
+│   │   └── config.yml        # CMS collections and field definitions
 │   │
-│   ├── assets/               # Images
+│   ├── assets/               # Images and static files
 │   ├── styles.css            # All CSS
-│   ├── sitemap.xml           # SEO sitemap
-│   └── robots.txt            # Crawler directives
+│   ├── feed.njk              # RSS feed → /feed.xml
+│   ├── sitemap.xml
+│   └── robots.txt
 │
-├── _site/                    # Build output (gitignored)
-├── CLAUDE.md                 # Claude Code maintenance guide
-└── README.md                 # This file
+└── _site/                    # Build output (gitignored)
 ```
 
 ## Development
 
-### Prerequisites
-- Node.js (v18+)
-- npm
-
-### Setup
 ```bash
-# Install dependencies
-npm install
-
-# Start development server with live reload
-npm run serve
-
-# Build for production
-npm run build
+npm install        # First-time setup
+npm run serve      # Dev server at localhost:8080 with live reload
+npm run build      # Production build → _site/
 ```
 
-### Deployment
-Push to `main` branch triggers automated deployment via GitHub Actions:
-```bash
-git add .
-git commit -m "Your commit message"
-git push origin main
-```
+Always run `npm run build` before committing to verify everything compiles.
 
-The site is built with Eleventy and deployed to GitHub Pages automatically.
+## Deployment
+
+Push to `main` triggers the GitHub Actions pipeline:
+
+1. **Build** — `npm ci` + `npm run build`
+2. **Security scan** — `npm audit` + Trivy (secrets + vulnerabilities) — must pass
+3. **Deploy** — zips `_site/`, uploads to Netlify via API
+
+Netlify auto-builds are **disabled** — GitHub Actions is the only deploy trigger. Required GitHub secrets: `NETLIFY_AUTH_TOKEN`, `NETLIFY_SITE_ID`.
 
 ## Pages
 
-| Page | Description |
-|------|-------------|
-| **Home** | Hero, statistics, services, testimonials, team, contact form |
-| **Coaching** | Coaching & consulting services for pastors |
-| **Speaking & Training** | Speaking engagement information |
-| **Events** | Events hub linking to Golf and Missions |
-| **Golf Event** | Annual fundraiser with Zeffy registration |
-| **Mission Experiences** | Student and family mission trips |
-| **Book** | Matt's Book - "What You Would Have Learned in Sunday School" |
-| **Media** | Messages, podcasts, and articles |
-| **Partners** | Ministry partner organizations |
+| URL | File | Description |
+|-----|------|-------------|
+| `/` | `pages/index.njk` | Homepage |
+| `/about/` | `pages/about.njk` | Story + pastor crisis stats |
+| `/services/` | `pages/services.njk` | Services overview |
+| `/coaching/` | `pages/coaching.njk` | Coaching for pastors |
+| `/consulting/` | `pages/consulting.njk` | Consulting for ministries |
+| `/speaking/` | `pages/speaking.njk` | Speaking themes + event types |
+| `/training/` | `pages/training.njk` | Interactive workshops |
+| `/events/` | `pages/events.njk` | Events hub |
+| `/golf/` | `pages/golf.njk` | Golf fundraiser + Zeffy registration |
+| `/mission/` | `pages/mission.njk` | Student + Family + Win Your Jerusalem trips |
+| `/book/` | `pages/book.njk` | Matt's book |
+| `/media/` | `pages/media.njk` | Messages, podcasts, articles |
+| `/partners/` | `pages/partners.njk` | Ministry partners |
+| `/leadership/` | `pages/leadership.njk` | Team carousel |
+| `/contact/` | `pages/contact.njk` | Contact form |
+| `/blog/` | `pages/blog.njk` | Blog listing page |
+| `/blog/post-slug/` | `blog/*.md` | Individual blog posts |
+| `/admin/` | `admin/index.html` | Decap CMS editor (login required) |
+| `/feed.xml` | `feed.njk` | RSS feed |
 
-## Content Updates
+## Blog & CMS
 
-Content is managed through JSON data files in `src/_data/`:
+Blog posts are Markdown files in `src/blog/`. They are written and published through the Decap CMS web editor — no code knowledge needed.
 
-| File | Content |
-|------|---------|
-| `site.json` | Site name, URL, tagline, CSS version |
-| `navigation.json` | Menu structure and links |
-| `team.json` | Leadership team members |
-| `testimonials.json` | Testimonial quotes |
+### Accessing the Admin Panel
 
-See [CLAUDE.md](CLAUDE.md) for detailed maintenance instructions.
+1. Go to `https://enhancemin.com/admin/`
+2. Click **"Login with Netlify Identity"**
+3. Enter your invited email and password
+
+### Adding a Blog User
+
+Admin users are managed through **Netlify Identity** (separate from your Netlify account login):
+
+1. Log in to [app.netlify.com](https://app.netlify.com)
+2. Select the Enhance Ministries site
+3. Go to **Identity** tab → **Invite users**
+4. Enter the user's email address
+5. They'll receive an email to set a password — after that they can log in at `/admin/`
+
+Free tier supports up to **5 Identity users**.
+
+### How Publishing Works
+
+When a post is saved/published in the CMS:
+1. Decap CMS commits the Markdown file to `src/blog/` in GitHub
+2. The commit triggers the GitHub Actions pipeline
+3. Eleventy rebuilds the site and Netlify deploys it (typically 2–3 minutes)
+
+### Blog Post Fields
+
+| Field | Description |
+|-------|-------------|
+| Title | Post headline |
+| Publish Date | Date displayed on card and post |
+| Author | Defaults to "Matt Swigart" |
+| Category | Coaching / Ministry Life / Missions / Devotional / Leadership |
+| Description | 1–2 sentence summary — shown on listing card and used for SEO |
+| Featured Image | Optional image (stored in `src/assets/blog/`) |
+| Body | Full post content (Markdown WYSIWYG editor) |
+
+### Netlify Dashboard Configuration
+
+| Setting | Location | Value |
+|---------|----------|-------|
+| Identity | Site Settings → Identity | Enabled |
+| Git Gateway | Identity → Services → Git Gateway | Enabled |
+| Branch | `admin/config.yml` → `backend.branch` | `main` |
 
 ## Brand Colors
 
@@ -122,29 +155,22 @@ See [CLAUDE.md](CLAUDE.md) for detailed maintenance instructions.
 |-------|-----|-------|
 | Primary Orange | `#FF7A3D` | Buttons, accents, links |
 | Primary Dark | `#FF5100` | Hover states, gradients |
+| Accessible Orange | `#C54500` | WCAG AA compliant — used for text/buttons on white |
 | Dark Text | `#1E1810` | Headings, body text |
 | Light Background | `#F8F5F4` | Alternate sections |
 
+**After any CSS change:** increment `cssVersion` in `src/_data/site.json` for cache busting.
+
 ## External Integrations
 
-- **Zeffy** - Donation forms and golf registration
-- **Jotform** - Mission trip registration
-- **Google Fonts** - Inter font family
-
-## SEO
-
-- Meta tags, Open Graph, Twitter Cards (via base template)
-- JSON-LD structured data
-- Automated sitemap pings via GitHub Actions
-
-## Maintaining This Website
-
-This website is designed to be maintained using **Claude Code**. See [CLAUDE.md](CLAUDE.md) for:
-
-- Development commands
-- How to update content via data files
-- Adding pages and components
-- Common maintenance tasks
+| Service | Purpose | Config location |
+|---------|---------|-----------------|
+| Netlify Identity | CMS login / user auth | Netlify dashboard → Identity |
+| Decap CMS | Blog editor at `/admin/` | `src/admin/config.yml` |
+| Zeffy | Donation modal + golf registration | URL in `src/_data/site.json` |
+| Jotform | Mission trip registration | Iframe on `/mission/` |
+| Web3Forms | Contact form | Access key in `src/pages/contact.njk` |
+| Google Fonts | Inter typeface | `<link>` in `base.njk` |
 
 ## Contact
 
@@ -154,4 +180,6 @@ This website is designed to be maintained using **Claude Code**. See [CLAUDE.md]
 
 ---
 
-**Enhance Ministries** is a registered 501(c)(3) nonprofit organization. EIN: 85-2672334
+**Enhance Ministries** is a registered 501(c)(3) nonprofit. EIN: 85-2672334
+
+See [CLAUDE.md](CLAUDE.md) for developer/AI maintenance instructions.
