@@ -17,6 +17,11 @@ ogType: article
 <!-- Post Content -->
 <article class="section">
     <div class="container">
+        {% if featuredImage %}
+        <div class="blog-post-hero-image">
+            <img src="{{ featuredImage }}" alt="{{ title }}">
+        </div>
+        {% endif %}
         <div class="blog-post-body">
             {{ content | safe }}
         </div>

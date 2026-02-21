@@ -26,6 +26,11 @@ permalink: /blog/
         <div class="blog-grid">
             {% for post in posts %}
             <article class="blog-card">
+                {% if post.data.featuredImage %}
+                <div class="blog-card-image">
+                    <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}" loading="lazy">
+                </div>
+                {% endif %}
                 <div class="blog-card-content">
                     {% if post.data.category %}
                     <span class="event-badge blog-card-category">{{ post.data.category }}</span>
