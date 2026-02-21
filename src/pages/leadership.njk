@@ -1,42 +1,130 @@
 ---
 layout: layouts/base.njk
-title: Leadership
+title: Our Team
 navStyle: solid
-description: "Meet the Enhance Ministries leadership team—committed Christ-followers passionate about pastoral and church health."
-keywords: "Enhance Ministries leadership, board members, Matt Swigart, ministry team, church health leaders"
-canonical: "/leadership/"
-hasCarousel: true
-permalink: /leadership/
+description: "Meet the Enhance Ministries team — dedicated staff and board members committed to pastoral health and Kingdom impact."
+keywords: "Enhance Ministries team, Matt Swigart, Adrianna Frelich, board of directors, ministry leadership, pastoral care nonprofit"
+canonical: "/our-team/"
+permalink: /our-team/
 ---
 
 <!-- Hero Section -->
 <header class="coaching-hero">
     <div class="container">
-        <span class="event-badge">Our Team</span>
-        <h1>Leadership</h1>
-        <p class="coaching-hero-text">Guided by committed Christ-followers passionate about pastoral and church health.</p>
+        <h1>Meet Our Team</h1>
+        <p class="coaching-hero-text">Committed Christ-followers passionate about pastoral health and Kingdom impact.</p>
     </div>
 </header>
 
-<!-- Team Section -->
+<!-- Staff Section -->
 <section class="section">
     <div class="container">
-        <div class="team-carousel-wrapper">
-            <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&larr;</button>
-            <div class="team-carousel">
-                {% for member in team.members %}
-                <div class="team-card">
-                    <div class="team-photo">
-                        <img src="/assets/{{ member.image }}" alt="{{ member.name }}" class="team-img" width="200" height="200" loading="lazy"{% if member.objectPosition %} style="object-position: {{ member.objectPosition }};"{% endif %}>
-                    </div>
-                    <h3>{{ member.name }}</h3>
-                    <p class="team-role">{{ member.title }}</p>
-                    {% if member.bio %}<p class="team-bio">{{ member.bio }}</p>{% endif %}
-                </div>
-                {% endfor %}
+
+        <!-- Matt Swigart -->
+        <div class="member-profile">
+            <div class="member-photo-col">
+                <img src="/assets/matt-headshot.webp" alt="Matt Swigart" width="200" height="200" loading="eager">
+                <p class="member-photo-name">Matt Swigart</p>
+                <p class="member-photo-title">Founder &amp; Executive Director</p>
             </div>
-            <button class="carousel-btn carousel-btn-next" aria-label="Next">&rarr;</button>
-            <div class="carousel-hint">Swipe to see more</div>
+            <div class="member-bio-col">
+                <p>Matt Swigart is the founder and executive director of Enhance Ministries — a calling shaped by more than two decades of pastoral experience, a deep love for the Church, and a conviction that ministry leaders deserve real, trusted support.</p>
+                <h3>Ministry Roots</h3>
+                <p>For 12 years, Matt served at New Life Church of Woodbury, MN, where he led as Youth Pastor, Saturday Night Service Lead Pastor, and Elder. His passion for developing leaders grew through leading short-term mission trips to Honduras, Panama, New York City, Houston, and Ukraine, and through coaching youth pastors across the country as part of LEAD222, an international youth pastor coaching organization.</p>
+                <div class="ministry-roots-photos">
+                    <img src="/assets/matt-ministry-teaching.webp" alt="Matt teaching youth" loading="lazy">
+                    <img src="/assets/matt-ministry-fun.webp" alt="Matt with youth group" loading="lazy">
+                    <img src="/assets/matt-ministry-gospel.webp" alt="Matt sharing the gospel" loading="lazy" style="object-position: top;">
+                </div>
+                <h3>Athletics &amp; Coaching</h3>
+                <p>Matt's love for athletics runs deep. He has coached his children in baseball and basketball, led high school teams at New Life Academy, and currently serves as the Head Men's and Women's Tennis Coach at the University of Northwestern–St. Paul — where he is the all-time winningest coach in the program's history.</p>
+                <div class="athletics-photos">
+                    <img src="/assets/matt-athletics-chapel.webp" alt="Matt speaking at UNW chapel" loading="lazy">
+                    <img src="/assets/matt-athletics-unw.webp" alt="Matt coaching at UNW" loading="lazy">
+                </div>
+                <h3>Founding Enhance</h3>
+                <p>In late 2020, Matt felt the Holy Spirit clearly calling him to launch Enhance Ministries. Recognizing that his first 20 years of ministry had uniquely prepared him for the next chapter, he stepped out in faith to build a platform where healthy leaders lead healthy, fruitful ministries.</p>
+                <h3>Family</h3>
+                <p>Matt's primary ministry is his family. He has been married to his wife, Christina, since December 2000. Together they have three children: Caitlyn (Ricky), Caleb, and Lucy.</p>
+            </div>
+        </div>
+
+        <!-- Adrianna Frelich -->
+        <div class="member-profile">
+            <div class="member-photo-col">
+                <img src="/assets/adrianna-frelich.webp" alt="Adrianna Frelich" width="200" height="200" loading="lazy" style="object-position: center 30%;">
+                <p class="member-photo-name">Adrianna Frelich</p>
+                <p class="member-photo-title">Marketing Director</p>
+            </div>
+            <div class="member-bio-col">
+                <p>Adri is passionate about making a difference in the world and believes that when strategic marketing aligns with strong development and communication efforts, incredible things happen. With 11 years in corporate CPG marketing management, she gained valuable experience in running impactful campaigns that drive real results.</p>
+                <p>Her passion extends beyond marketing — she loves fostering partnerships between for-profit businesses and nonprofits to create lasting impact. For Adri, it's not just about strategy; it's about using her skills to make a difference for the Kingdom and transform lives through meaningful connections.</p>
+                <p>She also has a deep heart for giving back and sharing the love of Jesus with others. At home, she cherishes time with her husband, Kyle, and their two beautiful children, finding joy in both family and faith.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Board of Directors Section -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <h2>Board of Directors</h2>
+            <p class="section-subtitle">A dedicated group of leaders providing governance, wisdom, and accountability to Enhance Ministries.</p>
+        </div>
+        <div class="board-profiles">
+
+            <!-- Tait Hoglund -->
+            <div class="board-member-profile">
+                <div class="board-member-header">
+                    <img src="/assets/tait-hoglund-new.webp" alt="Tait Hoglund" class="board-member-photo" width="80" height="80" loading="lazy">
+                    <div>
+                        <h3 class="board-member-name">Tait Hoglund</h3>
+                        <p class="board-member-title">Board President</p>
+                    </div>
+                </div>
+                <p>With a 19-year career dedicated to leading, coaching, and accelerating ministry programs, Tait brings a deep understanding of the unique challenges and rewards of ministry leadership. His experience spans church, nonprofit, and camp settings, equipping him with the skills to support and encourage those serving in God's work.</p>
+                <p>Drawn to Enhance Ministries by a desire to see leaders thrive, he has witnessed firsthand the impact of healthy rhythms, coaching, and encouragement. He is honored to contribute to the mission of strengthening and sustaining ministry leaders for long-term impact.</p>
+            </div>
+
+            <!-- C.J. Lloyd -->
+            <div class="board-member-profile">
+                <div class="board-member-header">
+                    <img src="/assets/cj-lloyd.webp" alt="C.J. Lloyd" class="board-member-photo" width="80" height="80" loading="lazy">
+                    <div>
+                        <h3 class="board-member-name">C.J. Lloyd</h3>
+                        <p class="board-member-title">Board Treasurer</p>
+                    </div>
+                </div>
+                <p>C.J. is a follower of Jesus with a passion for helping businesses achieve financial clarity. As the Co-Founder and Managing Director of APEX Accounting Solutions and the Director of Finance and Business Services at Bridging MN, he brings extensive expertise in financial management and strategic planning.</p>
+                <p>His journey with Enhance Ministries began through a long-standing friendship with Matt, first as his college tennis coach and later as a partner providing accounting services to the ministry. He is committed to ensuring financial stewardship that supports the mission of sustaining and equipping ministry leaders.</p>
+            </div>
+
+            <!-- Cameron Fair -->
+            <div class="board-member-profile">
+                <div class="board-member-header">
+                    <img src="/assets/cam-fair.webp" alt="Cameron Fair" class="board-member-photo" width="80" height="80" loading="lazy">
+                    <div>
+                        <h3 class="board-member-name">Cameron Fair</h3>
+                        <p class="board-member-title">Board Secretary</p>
+                    </div>
+                </div>
+                <p>Cameron is an attorney, husband, and father of three based in the Twin Cities. He and his wife, Marissa, met at a church camp, where they later became engaged and together served for five years directing the middle school ministry.</p>
+                <p>Cameron graduated from Northwestern–St. Paul in 2018 with a degree in psychology. After serving as a youth pastor at Christ Community Church in Kansas City, he earned his J.D. from the University of St. Thomas School of Law in 2025 and now practices real estate law at a large firm in Minneapolis. In his spare time, he enjoys racquet sports, language learning, and specialty coffee.</p>
+            </div>
+
+            <!-- Marco Machado -->
+            <div class="board-member-profile">
+                <div class="board-member-header">
+                    <img src="/assets/placeholder-avatar.svg" alt="Marco Machado" class="board-member-photo" width="80" height="80" loading="lazy">
+                    <div>
+                        <h3 class="board-member-name">Marco Machado</h3>
+                        <p class="board-member-title">Board Member</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -47,7 +135,7 @@ permalink: /leadership/
         <div class="cta-content">
             <h2>Connect With Our Team</h2>
             <p>Have questions about Enhance Ministries or how we can support your ministry?</p>
-            <a href="/contact/" class="btn btn-outline-white btn-lg">Contact Us</a>
+            <a href="/contact/" class="btn btn-outline-white btn-lg">Get in Touch</a>
         </div>
     </div>
 </section>

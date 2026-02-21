@@ -5,6 +5,11 @@
 /missions.html          /mission/           301
 /coaching.html          /coaching/          301
 /speaking_training.html /speaking/          301
-/book.html              /book/              301
-/media.html             /media/             301
-/partners.html          /partners/          301
+/book.html              /resources/         301
+/media.html             /resources/         301
+/partners.html          /resources/         301
+/blog/                  /resources/         301
+/book/                  /resources/         301
+/media/                 /resources/         301
+/partners/              /resources/         301
+/leadership/            /our-team/          301

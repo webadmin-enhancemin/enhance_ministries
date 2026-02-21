@@ -1,0 +1,377 @@
+---
+layout: layouts/base.njk
+title: Resources
+navStyle: solid
+description: "Blog posts, Matt's book, media appearances, and ministry partners from Enhance Ministries — all in one place."
+keywords: "ministry resources, pastoral coaching blog, Matt Swigart book, Christian podcast, ministry partners, faith leadership"
+canonical: "/resources/"
+hasSmoothScroll: true
+hasCarousel: true
+hasDropdown: true
+permalink: /resources/
+---
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "What You Would Have Learned in Sunday School",
+    "author": {
+        "@type": "Person",
+        "name": "Matt Swigart"
+    },
+    "description": "A captivating book that unveils the timeless narratives of the Old Testament for those who came to faith as adults.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Enhance Ministries"
+    },
+    "url": "https://www.amazon.com/What-Would-Learned-Sunday-School/dp/1949562247/"
+}
+</script>
+
+<!-- Hero Section -->
+<header class="coaching-hero">
+    <div class="container">
+        <h1>Resources</h1>
+        <p class="coaching-hero-text">Content from Enhance Ministries - everything in one place.</p>
+    </div>
+</header>
+
+<!-- ===================== BLOG ===================== -->
+<section id="blog" class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Blog</h2>
+            <p class="section-subtitle">Encouragement, insights, and resources for ministry leaders.</p>
+        </div>
+        {% set posts = collections.blog | reverse %}
+        {% if posts and posts.length %}
+        <div class="blog-carousel-wrapper">
+            <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&larr;</button>
+            <div class="blog-carousel">
+                {% for post in posts %}
+                <article class="blog-card">
+                    {% if post.data.featuredImage %}
+                    <div class="blog-card-image">
+                        <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}" loading="lazy">
+                    </div>
+                    {% endif %}
+                    <div class="blog-card-content">
+                        {% if post.data.category %}
+                        <span class="event-badge blog-card-category">{{ post.data.category }}</span>
+                        {% endif %}
+                        <h3 class="blog-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+                        <p class="blog-card-meta">{{ post.data.date | readableDate }}{% if post.data.author %} &middot; {{ post.data.author }}{% endif %}</p>
+                        <p class="blog-card-excerpt">{{ post.data.description }}</p>
+                        <a href="{{ post.url }}" class="btn btn-primary btn-sm">Read More</a>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+            <button class="carousel-btn carousel-btn-next" aria-label="Next">&rarr;</button>
+            <div class="carousel-hint">Swipe to see more</div>
+        </div>
+        {% else %}
+        <p class="blog-empty">No posts yet. Check back soon!</p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ===================== MATT'S BOOK ===================== -->
+<section id="book" class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <h2>Matt's Book</h2>
+            <p class="section-subtitle">Discover the stories you missed and embark on a journey through the foundational tales of the Old Testament.</p>
+            <a href="https://www.amazon.com/What-Would-Learned-Sunday-School/dp/1949562247/" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: var(--spacing-sm);">Order on Amazon</a>
+        </div>
+        <div class="two-column">
+            <div class="column-image">
+                <img src="/assets/book-sunday-school.jpg" alt="What You Would Have Learned in Sunday School book cover" class="section-image" style="max-width: 350px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+            </div>
+            <div class="column-content">
+                <h3>What You Would Have Learned in Sunday School</h3>
+                <p class="lead-text" style="font-size: 1.15rem; font-style: italic; color: var(--color-text-light); margin-bottom: var(--spacing-md);">"For those who come to know Jesus as adults and do not have the foundation of all those 'Sunday School' stories so many learned as kids."</p>
+                <p>Are you someone who embraced faith later in life, feeling like you missed out on the foundational tales shared in Sunday School? Dive into "What You Would Have Learned In Sunday School," a captivating book that unveils the timeless narratives of the Old Testament, essential for understanding God's character, His creation, and our need for Jesus' sacrificial love on the cross.</p>
+                <a href="https://www.amazon.com/What-Would-Learned-Sunday-School/dp/1949562247/" target="_blank" rel="noopener" class="btn btn-primary">Order Your Copy</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Unveiling the Core Stories</h2>
+            <p class="section-subtitle">Each chapter guides you through a foundational tale, encouraging you to read it directly from your Bible before delving into the accompanying chapter.</p>
+        </div>
+        <div class="coaching-benefits-grid">
+            <div class="coaching-benefit-card">
+                <div class="coaching-benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                </div>
+                <h3>Unveiling the Core Stories</h3>
+                <p>Embark on a journey through the Old Testament, encountering key stories that shape our understanding of faith.</p>
+            </div>
+            <div class="coaching-benefit-card">
+                <div class="coaching-benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                </div>
+                <h3>Understanding God's Plan</h3>
+                <p>Discover what God was up to in each story and unravel its significance for your life today.</p>
+            </div>
+            <div class="coaching-benefit-card">
+                <div class="coaching-benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </div>
+                <h3>Modern-Day Relevance</h3>
+                <p>Through engaging narratives and personal anecdotes, see how ancient truths transform your journey of faith.</p>
+            </div>
+            <div class="coaching-benefit-card">
+                <div class="coaching-benefit-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h3>Deepening Your Reflection</h3>
+                <p>End each chapter with reflection questions designed for personal introspection and group discussions.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== MEDIA ===================== -->
+<section id="media" class="section section-alt messages-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Media</h2>
+            <p class="section-subtitle">Recorded messages from Matt Swigart at churches, conferences, and chapels.</p>
+        </div>
+        <div class="section-header" style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md);">
+            <h3>Messages</h3>
+        </div>
+        <div class="messages-carousel-wrapper">
+            <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&larr;</button>
+            <div class="messages-carousel">
+                <div class="media-card">
+                    <div class="media-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    </div>
+                    <div class="media-content">
+                        <span class="media-type">Message</span>
+                        <h4>Overcoming Lazy River Faith</h4>
+                        <p>Challenge passive Christianity and discover what it means to actively pursue God's calling.</p>
+                        <a href="https://cornerstoneowatonna.com/media/hkj6n43/02-12-23-guest-speaker-matt-swigart" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Listen Now</a>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <div class="media-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    </div>
+                    <div class="media-content">
+                        <span class="media-type">Message</span>
+                        <h4>Lazy River Christians Are More Offended By Other People's Sin Than Their Own</h4>
+                        <p>A convicting message about self-reflection and personal accountability in our faith walk.</p>
+                        <a href="https://unwchapel.podbean.com/e/matt-swigart/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Listen Now</a>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <div class="media-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    </div>
+                    <div class="media-content">
+                        <span class="media-type">Chapel Message</span>
+                        <h4>Unwavering Focus on Jesus</h4>
+                        <p>UNW Chapel - November 18th, 2024. Keeping our eyes fixed on Christ amidst life's distractions.</p>
+                        <a href="https://podcasts.apple.com/us/podcast/mystory-mondays-coach-matt-swigart/id1450031343?i=1000677520377" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Listen Now</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn carousel-btn-next" aria-label="Next">&rarr;</button>
+            <div class="carousel-hint">Swipe to see more</div>
+        </div>
+    </div>
+</section>
+
+<section class="section podcasts-section">
+    <div class="container">
+        <div class="section-header">
+            <h3>Podcasts</h3>
+            <p class="section-subtitle">Matt has been a guest on various podcasts discussing faith, family, and leadership.</p>
+        </div>
+        <div class="podcasts-carousel-wrapper">
+            <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&larr;</button>
+            <div class="podcasts-carousel">
+                <div class="media-card">
+                    <div class="media-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </div>
+                    <div class="media-content">
+                        <span class="media-type">Courageous Christianity Podcast</span>
+                        <h4>Overcoming Lazy River Faith</h4>
+                        <p>Matt discusses his signature message about moving from passive to active faith.</p>
+                        <a href="https://omny.fm/shows/courageous-christianity/lazy-river-faith?in_playlist=podcast" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Listen Now</a>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <div class="media-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </div>
+                    <div class="media-content">
+                        <span class="media-type">Courageous Christianity Podcast</span>
+                        <h4>How Old Testament Truths Can Guide Us Today</h4>
+                        <p>Exploring the relevance of ancient Scripture for modern believers.</p>
+                        <a href="https://omny.fm/shows/courageous-christianity/threats-to-america-how-old-testament-truths-can-gu?in_playlist=podcast" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Listen Now</a>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <div class="media-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </div>
+                    <div class="media-content">
+                        <span class="media-type">Podcast</span>
+                        <h4>Intentional Rites of Passage with Your Children</h4>
+                        <p>Practical wisdom for parents on creating meaningful milestones in family life.</p>
+                        <a href="https://open.spotify.com/show/75d6my4i2zxCG9IRkxDauH" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Listen Now</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn carousel-btn-next" aria-label="Next">&rarr;</button>
+            <div class="carousel-hint">Swipe to see more</div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <h3>Articles</h3>
+            <p class="section-subtitle">Press coverage and written features about Matt Swigart and Enhance Ministries.</p>
+        </div>
+        <div class="articles-carousel-wrapper">
+            <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&larr;</button>
+            <div class="articles-carousel">
+                <div class="media-card">
+                    <div class="media-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    </div>
+                    <div class="media-content">
+                        <span class="media-type">USA Wire</span>
+                        <h4>New Author Matt Swigart Brings Old Stories to Fresh Audiences with Innovative Approach</h4>
+                        <p>Coverage of Matt's unique approach to making Old Testament stories accessible to new believers.</p>
+                        <a href="https://usawire.com/new-author-matt-swigart-brings-old-stories-to-fresh-audiences-with-innovative-approach/amp/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Read Article</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn carousel-btn-next" aria-label="Next">&rarr;</button>
+            <div class="carousel-hint">Swipe to see more</div>
+        </div>
+        <div style="text-align: center; margin-top: var(--spacing-xl);">
+            <p style="margin-bottom: var(--spacing-md); color: var(--color-text-light);">Interested in having Matt speak at your church, conference, or podcast?</p>
+            <a href="/contact/" class="btn btn-primary btn-lg">Book Matt for Your Event</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== MINISTRY PARTNERS ===================== -->
+<section id="partners" class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Ministry Partners</h2>
+            <p class="section-subtitle">Enhance Ministries endorses these ministries, recognizing the Kingdom and Body of Christ require diverse support structures for different seasons.</p>
+        </div>
+        <div class="partners-carousel-wrapper">
+            <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&larr;</button>
+            <div class="partners-carousel">
+                <!-- The Center for Biblical Living -->
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <img src="/assets/partner-cbl.png" alt="The Center for Biblical Living" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="partner-logo-placeholder" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                        </div>
+                    </div>
+                    <h3>The Center for Biblical Living</h3>
+                    <p>The Center for Biblical Living (CBL) is dedicated to providing biblical counseling for ministry leaders. They serve pastors, missionaries, church staff, seminary students and professors, and Christian organization leaders in the U.S. and around the world. CBL desires to strengthen the impact of the church by providing biblical care and counseling for ministers so that they will be effective and fruitful in leading their ministries and living the gospel before their families, churches, and communities.</p>
+                    <a href="https://cbl.org/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Visit Website</a>
+                </div>
+
+                <!-- GodTown -->
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <img src="/assets/partner-godtown.png" alt="GodTown" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="partner-logo-placeholder" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        </div>
+                    </div>
+                    <h3>GodTown</h3>
+                    <p>We're honored to partner with GodTown, a ministry committed to equipping believers to transform communities through intentional discipleship and hands-on outreach. Based in St. Paul, GodTown empowers individuals and teams to grow in their faith, engage in neighborhood service projects, and build lasting relationships through prayer, worship, community gardens, food distribution, children's ministry, and more. Whether hosting local mission teams or providing leadership training that activates believers in their calling, GodTown exemplifies Kingdom-centered impact in both urban spaces and global contexts.</p>
+                    <a href="https://www.godtown.com/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Visit Website</a>
+                </div>
+
+                <!-- Good in the Hood -->
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <img src="/assets/partner-good-in-the-hood.png" alt="Good in the Hood" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="partner-logo-placeholder" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </div>
+                    </div>
+                    <h3>Good in the Hood</h3>
+                    <p>We're proud to partner with Good in the Hood, a community-focused nonprofit dedicated to changing lives together with simple acts of kindness. Rooted in intentional service and neighborhood engagement, Good in the Hood fosters connection, dignity, and hope by providing essential resources like food, shoes, wellness support, and holiday assistance, while creating volunteer opportunities that bring people together in meaningful ways. Through food programs, outreach programs, and kindness-based initiatives, they work to uplift individuals, strengthen families, and build healthier, more compassionate communities.</p>
+                    <a href="https://www.goodinthehood.org/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Visit Website</a>
+                </div>
+
+                <!-- Source MN -->
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <img src="/assets/partner-source.png" alt="Source MN" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="partner-logo-placeholder" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        </div>
+                    </div>
+                    <h3>Source MN</h3>
+                    <p>We're honored to partner with Source MN, a long-standing Christian ministry in Minneapolis that empowers the at-risk, unreached, and vulnerable through holistic urban outreach. For over three decades, Source MN has met both physical and spiritual needs through programs like food distribution, community meals, English classes, supportive housing, anti-trafficking outreach, women's drop-in support, and relational care, all grounded in sharing the hope of Christ with dignity and compassion. Their work reflects a bold commitment to breaking cycles of poverty and hopelessness while building foundations for a stronger future in the heart of the city.</p>
+                    <a href="https://www.sourcemn.org/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Visit Website</a>
+                </div>
+
+                <!-- Hearts & Hammers -->
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <img src="/assets/partner-hearts-hammers.png" alt="Hearts &amp; Hammers" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="partner-logo-placeholder" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                        </div>
+                    </div>
+                    <h3>Hearts &amp; Hammers</h3>
+                    <p>We're grateful to partner with Hearts &amp; Hammers, a hands-on ministry transforming lives through compassionate home repair and service. By providing critical repairs, accessibility modifications, and physical care for those in need especially seniors, veterans, and families facing hardship, Hearts &amp; Hammers demonstrates the love of Christ in practical, life-changing ways. Their work builds safer, more stable homes while fostering dignity, community connection, and hope. Together with Hearts &amp; Hammers, we're helping neighbors experience restoration from the inside out.</p>
+                    <a href="https://www.heartsandhammers.org/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Visit Website</a>
+                </div>
+
+                <!-- The Chap Store -->
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <img src="/assets/partner-chap-store.png" alt="The Chap Store" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="partner-logo-placeholder" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                        </div>
+                    </div>
+                    <h3>The Chap Store</h3>
+                    <p>We're proud to partner with The Chap Store, a ministry devoted to equipping and encouraging pastors, ministry leaders, and their families with resources that inspire spiritual growth and personal well-being. Through curated books, devotionals, apparel, and gifts crafted specifically for those in ministry, The Chap Store brings encouragement straight to the heart of the church. Their passion for supporting ministry leaders aligns with our commitment at Enhance to uplift, strengthen, and walk alongside pastors in every season of leadership.</p>
+                    <a href="https://thechapstore.com/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Visit Website</a>
+                </div>
+            </div>
+            <button class="carousel-btn carousel-btn-next" aria-label="Next">&rarr;</button>
+            <div class="carousel-hint">Swipe to see more</div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<section class="section section-cta">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Interested in Becoming a Ministry Partner?</h2>
+            <p>If your ministry shares our heart for cultivating healthy leaders and fruitful ministries, we'd love to connect and explore what a partnership could look like.</p>
+            <a href="/contact/" class="btn btn-outline-white btn-lg">Get in Touch</a>
+        </div>
+    </div>
+</section>

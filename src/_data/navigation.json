@@ -2,11 +2,15 @@
   "items": [
     {
       "text": "About",
-      "url": "/about/"
+      "url": "/#story",
+      "dropdown": true,
+      "children": [
+        { "text": "Our Team", "url": "/our-team/" }
+      ]
     },
     {
       "text": "Services",
-      "url": "/services/",
+      "url": "/#services",
       "dropdown": true,
       "children": [
         { "text": "Coaching for Pastors", "url": "/coaching/" },
@@ -25,18 +29,14 @@
     },
     {
       "text": "Resources",
-      "url": "/blog/",
+      "url": "/resources/",
       "dropdown": true,
       "children": [
-        { "text": "Blog", "url": "/blog/" },
-        { "text": "Matt's Book", "url": "/book/" },
-        { "text": "Media", "url": "/media/" },
-        { "text": "Ministry Partners", "url": "/partners/" }
+        { "text": "Blog", "url": "/resources/#blog" },
+        { "text": "Matt's Book", "url": "/resources/#book" },
+        { "text": "Media", "url": "/resources/#media" },
+        { "text": "Ministry Partners", "url": "/resources/#partners" }
       ]
-    },
-    {
-      "text": "Leadership",
-      "url": "/leadership/"
     },
     {
       "text": "Contact",

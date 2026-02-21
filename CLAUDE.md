@@ -171,6 +171,46 @@ Breakpoints: mobile < 768px, tablet 768px+, desktop 1024px+
 
 **After any CSS change:** increment `cssVersion` in `src/_data/site.json` (cache busting).
 
+## Event Badge Pattern (`event-badge`)
+
+The `.event-badge` class renders a small orange pill/chip label that appears above section headings. It is **purely decorative** — not interactive, not linked, not filterable.
+
+**Use a badge when it adds information the heading alone does not convey:**
+- Specific dates or timeframes: `"July 19-25, 2026"`, `"Summer 2026"`
+- Event or content type: `"Annual Fundraiser"`, `"Interactive Training"`
+- Intended audience: `"For Your Next Event"`, `"Church & Nonprofit"`
+- Content taxonomy on cards: blog post category tags (`"Coaching"`, `"Leadership"`)
+- Contextual framing for a sub-section: `"Latest Insights"`, `"Featured Appearances"`, `"In the News"`, `"Kingdom Partnerships"`, `"Listen & Learn"`
+
+**Do not use a badge when it merely restates the heading below it.** Examples of what to avoid:
+- `"Our Story"` above *About Enhance Ministries* — same meaning
+- `"Get in Touch"` above *Connect with Matt* — same meaning
+- `"Our Team"` above *Leadership* — same meaning
+- Vague marketing phrases: `"Personalized Support"`, `"Versatile Speaker"`, `"How We Help"`
+
+**Current badge inventory by page:**
+
+| Page | Badge | Section |
+|------|-------|---------|
+| `golf.njk` | `"Annual Fundraiser"` | Page hero |
+| `events.njk` | `"Annual Fundraiser"` | Golf event card |
+| `events.njk` | `"Summer 2026"` | Mission experiences card |
+| `mission.njk` | `"Summer 2026"` | Page hero |
+| `mission.njk` | `"July 19-25, 2026"` | Student Missions Trip |
+| `mission.njk` | `"July 6-12, 2026"` | Family Mission Trip |
+| `mission.njk` | `"Local Missions"` | Win Your Jerusalem |
+| `speaking.njk` | `"For Your Next Event"` | Page hero |
+| `training.njk` | `"Interactive Training"` | Page hero |
+| `consulting.njk` | `"Church & Nonprofit"` | Page hero |
+| `coaching.njk` | `"Church & Nonprofit"` | Consulting sub-section |
+| `resources.njk` | `"Latest Insights"` | Blog section header |
+| `resources.njk` | `"Listen & Learn"` | Media section header |
+| `resources.njk` | `"Featured Appearances"` | Podcasts sub-section |
+| `resources.njk` | `"In the News"` | Articles sub-section |
+| `resources.njk` | `"Kingdom Partnerships"` | Ministry Partners section |
+| `resources.njk` | `"[Category]"` | Blog post cards (dynamic) |
+| `index.njk` | `"Annual Fundraiser"` | Golf event card |
+
 ## Adding a New Page
 
 1. Create `src/pages/newpage.njk` with frontmatter (`permalink: /newpage/`)

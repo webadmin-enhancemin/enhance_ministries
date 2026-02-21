@@ -61,34 +61,16 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://enhancemin.com/book/</loc>
-    <lastmod>2026-02-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://enhancemin.com/media/</loc>
-    <lastmod>2026-02-20</lastmod>
+    <loc>https://enhancemin.com/resources/</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://enhancemin.com/partners/</loc>
-    <lastmod>2026-02-20</lastmod>
+    <loc>https://enhancemin.com/our-team/</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://enhancemin.com/leadership/</loc>
-    <lastmod>2026-02-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://enhancemin.com/blog/</loc>
-    <lastmod>2026-02-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://enhancemin.com/contact/</loc>

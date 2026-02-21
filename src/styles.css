@@ -56,6 +56,13 @@ body {
     color: var(--color-text);
     background-color: var(--color-white);
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
 }
 
 img {
@@ -1061,6 +1068,190 @@ h3 { font-size: 1.25rem; }
     color: var(--color-text-light);
 }
 
+/* Board CTA (homepage) */
+.board-cta {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+}
+
+.board-cta p {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Our Team Page - Staff Profiles */
+.member-profile {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-2xl);
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.member-profile:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.member-photo-col {
+    text-align: center;
+}
+
+.member-photo-col img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-primary);
+    display: block;
+    margin: 0 auto var(--spacing-sm);
+}
+
+.member-photo-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+}
+
+.member-photo-title {
+    color: var(--color-primary-accessible);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.member-bio-col h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+}
+
+.member-bio-col p {
+    color: var(--color-text-light);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+}
+
+.member-bio-col p:last-child {
+    margin-bottom: 0;
+}
+
+.ministry-roots-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+    margin: var(--spacing-md) 0;
+}
+
+.ministry-roots-photos img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+@media (max-width: 480px) {
+    .ministry-roots-photos {
+        grid-template-columns: 1fr;
+    }
+
+    .ministry-roots-photos img {
+        height: 200px;
+    }
+}
+
+.athletics-photos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+    margin: var(--spacing-md) 0;
+}
+
+.athletics-photos img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+}
+
+@media (max-width: 480px) {
+    .athletics-photos {
+        grid-template-columns: 1fr;
+    }
+
+    .athletics-photos img {
+        height: auto;
+    }
+}
+
+/* Our Team Page - Board Profiles */
+.board-profiles {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+}
+
+.board-member-profile {
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.board-member-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.board-member-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-primary);
+    flex-shrink: 0;
+}
+
+.board-member-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+}
+
+.board-member-title {
+    color: var(--color-primary-accessible);
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.board-member-profile p {
+    color: var(--color-text-light);
+    line-height: 1.75;
+    font-size: 0.925rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.board-member-profile p:last-child {
+    margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+    .member-profile {
+        grid-template-columns: 220px 1fr;
+        align-items: start;
+    }
+
+    .board-profiles {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 .carousel-hint {
     text-align: center;
     font-size: 0.875rem;
@@ -1230,6 +1421,67 @@ h3 { font-size: 1.25rem; }
 .contact-item p {
     font-size: 1.125rem;
     color: var(--color-text);
+}
+
+/* Matt Note - Contact Page */
+.matt-note {
+    background: var(--color-bg-light);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.matt-note-greeting {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+}
+
+.matt-note-body p {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-sm);
+}
+
+.matt-note-signoff {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: var(--spacing-sm);
+}
+
+.matt-note-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+}
+
+.matt-note-sign-media {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+}
+
+.matt-note-photo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-primary);
+    flex-shrink: 0;
+}
+
+.matt-note-signature {
+    max-width: 130px;
+}
+
+.matt-note-title {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
 }
 
 .social-links {
@@ -2741,7 +2993,7 @@ h3 { font-size: 1.25rem; }
 }
 
 .media-card .btn {
-    align-self: flex-start;
+    align-self: center;
 }
 
 /* Partners Page Styles */
@@ -2812,6 +3064,200 @@ h3 { font-size: 1.25rem; }
 
 .partner-card .btn {
     margin-top: auto;
+}
+
+/* Partners Carousel */
+.partners-carousel-wrapper {
+    position: relative;
+}
+
+.partners-carousel {
+    display: flex;
+    gap: var(--spacing-lg);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--spacing-sm) var(--spacing-md);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.partners-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.partners-carousel .partner-card {
+    flex: 0 0 min(380px, calc(100vw - 4rem));
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.partners-carousel .partner-card .btn {
+    margin-top: auto;
+}
+
+/* Blog Carousel */
+.blog-carousel-wrapper {
+    position: relative;
+}
+
+.blog-carousel {
+    display: flex;
+    justify-content: safe center;
+    gap: var(--spacing-lg);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--spacing-sm) var(--spacing-md);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.blog-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.blog-carousel .blog-card {
+    flex: 0 0 min(350px, calc(100vw - 4rem));
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Messages Carousel */
+.messages-carousel-wrapper {
+    position: relative;
+}
+
+.messages-carousel {
+    display: flex;
+    gap: var(--spacing-lg);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--spacing-sm) var(--spacing-md);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.messages-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.messages-carousel .media-card {
+    flex: 0 0 min(350px, calc(100vw - 4rem));
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Messages Section Background */
+.messages-section {
+    position: relative;
+}
+
+.messages-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/matt-speaking-bg.webp');
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.14;
+    z-index: 0;
+}
+
+.messages-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Podcasts Section Background */
+.podcasts-section {
+    position: relative;
+    border-top: 12px solid rgba(255, 122, 61, 0.25);
+}
+
+.podcasts-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/matt-podcast-bg.webp');
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.14;
+    z-index: 0;
+}
+
+.podcasts-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Podcasts Carousel */
+.podcasts-carousel-wrapper {
+    position: relative;
+}
+
+.podcasts-carousel {
+    display: flex;
+    gap: var(--spacing-lg);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--spacing-sm) var(--spacing-md);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.podcasts-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.podcasts-carousel .media-card {
+    flex: 0 0 min(350px, calc(100vw - 4rem));
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Articles Carousel */
+.articles-carousel-wrapper {
+    position: relative;
+}
+
+.articles-carousel {
+    display: flex;
+    justify-content: safe center;
+    gap: var(--spacing-lg);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--spacing-sm) var(--spacing-md);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.articles-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.articles-carousel .media-card {
+    flex: 0 0 min(500px, calc(100vw - 4rem));
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Blog Listing Page */
@@ -2909,7 +3355,7 @@ h3 { font-size: 1.25rem; }
 }
 
 .blog-card .btn {
-    align-self: flex-start;
+    align-self: center;
     margin-top: var(--spacing-xs);
 }
 

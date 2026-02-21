@@ -90,15 +90,14 @@ Netlify auto-builds are **disabled** — GitHub Actions is the only deploy trigg
 | `/events/` | `pages/events.njk` | Events hub |
 | `/golf/` | `pages/golf.njk` | Golf fundraiser + Zeffy registration |
 | `/mission/` | `pages/mission.njk` | Student + Family + Win Your Jerusalem trips |
-| `/book/` | `pages/book.njk` | Matt's book |
-| `/media/` | `pages/media.njk` | Messages, podcasts, articles |
-| `/partners/` | `pages/partners.njk` | Ministry partners |
+| `/resources/` | `pages/resources.njk` | Blog, Matt's book, media, and ministry partners |
 | `/leadership/` | `pages/leadership.njk` | Team carousel |
-| `/contact/` | `pages/contact.njk` | Contact form |
-| `/blog/` | `pages/blog.njk` | Blog listing page |
+| `/contact/` | `pages/contact.njk` | Contact form (sole form submission point on the site) |
 | `/blog/post-slug/` | `blog/*.md` | Individual blog posts |
 | `/admin/` | `admin/index.html` | Decap CMS editor (login required) |
 | `/feed.xml` | `feed.njk` | RSS feed |
+
+> **Note:** The old `/blog/`, `/book/`, `/media/`, and `/partners/` URLs redirect to `/resources/` via `src/_redirects`.
 
 ## Blog & CMS
 
@@ -148,6 +147,19 @@ When a post is saved/published in the CMS:
 | Identity | Site Settings → Identity | Enabled |
 | Git Gateway | Identity → Services → Git Gateway | Enabled |
 | Branch | `admin/config.yml` → `backend.branch` | `main` |
+
+## Section Badge Labels (`event-badge`)
+
+Throughout the site, small orange pill/chip labels appear above certain section headings. These are `<span class="event-badge">` elements — purely decorative, not interactive.
+
+**Use a badge only when it adds information the heading alone doesn't convey:**
+- Dates or timeframes: `"July 19-25, 2026"`, `"Summer 2026"`
+- Event type: `"Annual Fundraiser"`, `"Interactive Training"`
+- Audience context: `"For Your Next Event"`, `"Church & Nonprofit"`
+- Content type framing: `"Latest Insights"`, `"In the News"`, `"Featured Appearances"`
+- Blog post category tags on cards (these are content taxonomy, not decorative)
+
+**Do not use a badge to restate the heading.** For example, `"Our Story"` above *About Enhance Ministries*, or `"Get in Touch"` above *Connect with Matt*, adds nothing and has been intentionally removed. Vague marketing phrases like `"Personalized Support"` or `"Versatile Speaker"` should also be avoided.
 
 ## Brand Colors
 

@@ -8,7 +8,6 @@ canonical: "/"
 heroPreload: "assets/hero-mountain.webp"
 hasSmoothScroll: true
 hasCarousel: true
-hasContactForm: true
 hasDropdown: true
 permalink: /
 ---
@@ -50,7 +49,7 @@ permalink: /
 
 <!-- Hero Section -->
 <header class="hero">
-    <img src="assets/hero-mountain.webp" alt="" class="hero-bg-img" width="1920" height="1080" fetchpriority="high">
+    <img src="/assets/hero-mountain.webp" alt="" class="hero-bg-img" width="1920" height="1080" fetchpriority="high">
     <div class="container">
         <h1 class="hero-vision">Cultivating Healthy Leaders and Fruitful Ministries</h1>
         <div class="hero-cta">
@@ -125,7 +124,7 @@ permalink: /
         </div>
         <div class="story-content">
             <div class="story-image">
-                <img src="assets/matt-story.webp" alt="Matt Swigart" class="story-img" width="300" height="300" loading="lazy">
+                <img src="/assets/matt-story.webp" alt="Matt Swigart" class="story-img" width="300" height="300" loading="lazy">
             </div>
             <div class="story-text">
                 <p>After more than two decades in pastoral ministry, Matt Swigart experienced firsthand the unique challenges pastors face—the isolation, the weight of leadership, and the need for trusted voices who understand the journey.</p>
@@ -218,7 +217,6 @@ permalink: /
                 <div class="partner-card-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                 </div>
-                <span class="event-badge">Missions</span>
                 <h3>Mission Experiences</h3>
                 <p class="partner-card-date">Student · Family · Win Your Jerusalem</p>
                 <p>Life-changing mission opportunities for students, families, and churches. Serve in the Twin Cities or bring the mission trip experience to your own community.</p>
@@ -244,7 +242,7 @@ permalink: /
                 {% for member in team.members %}
                 <div class="team-card">
                     <div class="team-photo">
-                        <img src="assets/{{ member.image }}" alt="{{ member.name }}" class="team-img" width="200" height="200" loading="lazy"{% if member.objectPosition %} style="object-position: {{ member.objectPosition }};"{% endif %}>
+                        <img src="/assets/{{ member.image }}" alt="{{ member.name }}" class="team-img" width="200" height="200" loading="lazy"{% if member.objectPosition %} style="object-position: {{ member.objectPosition }};"{% endif %}>
                     </div>
                     <h3>{{ member.name }}</h3>
                     <p class="team-role">{{ member.title }}</p>
@@ -255,6 +253,10 @@ permalink: /
             <button class="carousel-btn carousel-btn-next" aria-label="Next">&rarr;</button>
             <div class="carousel-hint">Swipe to see more</div>
         </div>
+        <div class="board-cta">
+            <p>An exceptional team of leaders dedicated to pastoral health and Kingdom impact.</p>
+            <a href="/our-team/" class="btn btn-primary">Meet Our Full Team</a>
+        </div>
     </div>
 </section>
 
@@ -263,59 +265,10 @@ permalink: /
     <div class="container">
         <div class="section-header">
             <h2>Connect with Matt Directly</h2>
-            <p class="section-subtitle">Fill out with basic information and Matt will follow up with you.</p>
+            <p class="section-subtitle">Have a question or want to explore how Enhance Ministries can serve you? We'd love to hear from you.</p>
         </div>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h3>Location</h3>
-                    <p>Woodbury, MN</p>
-                </div>
-                <div class="contact-item">
-                    <h3>Follow Us</h3>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/EnhanceMinistries" target="_blank" aria-label="Facebook">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                        </a>
-                        <a href="https://www.instagram.com/enhanceministries/" target="_blank" aria-label="Instagram">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <form class="contact-form" id="contact-form">
-                <input type="hidden" name="access_key" value="ff5f576c-4d05-466a-af9d-4035f33d4445">
-                <input type="hidden" name="subject" value="Enhance Ministries Website - New Contact Request Follow Up">
-                <input type="hidden" name="from_name" value="Enhance Ministries Website">
-                <input type="checkbox" name="botcheck" style="display: none;">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" autocomplete="name" required minlength="2" pattern="[A-Za-z\s\-'.]+">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" autocomplete="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="interest">I am interested in...</label>
-                    <select id="interest" name="interest">
-                        <option value="booking Matt to speak for an event">booking Matt to speak for my event</option>
-                        <option value="an Enhance mission experience">an Enhance mission experience</option>
-                        <option value="recieving coaching / consulting from Matt">recieving coaching / consulting from Matt</option>
-                        <option value="booking Matt to train my team">booking Matt to train my team</option>
-                        <option value="becoming a donor of Enhance Ministries">becoming a donor of Enhance Ministries</option>
-                        <option value="partnering my ministry with Enhance">partnering my ministry with Enhance</option>
-                        <option value="the golf event">the golf event</option>
-                        <option value="Other (specify below)">Other (specify below)</option>
-                    </select>
-                </div>
-                <div class="form-group" id="message-group" style="display: none;">
-                    <label for="message">Please describe your inquiry</label>
-                    <textarea id="message" name="message" rows="4"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block" id="submit-btn">Send Message to Matt</button>
-                <div id="form-status" class="form-status"></div>
-            </form>
+        <div style="text-align: center; margin-top: var(--spacing-lg);">
+            <a href="/contact/" class="btn btn-primary btn-lg">Get in Touch</a>
         </div>
     </div>
 </section>
