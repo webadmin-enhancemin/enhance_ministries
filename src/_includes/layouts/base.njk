@@ -60,6 +60,7 @@
         {% if hasCarousel %}{% include "components/scripts/carousel.njk" %}{% endif %}
         {% if hasContactForm %}{% include "components/scripts/contact-form.njk" %}{% endif %}
     </script>
+    {% if hasContactForm %}<script src="https://web3forms.com/client/script.js" async defer></script>{% endif %}
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
         if (window.netlifyIdentity) {

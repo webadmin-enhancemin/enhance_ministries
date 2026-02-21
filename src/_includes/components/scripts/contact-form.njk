@@ -60,6 +60,12 @@ if (contactForm) {
 
         if (!validateForm()) return;
 
+        const hCaptchaResponse = contactForm.querySelector('textarea[name=h-captcha-response]');
+        if (!hCaptchaResponse || !hCaptchaResponse.value) {
+            showError('Please complete the captcha to send your message.');
+            return;
+        }
+
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;

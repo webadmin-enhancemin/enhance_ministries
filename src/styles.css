@@ -2023,6 +2023,12 @@ h3 { font-size: 1.25rem; }
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
+.event-hub-card .event-badge {
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+}
+
 .event-hub-icon {
     color: var(--color-primary);
     margin-bottom: var(--spacing-md);
@@ -2040,6 +2046,12 @@ h3 { font-size: 1.25rem; }
     font-weight: 600;
     color: var(--color-primary);
     margin-bottom: var(--spacing-md);
+}
+
+.event-hub-date p {
+    margin: 0;
+    line-height: 1.8;
+    color: var(--color-text-light);
 }
 
 .event-hub-card > p {
