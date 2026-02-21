@@ -1,9 +1,10 @@
 ---
-title: "5 Signs a Pastor Needs a Coaching Conversation"
-date: 2026-02-15
-author: "Matt Swigart"
-category: "Coaching"
-description: "Pastoral leadership is a unique calling. Here are five indicators that a pastor might benefit from a trusted coaching relationship."
+title: 5 Signs a Pastor Needs a Coaching Conversation
+date: 2026-02-21
+author: Tait Hoglund
+category: Coaching
+description: Pastoral leadership is a unique calling. Here are five indicators
+  that a pastor might benefit from a trusted coaching relationship.
 ---
 
 Pastoral ministry is one of the most rewarding—and most isolating—vocations in the world. Pastors carry weight that few others understand: the spiritual wellbeing of their congregation, the pressure of leadership, and the personal challenges of faith lived out publicly.
