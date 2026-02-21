@@ -35,5 +35,5 @@ collections:
         name: "featuredImage"
         widget: "image"
         required: false
-        hint: "Optional. Upload an image to appear at the top of the post."
+        hint: "Optional. Click 'Choose an image' to select from previously uploaded assets in the Media Library, or upload a new image."
       - { label: "Body", name: "body", widget: "markdown" }
