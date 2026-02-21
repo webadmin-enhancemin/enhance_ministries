@@ -25,9 +25,10 @@
     },
     {
       "text": "Resources",
-      "url": "/book/",
+      "url": "/blog/",
       "dropdown": true,
       "children": [
+        { "text": "Blog", "url": "/blog/" },
         { "text": "Matt's Book", "url": "/book/" },
         { "text": "Media", "url": "/media/" },
         { "text": "Ministry Partners", "url": "/partners/" }

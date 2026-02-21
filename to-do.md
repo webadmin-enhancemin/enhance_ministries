@@ -201,6 +201,7 @@ Fixed in `src/styles.css` using Option C (full-width centered dropdown):
 - [x] Update GitHub Actions workflow: build → security scan → deploy via Netlify API (true gate)
 - [x] Fix npm vulnerabilities: markdown-it (moderate) + minimatch (high via overrides)
 - [x] Stop Netlify auto-builds (GitHub Actions is sole deploy trigger)
+- [x] Update `src/_data/site.json` URL to `https://enhancemin.com` (canonical/OG tags)
 - [ ] Configure custom domain (`enhancemin.com`) on Netlify
 - [ ] Update DNS to point to Netlify (replaces GitHub Pages)
 - [ ] Enable HTTPS (automatic via Netlify)
@@ -208,25 +209,25 @@ Fixed in `src/styles.css` using Option C (full-width centered dropdown):
 
 ### Phase 2: Set Up Decap CMS
 
-- [ ] Install Decap CMS: create `src/admin/index.html` and `src/admin/config.yml`
-- [ ] Enable Netlify Identity (free tier — up to 5 admin users)
-- [ ] Configure Netlify Identity widget for login
-- [ ] Define blog post collection in `config.yml`:
+- [x] Install Decap CMS: create `src/admin/index.html` and `src/admin/config.yml`
+- [x] Enable Netlify Identity (free tier — up to 5 admin users) + Enable Git Gateway
+- [x] Configure Netlify Identity widget for login (added to `base.njk`)
+- [x] Define blog post collection in `config.yml`:
   - Title, date, author, featured image, body
   - Categories/tags (e.g., Coaching, Ministry Life, Missions, Devotional)
 - [ ] Set up editorial workflow (draft → review → publish) if desired
-- [ ] Test login and post creation at `/admin`
+- [ ] Test login and post creation at `/admin` ← after Identity is enabled
 
 ### Phase 3: Build Blog in Eleventy
 
-- [ ] Create `src/blog/` directory for Markdown blog posts
-- [ ] Create `src/_includes/layouts/post.njk` template for individual posts
-- [ ] Create `src/pages/blog.njk` — blog listing page with post cards
-- [ ] Add pagination to blog listing if needed
-- [ ] Style blog pages to match existing site design
-- [ ] Add blog to `src/_data/navigation.json`
-- [ ] Add blog pages to `src/sitemap.xml`
-- [ ] Add RSS feed (`feed.xml`) for blog syndication
+- [x] Create `src/blog/` directory for Markdown blog posts (+ sample post)
+- [x] Create `src/_includes/layouts/post.njk` template for individual posts
+- [x] Create `src/pages/blog.njk` — blog listing page with post cards
+- [x] Pagination not needed yet (add when post count warrants it)
+- [x] Style blog pages to match existing site design
+- [x] Add blog to `src/_data/navigation.json` (under Resources dropdown)
+- [x] Add blog pages to `src/sitemap.xml`
+- [x] Add RSS feed (`src/feed.njk` → `/feed.xml`) for blog syndication
 
 ### Phase 4: Content Editor Training
 
