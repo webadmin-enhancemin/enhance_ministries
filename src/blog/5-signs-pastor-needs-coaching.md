@@ -16,6 +16,8 @@ You're doing the work. The sermons are prepped, the meetings are attended, the h
 
 Coaching creates space to name what's hard to name alone. Sometimes all it takes is a trusted voice and a few honest questions to unlock what God is already doing beneath the surface.
 
+![](https://res.cloudinary.com/dudif9y8i/image/upload/v1772060380/hero-mountain_w7jiq7.webp)
+
 ## Your Closest Relationships Are Suffering
 
 When ministry pressure spills into your marriage, your parenting, or your friendships — something needs to change. Pastors often push through relational strain because the "work of the Kingdom" feels urgent. But the most important ministries in a pastor's life are often right at home.
