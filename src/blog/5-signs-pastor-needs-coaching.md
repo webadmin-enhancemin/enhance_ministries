@@ -5,6 +5,7 @@ author: Tait Hoglund
 category: Coaching
 description: Pastoral ministry is rewarding and isolating in equal measure. Here
   are five signs a pastor might benefit from a trusted coaching conversation.
+featuredImage: /assets/blog/coaching_stock_1.png
 ---
 Pastoral ministry is one of the most rewarding—and most isolating—vocations in the world. Pastors carry weight that few others understand: the spiritual wellbeing of their congregation, the pressure of leadership, and the personal challenges of faith lived out publicly.
 
