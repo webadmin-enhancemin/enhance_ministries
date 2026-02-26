@@ -78,13 +78,13 @@ collections:
           - { label: "Missions", value: "Missions" }
           - { label: "Devotional", value: "Devotional" }
           - { label: "Leadership", value: "Leadership" }
-      - { label: "Description", name: "description", widget: "text", hint: "Brief summary shown in post cards and used for SEO (1-2 sentences)." }
+      - { label: "Description", name: "description", widget: "text", hint: "Brief summary shown in content card for the blog on the /blog carousel. Used for SEO (1-2 sentences)." }
       - label: "Featured Image"
         name: "featuredImage"
         widget: "image"
         required: false
         choose_url: false
-        hint: "Optional. Upload a new image or select one from the Media Library."
+        hint: "Optional. You can choose to upload a new image or select one from our Cloudinary Media Library. While this image will display in the blog preview screen, it only displays on the content card for the blog on the /blog carousel. "
       - label: "Body"
         name: "body"
         widget: "markdown"
