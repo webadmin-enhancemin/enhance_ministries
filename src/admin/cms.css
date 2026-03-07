@@ -80,3 +80,15 @@ a[href*="/collections/"][href*="/entries/"] {
   background-color: #28a745;
   color: #fff !important;
 }
+
+/* ── 10. Hide "Quick add" dropdown button ──────── */
+/* The Quick add button is in the top nav bar; only collection has "blog" */
+header [class*="AppHeader"] button[class*="dropdown" i],
+header button[class*="AppHeader" i] {
+  display: none !important;
+}
+/* Fallback: target by the dropdown caret in the top-right nav area.
+   Decap renders Quick-add as the only <details> element in the header. */
+header details {
+  display: none !important;
+}

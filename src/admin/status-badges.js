@@ -1,10 +1,12 @@
 /**
- * Published Status Badges for Decap CMS
+ * Decap CMS Enhancements
  *
- * Decap CMS editorial_workflow shows Draft / In Review / Ready badges on
- * unpublished entries, but published entries (on main branch) have no
- * indicator.  This script watches the collection list and injects a green
- * "Published" badge on every entry that lacks a workflow status badge.
+ * 1. Published badges – injects a green "Published" badge on collection
+ *    entries that lack a workflow status (Draft / In Review / Ready).
+ *
+ * 2. Date sort – Decap CMS sorts published and workflow entries as
+ *    separate groups. This script re-sorts ALL entries together by the
+ *    date shown in the summary text (newest first).
  */
 (function () {
   'use strict';
@@ -24,17 +26,22 @@
     return false;
   }
 
-  /** Scan visible collection entries and add badges where needed. */
+  /** Extract a YYYY-MM-DD date string from the entry summary text. */
+  function getEntryDate(entry) {
+    var text = entry.textContent || '';
+    var match = text.match(/(\d{4}-\d{2}-\d{2})/);
+    return match ? match[1] : '0000-00-00';
+  }
+
+  /* ── badges ──────────────────────────────────────────── */
+
   function addBadges() {
-    // Decap renders collection entries as <a> pointing to /collections/…/entries/…
     var entries = document.querySelectorAll(
       'a[href*="/collections/"][href*="/entries/"]'
     );
-
     entries.forEach(function (entry) {
-      if (entry.querySelector('.' + BADGE_CLASS)) return; // already badged
-      if (hasWorkflowBadge(entry)) return;                // has workflow status
-
+      if (entry.querySelector('.' + BADGE_CLASS)) return;
+      if (hasWorkflowBadge(entry)) return;
       var badge = document.createElement('span');
       badge.className = BADGE_CLASS;
       badge.textContent = 'Published';
@@ -42,46 +49,78 @@
     });
   }
 
-  /* ── observer ─────────────────────────────────────────── */
+  /* ── sort by date (newest first) ─────────────────────── */
 
-  var timer;
-  function debouncedBadges() {
-    clearTimeout(timer);
-    timer = setTimeout(addBadges, 250);
-  }
-
-  /* ── default sort ─────────────────────────────────────
-   * Decap CMS v3 doesn't support a default sort direction in config.
-   * After the collection list renders, click the "date" sort button
-   * once to activate descending sort (newest first).
-   */
-  var sortApplied = false;
-  function applyDefaultSort() {
-    if (sortApplied) return;
+  function sortEntries() {
     // Only act on the blog collection page
     if (!location.hash.match(/#\/collections\/blog\/?$/)) return;
-    var buttons = document.querySelectorAll('button');
-    for (var i = 0; i < buttons.length; i++) {
-      if (buttons[i].textContent.trim().toLowerCase() === 'date') {
-        buttons[i].click();
-        sortApplied = true;
-        break;
+
+    var entries = document.querySelectorAll(
+      'a[href*="/collections/"][href*="/entries/"]'
+    );
+    if (entries.length < 2) return;
+
+    // All entries share the same parent wrapper
+    var parent = entries[0].parentElement;
+    if (!parent) return;
+
+    // Build an array, sort by date descending
+    var items = Array.prototype.slice.call(entries).map(function (el) {
+      return { el: el, date: getEntryDate(el) };
+    });
+    items.sort(function (a, b) {
+      return a.date > b.date ? -1 : a.date < b.date ? 1 : 0;
+    });
+
+    // Check if already in correct order
+    var needsSort = false;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].el !== entries[i]) { needsSort = true; break; }
+    }
+    if (!needsSort) return;
+
+    // Re-order DOM nodes (moves, doesn't clone)
+    items.forEach(function (item) {
+      parent.appendChild(item.el);
+    });
+  }
+
+  /* ── hide Quick add button ─────────────────────────────
+   * Decap CMS uses CSS-in-JS with hashed classes so we find
+   * the button by its text content and hide it.
+   */
+  var quickAddHidden = false;
+  function hideQuickAdd() {
+    if (quickAddHidden) return;
+    // Quick add is rendered as a <details> or a button containing "Quick add"
+    var els = document.querySelectorAll('details, button');
+    for (var i = 0; i < els.length; i++) {
+      var text = els[i].textContent.trim();
+      if (text.match(/^Quick add/i)) {
+        els[i].style.display = 'none';
+        quickAddHidden = true;
+        return;
       }
     }
   }
 
+  /* ── observer ─────────────────────────────────────────── */
+
+  var timer;
+  function debouncedUpdate() {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      addBadges();
+      sortEntries();
+      hideQuickAdd();
+    }, 300);
+  }
+
   function init() {
-    new MutationObserver(function () {
-      debouncedBadges();
-      if (!sortApplied) setTimeout(applyDefaultSort, 500);
-    }).observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(debouncedUpdate)
+      .observe(document.body, { childList: true, subtree: true });
     // first pass after CMS renders
-    setTimeout(addBadges, 1500);
-    setTimeout(applyDefaultSort, 2000);
-    // Re-apply sort when navigating back to the collection
-    window.addEventListener('hashchange', function () {
-      sortApplied = false;
-    });
+    setTimeout(function () { addBadges(); sortEntries(); }, 1500);
   }
 
   if (document.readyState === 'complete') {
