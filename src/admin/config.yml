@@ -40,11 +40,7 @@ collections:
     slug: "{{slug}}"
     preview_path: "blog/{{slug}}/"
     summary: "{{date}} · {{title}} [{{category}}]"
-    sortable_fields:
-      fields: ["date", "title", "category"]
-      default:
-        field: date
-        direction: Descending
+    sortable_fields: ["date", "title", "category"]
     view_filters:
       - label: "Coaching"
         field: category

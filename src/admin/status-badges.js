@@ -50,11 +50,38 @@
     timer = setTimeout(addBadges, 250);
   }
 
+  /* ── default sort ─────────────────────────────────────
+   * Decap CMS v3 doesn't support a default sort direction in config.
+   * After the collection list renders, click the "date" sort button
+   * once to activate descending sort (newest first).
+   */
+  var sortApplied = false;
+  function applyDefaultSort() {
+    if (sortApplied) return;
+    // Only act on the blog collection page
+    if (!location.hash.match(/#\/collections\/blog\/?$/)) return;
+    var buttons = document.querySelectorAll('button');
+    for (var i = 0; i < buttons.length; i++) {
+      if (buttons[i].textContent.trim().toLowerCase() === 'date') {
+        buttons[i].click();
+        sortApplied = true;
+        break;
+      }
+    }
+  }
+
   function init() {
-    new MutationObserver(debouncedBadges)
-      .observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(function () {
+      debouncedBadges();
+      if (!sortApplied) setTimeout(applyDefaultSort, 500);
+    }).observe(document.body, { childList: true, subtree: true });
     // first pass after CMS renders
     setTimeout(addBadges, 1500);
+    setTimeout(applyDefaultSort, 2000);
+    // Re-apply sort when navigating back to the collection
+    window.addEventListener('hashchange', function () {
+      sortApplied = false;
+    });
   }
 
   if (document.readyState === 'complete') {
