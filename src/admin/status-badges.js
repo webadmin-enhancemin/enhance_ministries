@@ -84,15 +84,15 @@
       var fmtDate  = formatDate(match[1]);
 
       // Hide original h2 text but keep the element for pseudo-elements.
-      // font-size:0 makes text invisible; color:transparent as fallback.
-      // Do NOT set line-height:0 — that collapses the h2 and hides pseudo-elements.
-      css += sel + ' h2{font-size:0!important;color:transparent!important;padding:0!important;margin:0!important}\n';
+      // Force display:block so pseudo-elements stack vertically.
+      css += sel + ' h2{font-size:0!important;color:transparent!important;padding:0!important;margin:0!important;display:block!important}\n';
       // Hide any child elements inside h2 (TitleIcons div, etc.)
       css += sel + ' h2>*{display:none!important}\n';
 
-      // Category badge  →  a::before
+      // Category badge  →  a::before (align-self:flex-start prevents full-width stretching)
       css += sel + '::before{content:"' + cssEsc(category).toUpperCase() + '"!important;'
-        + 'display:inline-block!important;background:#FF7A3D!important;color:#fff!important;'
+        + 'display:inline-block!important;align-self:flex-start!important;'
+        + 'background:#FF7A3D!important;color:#fff!important;'
         + 'font-size:.7rem!important;font-weight:600!important;text-transform:uppercase!important;'
         + 'letter-spacing:.05em!important;padding:3px 10px!important;border-radius:20px!important;'
         + 'margin-bottom:4px!important;line-height:1.4!important}\n';
@@ -100,7 +100,7 @@
       // Title  →  h2::before
       css += sel + ' h2::before{content:"' + cssEsc(title) + '"!important;'
         + 'display:block!important;font-size:1rem!important;font-weight:600!important;'
-        + 'color:#1E1810!important;line-height:1.4!important}\n';
+        + 'color:#1E1810!important;line-height:1.4!important;white-space:normal!important}\n';
 
       // Date  →  h2::after
       css += sel + ' h2::after{content:"' + cssEsc(fmtDate) + '"!important;'
