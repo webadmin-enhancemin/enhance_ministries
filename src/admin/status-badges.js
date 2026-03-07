@@ -1,12 +1,13 @@
 /**
  * Decap CMS Enhancements
  *
- * 1. Tile card restyling – parses the summary text "date · title [category]"
- *    and restructures each entry card with styled components (badge, title,
- *    date). Uses a data attribute marker to skip already-processed cards.
+ * 1. Card restyling – parses summary text "date · title [category]" and uses
+ *    CSS pseudo-elements (a::before, h2::before, h2::after) to display styled
+ *    card content. All styling lives in a <style> tag in <head>, making it
+ *    immune to React re-renders.
  *
  * 2. Published badges – uses a dynamic <style> tag in <head> to show a green
- *    "Published" badge (via ::after) on entries without a workflow status.
+ *    "Published" badge (via a::after) on entries without a workflow status.
  *
  * 3. Hide Quick add – removes the redundant "Quick add" dropdown from
  *    the top navigation bar.
@@ -15,7 +16,8 @@
   'use strict';
 
   var WORKFLOW_LABELS = ['draft', 'in review', 'ready'];
-  var STYLE_ID = 'em-published-badges';
+  var BADGE_STYLE_ID = 'em-published-badges';
+  var CARD_STYLE_ID  = 'em-card-styles';
   var SUMMARY_RE = /^(\d{4}-\d{2}-\d{2})\s*·\s*(.+?)\s*\[([^\]]+)\]$/;
   var timer;
 
@@ -40,20 +42,28 @@
     }
   }
 
-  /* ── tile card restyling ─────────────────────────────── */
+  function cssEsc(str) {
+    return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  }
 
-  function styleEntryCards() {
-    // Restyle entry cards in both tile (grid) and list views
+  /* ── card styles (CSS-only, React-proof) ───────────── */
+
+  function updateCardStyles() {
     var entries = document.querySelectorAll(
-      'li > a[href*="/collections/"][href*="/entries/"]:not([data-em-styled])'
+      'a[href*="/collections/"][href*="/entries/"]'
     );
     if (!entries.length) return;
 
+    var css = '';
+
     entries.forEach(function (entry) {
+      // Only process entries inside <li> (both grid and list views)
+      if (!entry.parentElement || entry.parentElement.tagName !== 'LI') return;
+
       var heading = entry.querySelector('h2');
       if (!heading) return;
 
-      // Extract raw summary text from text nodes (before any TitleIcons div)
+      // Extract raw summary text from text nodes (before any child elements)
       var summaryText = '';
       for (var i = 0; i < heading.childNodes.length; i++) {
         if (heading.childNodes[i].nodeType === Node.TEXT_NODE) {
@@ -65,55 +75,49 @@
       var match = SUMMARY_RE.exec(summaryText);
       if (!match) return;
 
-      var isoDate = match[1];
-      var title = match[2];
+      var href = entry.getAttribute('href');
+      if (!href) return;
+
+      var sel = 'a[href="' + cssEsc(href) + '"]';
       var category = match[3];
+      var title    = match[2];
+      var fmtDate  = formatDate(match[1]);
 
-      // Mark as processed
-      entry.setAttribute('data-em-styled', '');
+      // Hide original h2 text (keep element so pseudo-elements render)
+      css += sel + ' h2{font-size:0!important;color:transparent!important;line-height:0!important;overflow:visible!important}\n';
+      // Hide any child elements inside h2 (TitleIcons div, etc.)
+      css += sel + ' h2>*{display:none!important}\n';
+      // Collapse wrapper div padding/margin in grid view
+      css += sel + '>div:first-child{padding:0!important;margin:0!important;overflow:visible!important}\n';
 
-      // Hide only the element containing the summary text, not workflow badges.
-      // Grid view: <a> → <div>(contains <h2>)</div> → hide the wrapper div
-      // List view: <a> → <h2> → hide the h2 directly
-      var hideTarget = (heading.parentElement === entry) ? heading : heading.parentElement;
-      if (hideTarget) hideTarget.style.display = 'none';
+      // Category badge  →  a::before
+      css += sel + '::before{content:"' + cssEsc(category).toUpperCase() + '"!important;'
+        + 'display:inline-block!important;background:#FF7A3D!important;color:#fff!important;'
+        + 'font-size:.7rem!important;font-weight:600!important;text-transform:uppercase!important;'
+        + 'letter-spacing:.05em!important;padding:3px 10px!important;border-radius:20px!important;'
+        + 'margin-bottom:4px!important;line-height:1.4!important}\n';
 
-      // Fix parent <li> height for browsers without :has() support
-      var parentLi = entry.parentElement;
-      if (parentLi && parentLi.tagName === 'LI') {
-        parentLi.style.height = 'auto';
-        parentLi.style.minHeight = '120px';
-        parentLi.style.overflow = 'visible';
-      }
+      // Title  →  h2::before
+      css += sel + ' h2::before{content:"' + cssEsc(title) + '"!important;'
+        + 'display:block!important;font-size:1rem!important;font-weight:600!important;'
+        + 'color:#1E1810!important;line-height:1.4!important}\n';
 
-      // Build new card content
-      // Workflow badges (Draft/In Review/Ready) are rendered by Decap itself;
-      // Published badges use our ::after pseudo-element. No need to clone either.
-      var wrapper = document.createElement('div');
-      wrapper.className = 'em-card-content';
-
-      var badge = document.createElement('span');
-      badge.className = 'em-card-badge';
-      badge.textContent = category;
-      wrapper.appendChild(badge);
-
-      // Row 2: Title
-      var titleEl = document.createElement('div');
-      titleEl.className = 'em-card-title';
-      titleEl.textContent = title;
-      wrapper.appendChild(titleEl);
-
-      // Row 3: Formatted date
-      var dateEl = document.createElement('div');
-      dateEl.className = 'em-card-date';
-      dateEl.textContent = formatDate(isoDate);
-      wrapper.appendChild(dateEl);
-
-      entry.appendChild(wrapper);
+      // Date  →  h2::after
+      css += sel + ' h2::after{content:"' + cssEsc(fmtDate) + '"!important;'
+        + 'display:block!important;font-size:.8rem!important;color:#575250!important;'
+        + 'font-weight:400!important;margin-top:4px!important}\n';
     });
+
+    var el = document.getElementById(CARD_STYLE_ID);
+    if (!el) {
+      el = document.createElement('style');
+      el.id = CARD_STYLE_ID;
+      document.head.appendChild(el);
+    }
+    el.textContent = css;
   }
 
-  /* ── badges (CSS-only, no DOM injection) ─────────────── */
+  /* ── Published badges (CSS-only) ───────────────────── */
 
   function updateBadges() {
     var entries = document.querySelectorAll(
@@ -131,10 +135,10 @@
       }
     });
 
-    var styleEl = document.getElementById(STYLE_ID);
+    var styleEl = document.getElementById(BADGE_STYLE_ID);
     if (!styleEl) {
       styleEl = document.createElement('style');
-      styleEl.id = STYLE_ID;
+      styleEl.id = BADGE_STYLE_ID;
       document.head.appendChild(styleEl);
     }
 
@@ -194,7 +198,7 @@
   function debouncedUpdate() {
     clearTimeout(timer);
     timer = setTimeout(function () {
-      styleEntryCards();
+      updateCardStyles();
       updateBadges();
       hideQuickAdd();
     }, 500);
@@ -203,9 +207,8 @@
   function init() {
     new MutationObserver(debouncedUpdate)
       .observe(document.body, { childList: true, subtree: true });
-    // CSS hides the original CardBody immediately; run JS quickly to fill content
     setTimeout(function () {
-      styleEntryCards();
+      updateCardStyles();
       updateBadges();
       hideQuickAdd();
     }, 800);
