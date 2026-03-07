@@ -43,7 +43,7 @@
   /* ── tile card restyling ─────────────────────────────── */
 
   function styleEntryCards() {
-    // Only restyle tile/grid view entries (inside <li>), not list view
+    // Restyle entry cards in both tile (grid) and list views
     var entries = document.querySelectorAll(
       'li > a[href*="/collections/"][href*="/entries/"]:not([data-em-styled])'
     );
@@ -52,11 +52,6 @@
     entries.forEach(function (entry) {
       var heading = entry.querySelector('h2');
       if (!heading) return;
-
-      // Grid view: <a><div><h2>...</h2></div></a>  — h2 inside wrapper div
-      // List view: <a><h2>...</h2></a>              — h2 is direct child
-      // Only restyle grid view; list view keeps Decap's default rendering.
-      if (heading.parentElement === entry) return;
 
       // Extract raw summary text from text nodes (before any TitleIcons div)
       var summaryText = '';
@@ -74,13 +69,21 @@
       var title = match[2];
       var category = match[3];
 
-      // Mark as processed — CSS uses this to hide original CardBody
+      // Mark as processed
       entry.setAttribute('data-em-styled', '');
 
+      // Hide all existing children (handles both grid and list view DOM)
+      for (var j = 0; j < entry.children.length; j++) {
+        entry.children[j].style.display = 'none';
+      }
+
       // Fix parent <li> height for browsers without :has() support
-      parentLi.style.height = 'auto';
-      parentLi.style.minHeight = '120px';
-      parentLi.style.overflow = 'visible';
+      var parentLi = entry.parentElement;
+      if (parentLi && parentLi.tagName === 'LI') {
+        parentLi.style.height = 'auto';
+        parentLi.style.minHeight = '120px';
+        parentLi.style.overflow = 'visible';
+      }
 
       // Build new card content
       // Workflow badges (Draft/In Review/Ready) are rendered by Decap itself;

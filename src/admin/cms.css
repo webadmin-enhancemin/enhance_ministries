@@ -90,10 +90,8 @@ li > a[href*="/collections/"][href*="/entries/"]:hover {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* Hide original CardBody only after JS confirms it's a grid card */
-a[href*="/collections/"][href*="/entries/"][data-em-styled] > div:first-child {
-  display: none !important;
-}
+/* Original content is hidden via JS (entry.children[j].style.display = 'none')
+   for both grid and list view DOM structures. */
 
 /* ── 10. Hide "Quick add" dropdown ─────────────── */
 [data-em-hidden] {
