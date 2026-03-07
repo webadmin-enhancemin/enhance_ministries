@@ -50,13 +50,13 @@
     if (!entries.length) return;
 
     entries.forEach(function (entry) {
-      // Skip list view entries — in list view the <li> has multiple children
-      // (the <a> link plus column elements). Grid view <li> has only the <a>.
-      var parentLi = entry.parentElement;
-      if (!parentLi || parentLi.tagName !== 'LI' || parentLi.children.length > 1) return;
-
       var heading = entry.querySelector('h2');
       if (!heading) return;
+
+      // Grid view: <a><div><h2>...</h2></div></a>  — h2 inside wrapper div
+      // List view: <a><h2>...</h2></a>              — h2 is direct child
+      // Only restyle grid view; list view keeps Decap's default rendering.
+      if (heading.parentElement === entry) return;
 
       // Extract raw summary text from text nodes (before any TitleIcons div)
       var summaryText = '';
