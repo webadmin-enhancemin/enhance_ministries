@@ -59,34 +59,9 @@ button {
   background-color: #FF7A3D;
 }
 
-/* ── 9. Published status badge (collection list) ── */
-/* Entry <a> needs relative positioning so the ::after badge can anchor.
-   Badge content + styles are injected via <style> in <head> by
-   status-badges.js — using ::after avoids React re-render flicker. */
+/* ── 9. Entry card base styles (applied immediately via CSS) ── */
+/* These apply before JS runs so there is no flash of Decap's default styling. */
 a[href*="/collections/"][href*="/entries/"] {
-  position: relative !important;
-}
-
-/* ── 10. Hide "Quick add" dropdown ─────────────── */
-/* JS handles this via status-badges.js; CSS below is a fallback
-   in case JS finds and marks the container with a data attribute. */
-[data-em-hidden] {
-  display: none !important;
-}
-
-/* ── 11. Tile card restyling ──────────────────────── */
-/* Styled entry cards injected by status-badges.js.
-   JS parses summary text → builds card HTML → marks with data-em-styled. */
-
-/* Override Decap's fixed-height GridCard <li> */
-li:has(> a[href*="/collections/"][href*="/entries/"][data-em-styled]) {
-  height: auto !important;
-  min-height: 120px !important;
-  overflow: visible !important;
-}
-
-/* Card container */
-a[href*="/collections/"][href*="/entries/"][data-em-styled] {
   position: relative !important;
   display: flex !important;
   flex-direction: column !important;
@@ -100,15 +75,29 @@ a[href*="/collections/"][href*="/entries/"][data-em-styled] {
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-a[href*="/collections/"][href*="/entries/"][data-em-styled]:hover {
+a[href*="/collections/"][href*="/entries/"]:hover {
   transform: translateY(-3px) !important;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* Hide Decap's original CardBody (fixed-height div) */
-a[href*="/collections/"][href*="/entries/"][data-em-styled] > div:first-child {
+/* Override Decap's fixed-height GridCard <li> */
+li:has(> a[href*="/collections/"][href*="/entries/"]) {
+  height: auto !important;
+  min-height: 120px !important;
+  overflow: visible !important;
+}
+
+/* Hide Decap's original CardBody div — JS replaces it with styled content */
+a[href*="/collections/"][href*="/entries/"] > div:first-child {
   display: none !important;
 }
+
+/* ── 10. Hide "Quick add" dropdown ─────────────── */
+[data-em-hidden] {
+  display: none !important;
+}
+
+/* ── 11. Tile card content (injected by status-badges.js) ── */
 
 /* Card content wrapper */
 .em-card-content {
@@ -153,8 +142,8 @@ a[href*="/collections/"][href*="/entries/"][data-em-styled] > div:first-child {
   font-weight: 400 !important;
 }
 
-/* Reposition Published badge for card layout (top-right corner) */
-a[href*="/collections/"][href*="/entries/"][data-em-styled]::after {
+/* Published badge position (top-right corner of card) */
+a[href*="/collections/"][href*="/entries/"]::after {
   top: 16px !important;
   right: 16px !important;
   transform: none !important;

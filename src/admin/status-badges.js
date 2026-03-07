@@ -196,16 +196,17 @@
   function init() {
     new MutationObserver(debouncedUpdate)
       .observe(document.body, { childList: true, subtree: true });
+    // CSS hides the original CardBody immediately; run JS quickly to fill content
     setTimeout(function () {
       styleEntryCards();
       updateBadges();
       hideQuickAdd();
-    }, 2000);
+    }, 800);
   }
 
   if (document.readyState === 'complete') {
-    setTimeout(init, 800);
+    setTimeout(init, 200);
   } else {
-    window.addEventListener('load', function () { setTimeout(init, 800); });
+    window.addEventListener('load', function () { setTimeout(init, 200); });
   }
 })();
