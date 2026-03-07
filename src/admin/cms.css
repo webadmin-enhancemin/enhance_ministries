@@ -73,3 +73,89 @@ a[href*="/collections/"][href*="/entries/"] {
 [data-em-hidden] {
   display: none !important;
 }
+
+/* ── 11. Tile card restyling ──────────────────────── */
+/* Styled entry cards injected by status-badges.js.
+   JS parses summary text → builds card HTML → marks with data-em-styled. */
+
+/* Override Decap's fixed-height GridCard <li> */
+li:has(> a[href*="/collections/"][href*="/entries/"][data-em-styled]) {
+  height: auto !important;
+  min-height: 120px !important;
+  overflow: visible !important;
+}
+
+/* Card container */
+a[href*="/collections/"][href*="/entries/"][data-em-styled] {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: #fff !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08) !important;
+  padding: 20px !important;
+  text-decoration: none !important;
+  height: auto !important;
+  min-height: 100px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+a[href*="/collections/"][href*="/entries/"][data-em-styled]:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Hide Decap's original CardBody (fixed-height div) */
+a[href*="/collections/"][href*="/entries/"][data-em-styled] > div:first-child {
+  display: none !important;
+}
+
+/* Card content wrapper */
+.em-card-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+/* Category pill badge (matches .event-badge from live site) */
+.em-card-badge {
+  display: inline-block !important;
+  background-color: #FF7A3D !important;
+  color: #fff !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 3px 10px !important;
+  border-radius: 20px !important;
+  align-self: flex-start !important;
+  line-height: 1.4 !important;
+}
+
+/* Title */
+.em-card-title {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: #1E1810 !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Date meta */
+.em-card-date {
+  font-size: 0.8rem !important;
+  color: #575250 !important;
+  margin: 0 !important;
+  font-weight: 400 !important;
+}
+
+/* Reposition Published badge for card layout (top-right corner) */
+a[href*="/collections/"][href*="/entries/"][data-em-styled]::after {
+  top: 16px !important;
+  right: 16px !important;
+  transform: none !important;
+}
