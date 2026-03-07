@@ -100,6 +100,10 @@
       // They inherit font-size:0 but Decap sets explicit font-size so they stay visible.
       // Position them in the top-right corner of the card (like Published badge).
       css += sel + ' h2>*{position:absolute!important;top:16px!important;right:16px!important;z-index:1!important}\n';
+      // On the workflow page, hide extra Decap elements (collection label, modification date, description)
+      if (onWorkflow) {
+        css += sel + '>div:first-child>*:not(h2){display:none!important}\n';
+      }
 
       // Category badge  →  a::before (align-self:flex-start prevents full-width stretching)
       css += sel + '::before{content:"' + cssEsc(category).toUpperCase() + '"!important;'
