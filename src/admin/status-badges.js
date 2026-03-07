@@ -12,6 +12,8 @@
 
   var BADGE_CLASS = 'em-status-published';
   var WORKFLOW_LABELS = ['draft', 'in review', 'ready'];
+  var observer;
+  var timer;
 
   /* ── helpers ──────────────────────────────────────────── */
 
@@ -28,6 +30,9 @@
   /* ── badges ──────────────────────────────────────────── */
 
   function addBadges() {
+    // Pause observer so our own DOM writes don't re-trigger it
+    if (observer) observer.disconnect();
+
     var entries = document.querySelectorAll(
       'a[href*="/collections/"][href*="/entries/"]'
     );
@@ -39,6 +44,14 @@
       badge.textContent = 'Published';
       entry.appendChild(badge);
     });
+
+    // Re-attach observer after a brief delay to skip any synchronous
+    // React reconciliation triggered by our DOM changes
+    setTimeout(function () {
+      if (observer) {
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+    }, 100);
   }
 
   /* ── hide Quick add button ───────────────────────────── */
@@ -73,25 +86,24 @@
 
   /* ── observer ─────────────────────────────────────────── */
 
-  var timer;
   function debouncedUpdate() {
     clearTimeout(timer);
     timer = setTimeout(function () {
       addBadges();
       hideQuickAdd();
-    }, 300);
+    }, 500);
   }
 
   function init() {
-    new MutationObserver(debouncedUpdate)
-      .observe(document.body, { childList: true, subtree: true });
-    // first pass after CMS renders
-    setTimeout(addBadges, 1500);
+    observer = new MutationObserver(debouncedUpdate);
+    observer.observe(document.body, { childList: true, subtree: true });
+    // first pass after CMS finishes rendering
+    setTimeout(addBadges, 2000);
   }
 
   if (document.readyState === 'complete') {
-    setTimeout(init, 500);
+    setTimeout(init, 800);
   } else {
-    window.addEventListener('load', function () { setTimeout(init, 500); });
+    window.addEventListener('load', function () { setTimeout(init, 800); });
   }
 })();
