@@ -59,10 +59,20 @@ button {
   background-color: #FF7A3D;
 }
 
-/* ── 9. Entry card base styles (applied immediately via CSS) ── */
-/* These apply before JS runs so there is no flash of Decap's default styling. */
+/* ── 9. Entry link base (needed for ::after badge positioning) ── */
 a[href*="/collections/"][href*="/entries/"] {
   position: relative !important;
+}
+
+/* ── 9a. Tile card styles (grid view only, scoped to <li> parent) ── */
+/* Applied via CSS immediately; JS adds content later without a flash. */
+li:has(> a[href*="/collections/"][href*="/entries/"]) {
+  height: auto !important;
+  min-height: 120px !important;
+  overflow: visible !important;
+}
+
+li > a[href*="/collections/"][href*="/entries/"] {
   display: flex !important;
   flex-direction: column !important;
   background: #fff !important;
@@ -75,20 +85,13 @@ a[href*="/collections/"][href*="/entries/"] {
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-a[href*="/collections/"][href*="/entries/"]:hover {
+li > a[href*="/collections/"][href*="/entries/"]:hover {
   transform: translateY(-3px) !important;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* Override Decap's fixed-height GridCard <li> */
-li:has(> a[href*="/collections/"][href*="/entries/"]) {
-  height: auto !important;
-  min-height: 120px !important;
-  overflow: visible !important;
-}
-
-/* Hide Decap's original CardBody div — JS replaces it with styled content */
-a[href*="/collections/"][href*="/entries/"] > div:first-child {
+/* Hide original CardBody only after JS has injected replacement content */
+a[href*="/collections/"][href*="/entries/"][data-em-styled] > div:first-child {
   display: none !important;
 }
 

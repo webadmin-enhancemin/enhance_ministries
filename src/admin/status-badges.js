@@ -43,8 +43,9 @@
   /* ── tile card restyling ─────────────────────────────── */
 
   function styleEntryCards() {
+    // Only restyle tile/grid view entries (inside <li>), not list view
     var entries = document.querySelectorAll(
-      'a[href*="/collections/"][href*="/entries/"]:not([data-em-styled])'
+      'li > a[href*="/collections/"][href*="/entries/"]:not([data-em-styled])'
     );
     if (!entries.length) return;
 
