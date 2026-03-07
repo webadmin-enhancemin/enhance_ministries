@@ -83,12 +83,12 @@
       var title    = match[2];
       var fmtDate  = formatDate(match[1]);
 
-      // Hide original h2 text (keep element so pseudo-elements render)
-      css += sel + ' h2{font-size:0!important;color:transparent!important;line-height:0!important;overflow:visible!important}\n';
+      // Hide original h2 text but keep the element for pseudo-elements.
+      // font-size:0 makes text invisible; color:transparent as fallback.
+      // Do NOT set line-height:0 — that collapses the h2 and hides pseudo-elements.
+      css += sel + ' h2{font-size:0!important;color:transparent!important;padding:0!important;margin:0!important}\n';
       // Hide any child elements inside h2 (TitleIcons div, etc.)
       css += sel + ' h2>*{display:none!important}\n';
-      // Collapse wrapper div padding/margin in grid view
-      css += sel + '>div:first-child{padding:0!important;margin:0!important;overflow:visible!important}\n';
 
       // Category badge  →  a::before
       css += sel + '::before{content:"' + cssEsc(category).toUpperCase() + '"!important;'
