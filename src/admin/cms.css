@@ -60,11 +60,16 @@ button {
 }
 
 /* ── 9. Published status badge (collection list) ── */
+/* The entry <a> needs relative positioning so the badge can anchor to it */
+a[href*="/collections/"][href*="/entries/"] {
+  position: relative !important;
+}
 .em-status-published {
-  display: inline-flex;
-  align-items: center;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 2px 8px;
-  margin-left: auto;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 600;
@@ -73,5 +78,5 @@ button {
   text-transform: uppercase;
   white-space: nowrap;
   background-color: #28a745;
-  color: #fff;
+  color: #fff !important;
 }
