@@ -893,6 +893,45 @@ h3 { font-size: 1.25rem; }
     margin-bottom: var(--spacing-md);
 }
 
+/* Golf Photo Carousel */
+.golf-photo-carousel-wrapper {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.golf-photo-carousel {
+    display: flex;
+    gap: var(--spacing-md);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.golf-photo-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.golf-photo-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+}
+
+.golf-photo-slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+@media (max-width: 768px) {
+    .golf-photo-slide img {
+        height: 280px;
+    }
+}
+
 .zeffy-embed {
     max-width: 600px;
     margin: 0 auto;
@@ -1222,6 +1261,20 @@ h3 { font-size: 1.25rem; }
     .athletics-photos img {
         height: auto;
     }
+}
+
+.founding-photo,
+.family-photo {
+    margin: var(--spacing-md) 0;
+    max-width: 500px;
+}
+
+.founding-photo img,
+.family-photo img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
 }
 
 /* Our Team Page - Board Profiles */
@@ -1563,7 +1616,7 @@ h3 { font-size: 1.25rem; }
     justify-content: center;
     width: 20px;
     height: 20px;
-    background: #00C896;
+    background: var(--color-text-light);
     color: white;
     font-size: 11px;
     font-weight: 800;
