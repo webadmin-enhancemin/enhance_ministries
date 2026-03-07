@@ -58,3 +58,20 @@ button {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #FF7A3D;
 }
+
+/* ── 9. Published status badge (collection list) ── */
+.em-status-published {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  margin-left: auto;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background-color: #28a745;
+  color: #fff;
+}
