@@ -92,14 +92,29 @@
   var quickAddHidden = false;
   function hideQuickAdd() {
     if (quickAddHidden) return;
-    // Quick add is rendered as a <details> or a button containing "Quick add"
-    var els = document.querySelectorAll('details, button');
-    for (var i = 0; i < els.length; i++) {
-      var text = els[i].textContent.trim();
-      if (text.match(/^Quick add/i)) {
-        els[i].style.display = 'none';
-        quickAddHidden = true;
-        return;
+    // Walk all text nodes looking for "Quick add", then hide the
+    // closest interactive ancestor (button, details, div, a).
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      if (walker.currentNode.textContent.trim().toLowerCase() === 'quick add') {
+        var el = walker.currentNode.parentElement;
+        // Walk up to find a clickable container (max 6 levels)
+        for (var j = 0; j < 6 && el; j++) {
+          var tag = el.tagName.toLowerCase();
+          if (tag === 'button' || tag === 'details' || el.getAttribute('role') === 'button'
+              || (tag === 'div' && el.onclick) || tag === 'a') {
+            el.style.display = 'none';
+            quickAddHidden = true;
+            return;
+          }
+          el = el.parentElement;
+        }
+        // Fallback: hide the direct parent of the text
+        if (walker.currentNode.parentElement) {
+          walker.currentNode.parentElement.style.display = 'none';
+          quickAddHidden = true;
+          return;
+        }
       }
     }
   }
