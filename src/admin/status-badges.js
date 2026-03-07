@@ -86,6 +86,8 @@
       // Hide original h2 text but keep the element for pseudo-elements.
       // Force display:block so pseudo-elements stack vertically.
       css += sel + ' h2{font-size:0!important;color:transparent!important;padding:0!important;margin:0!important;display:block!important}\n';
+      // Neutralize wrapper div styling in grid view (removes Decap's shadow/gradient)
+      css += sel + '>div:first-child{background:none!important;box-shadow:none!important;border:none!important;overflow:visible!important;padding:0!important;margin:0!important}\n';
       // Workflow badges (Draft/In Review/Ready) live inside h2 as child elements.
       // They inherit font-size:0 but Decap sets explicit font-size so they stay visible.
       // Position them in the top-right corner of the card (like Published badge).
