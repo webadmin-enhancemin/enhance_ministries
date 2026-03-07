@@ -46,9 +46,14 @@
     return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
   }
 
+  function isWorkflowPage() {
+    return location.hash.indexOf('#/workflow') === 0;
+  }
+
   /* ── card styles (CSS-only, React-proof) ───────────── */
 
   function updateCardStyles() {
+    var onWorkflow = isWorkflowPage();
     var entries = document.querySelectorAll(
       'a[href*="/collections/"][href*="/entries/"]'
     );
@@ -57,8 +62,10 @@
     var css = '';
 
     entries.forEach(function (entry) {
-      // Only process entries inside <li> (both grid and list views)
-      if (!entry.parentElement || entry.parentElement.tagName !== 'LI') return;
+      // Collection page: entries are inside <li>. Workflow page: entries may be inside <div>.
+      if (!entry.parentElement) return;
+      var parentTag = entry.parentElement.tagName;
+      if (!onWorkflow && parentTag !== 'LI') return;
 
       var heading = entry.querySelector('h2');
       if (!heading) return;
@@ -125,6 +132,13 @@
   /* ── Published badges (CSS-only) ───────────────────── */
 
   function updateBadges() {
+    // On the workflow page every entry is unpublished — skip Published badges entirely
+    if (isWorkflowPage()) {
+      var styleEl = document.getElementById(BADGE_STYLE_ID);
+      if (styleEl) styleEl.textContent = '';
+      return;
+    }
+
     var entries = document.querySelectorAll(
       'a[href*="/collections/"][href*="/entries/"]'
     );
