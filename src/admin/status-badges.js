@@ -68,13 +68,6 @@
       var title = match[2];
       var category = match[3];
 
-      // Preserve any existing workflow badge div
-      var workflowBadgeEl = null;
-      var titleIconsDiv = heading.querySelector('div');
-      if (titleIconsDiv) {
-        workflowBadgeEl = titleIconsDiv.cloneNode(true);
-      }
-
       // Mark as processed
       entry.setAttribute('data-em-styled', '');
 
@@ -87,23 +80,15 @@
       }
 
       // Build new card content
+      // Workflow badges (Draft/In Review/Ready) are rendered by Decap itself;
+      // Published badges use our ::after pseudo-element. No need to clone either.
       var wrapper = document.createElement('div');
       wrapper.className = 'em-card-content';
-
-      // Row 1: Category badge + optional workflow badge
-      var topRow = document.createElement('div');
-      topRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;';
 
       var badge = document.createElement('span');
       badge.className = 'em-card-badge';
       badge.textContent = category;
-      topRow.appendChild(badge);
-
-      if (workflowBadgeEl) {
-        topRow.appendChild(workflowBadgeEl);
-      }
-
-      wrapper.appendChild(topRow);
+      wrapper.appendChild(badge);
 
       // Row 2: Title
       var titleEl = document.createElement('div');
