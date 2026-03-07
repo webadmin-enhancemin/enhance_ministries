@@ -41,25 +41,6 @@ collections:
     preview_path: "blog/{{slug}}/"
     summary: "{{date}} · {{title}} [{{category}}]"
     sortable_fields: ["date", "title", "category"]
-    view_filters:
-      - label: "Coaching"
-        field: category
-        pattern: "Coaching"
-      - label: "Ministry Life"
-        field: category
-        pattern: "Ministry Life"
-      - label: "Missions"
-        field: category
-        pattern: "Missions"
-      - label: "Devotional"
-        field: category
-        pattern: "Devotional"
-      - label: "Leadership"
-        field: category
-        pattern: "Leadership"
-    view_groups:
-      - label: "Category"
-        field: category
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - label: "Publish Date"
