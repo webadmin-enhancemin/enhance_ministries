@@ -40,11 +40,7 @@ collections:
     slug: "{{slug}}"
     preview_path: "blog/{{slug}}/"
     summary: "{{date}} · {{title}} [{{category}}]"
-    sortable_fields:
-      fields: ["date", "title"]
-      default:
-        field: date
-        direction: descending
+    sortable_fields: ["date", "title"]
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - label: "Publish Date"
