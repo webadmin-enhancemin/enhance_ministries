@@ -184,7 +184,7 @@
     }
   }
 
-  /* ── label workflow modification dates ────────────────── */
+  /* ── clean up workflow cards (label dates, hide collection label) ── */
 
   var MONTH_RE = /^(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}$/i;
 
@@ -203,8 +203,13 @@
         if (node.parentElement && node.parentElement.closest('h2')) continue;
 
         var text = node.textContent.trim();
+        // Label the modification date
         if (MONTH_RE.test(text) && text.indexOf('Last Modified') === -1) {
           node.textContent = 'Last Modified on: ' + text;
+        }
+        // Hide the "BLOG POSTS" collection label
+        if (text.toUpperCase() === 'BLOG POSTS' && node.parentElement) {
+          node.parentElement.style.display = 'none';
         }
       }
     });
