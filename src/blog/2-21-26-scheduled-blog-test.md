@@ -1,5 +1,5 @@
 ---
-title: 2/21/26 Scheduled Blog Test
+title: Scheduled Blog Test
 date: 2026-02-21
 author: Tait Hoglund
 category: Ministry Life
