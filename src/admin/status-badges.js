@@ -86,8 +86,9 @@
       // Hide original h2 text but keep the element for pseudo-elements.
       // Force display:block so pseudo-elements stack vertically.
       css += sel + ' h2{font-size:0!important;color:transparent!important;padding:0!important;margin:0!important;display:block!important}\n';
-      // Hide any child elements inside h2 (TitleIcons div, etc.)
-      css += sel + ' h2>*{display:none!important}\n';
+      // Do NOT hide h2 child elements — workflow badges (Draft/In Review/Ready)
+      // live inside h2 as a TitleIcons div. They inherit font-size:0 from h2,
+      // but Decap's own CSS sets explicit font-size on them, so they stay visible.
 
       // Category badge  →  a::before (align-self:flex-start prevents full-width stretching)
       css += sel + '::before{content:"' + cssEsc(category).toUpperCase() + '"!important;'
