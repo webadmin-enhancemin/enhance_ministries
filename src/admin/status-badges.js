@@ -100,11 +100,6 @@
       // They inherit font-size:0 but Decap sets explicit font-size so they stay visible.
       // Position them in the top-right corner of the card (like Published badge).
       css += sel + ' h2>*{position:absolute!important;top:16px!important;right:16px!important;z-index:1!important}\n';
-      // On the workflow page, hide extra Decap elements (collection label, modification date, description)
-      if (onWorkflow) {
-        css += sel + '>div:first-child>*:not(h2){display:none!important}\n';
-      }
-
       // Category badge  →  a::before (align-self:flex-start prevents full-width stretching)
       css += sel + '::before{content:"' + cssEsc(category).toUpperCase() + '"!important;'
         + 'display:inline-block!important;align-self:flex-start!important;'
@@ -118,8 +113,9 @@
         + 'display:block!important;font-size:1rem!important;font-weight:600!important;'
         + 'color:#1E1810!important;line-height:1.4!important;white-space:normal!important}\n';
 
-      // Date  →  h2::after
-      css += sel + ' h2::after{content:"' + cssEsc(fmtDate) + '"!important;'
+      // Date  →  h2::after (prefix with "Published:" on workflow page for clarity)
+      var dateLabel = onWorkflow ? 'Published: ' + fmtDate : fmtDate;
+      css += sel + ' h2::after{content:"' + cssEsc(dateLabel) + '"!important;'
         + 'display:block!important;font-size:.8rem!important;color:#575250!important;'
         + 'font-weight:400!important;margin-top:4px!important}\n';
     });
