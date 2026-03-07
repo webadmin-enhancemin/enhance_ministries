@@ -60,25 +60,11 @@ button {
 }
 
 /* ── 9. Published status badge (collection list) ── */
-/* The entry <a> needs relative positioning so the badge can anchor to it */
+/* Entry <a> needs relative positioning so the ::after badge can anchor.
+   Badge content + styles are injected via <style> in <head> by
+   status-badges.js — using ::after avoids React re-render flicker. */
 a[href*="/collections/"][href*="/entries/"] {
   position: relative !important;
-}
-.em-status-published {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.6;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  background-color: #28a745;
-  color: #fff !important;
 }
 
 /* ── 10. Hide "Quick add" dropdown ─────────────── */

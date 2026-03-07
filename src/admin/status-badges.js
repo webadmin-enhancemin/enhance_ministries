@@ -1,8 +1,10 @@
 /**
  * Decap CMS Enhancements
  *
- * 1. Published badges – injects a green "Published" badge on collection
- *    entries that lack a workflow status (Draft / In Review / Ready).
+ * 1. Published badges – uses a dynamic <style> tag in <head> to show a green
+ *    "Published" badge (via ::after) on entries without a workflow status.
+ *    Because the badge is a CSS pseudo-element (not a DOM child), React
+ *    re-renders cannot remove it, eliminating badge flicker.
  *
  * 2. Hide Quick add – removes the redundant "Quick add" dropdown from
  *    the top navigation bar.
@@ -10,14 +12,12 @@
 (function () {
   'use strict';
 
-  var BADGE_CLASS = 'em-status-published';
   var WORKFLOW_LABELS = ['draft', 'in review', 'ready'];
-  var observer;
+  var STYLE_ID = 'em-published-badges';
   var timer;
 
   /* ── helpers ──────────────────────────────────────────── */
 
-  /** Return true if the entry element already contains a workflow badge. */
   function hasWorkflowBadge(entry) {
     var walker = document.createTreeWalker(entry, NodeFilter.SHOW_TEXT);
     while (walker.nextNode()) {
@@ -27,31 +27,53 @@
     return false;
   }
 
-  /* ── badges ──────────────────────────────────────────── */
+  /* ── badges (CSS-only, no DOM injection) ─────────────── */
 
-  function addBadges() {
-    // Pause observer so our own DOM writes don't re-trigger it
-    if (observer) observer.disconnect();
-
+  function updateBadges() {
     var entries = document.querySelectorAll(
       'a[href*="/collections/"][href*="/entries/"]'
     );
+    if (!entries.length) return;
+
+    var selectors = [];
     entries.forEach(function (entry) {
-      if (entry.querySelector('.' + BADGE_CLASS)) return;
-      if (hasWorkflowBadge(entry)) return;
-      var badge = document.createElement('span');
-      badge.className = BADGE_CLASS;
-      badge.textContent = 'Published';
-      entry.appendChild(badge);
+      if (!hasWorkflowBadge(entry)) {
+        var href = entry.getAttribute('href');
+        if (href) {
+          selectors.push('a[href="' + href.replace(/"/g, '\\"') + '"]::after');
+        }
+      }
     });
 
-    // Re-attach observer after a brief delay to skip any synchronous
-    // React reconciliation triggered by our DOM changes
-    setTimeout(function () {
-      if (observer) {
-        observer.observe(document.body, { childList: true, subtree: true });
-      }
-    }, 100);
+    var styleEl = document.getElementById(STYLE_ID);
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      styleEl.id = STYLE_ID;
+      document.head.appendChild(styleEl);
+    }
+
+    if (selectors.length) {
+      styleEl.textContent =
+        selectors.join(',\n') + ' {\n' +
+        '  content: "Published";\n' +
+        '  position: absolute;\n' +
+        '  right: 12px;\n' +
+        '  top: 50%;\n' +
+        '  transform: translateY(-50%);\n' +
+        '  padding: 2px 8px;\n' +
+        '  border-radius: 4px;\n' +
+        '  font-size: 12px;\n' +
+        '  font-weight: 600;\n' +
+        '  line-height: 1.6;\n' +
+        '  letter-spacing: 0.4px;\n' +
+        '  text-transform: uppercase;\n' +
+        '  white-space: nowrap;\n' +
+        '  background-color: #28a745;\n' +
+        '  color: #fff;\n' +
+        '}';
+    } else {
+      styleEl.textContent = '';
+    }
   }
 
   /* ── hide Quick add button ───────────────────────────── */
@@ -63,7 +85,6 @@
     while (walker.nextNode()) {
       if (walker.currentNode.textContent.trim().toLowerCase() === 'quick add') {
         var el = walker.currentNode.parentElement;
-        // Walk up to find a clickable container (max 6 levels)
         for (var j = 0; j < 6 && el; j++) {
           var tag = el.tagName.toLowerCase();
           if (tag === 'button' || tag === 'details' || el.getAttribute('role') === 'button'
@@ -74,7 +95,6 @@
           }
           el = el.parentElement;
         }
-        // Fallback: hide the direct parent of the text
         if (walker.currentNode.parentElement) {
           walker.currentNode.parentElement.style.display = 'none';
           quickAddHidden = true;
@@ -89,16 +109,19 @@
   function debouncedUpdate() {
     clearTimeout(timer);
     timer = setTimeout(function () {
-      addBadges();
+      updateBadges();
       hideQuickAdd();
     }, 500);
   }
 
   function init() {
-    observer = new MutationObserver(debouncedUpdate);
-    observer.observe(document.body, { childList: true, subtree: true });
-    // first pass after CMS finishes rendering
-    setTimeout(addBadges, 2000);
+    // Style tag lives in <head>, observer watches <body> — no feedback loop
+    new MutationObserver(debouncedUpdate)
+      .observe(document.body, { childList: true, subtree: true });
+    setTimeout(function () {
+      updateBadges();
+      hideQuickAdd();
+    }, 2000);
   }
 
   if (document.readyState === 'complete') {
