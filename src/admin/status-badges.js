@@ -73,8 +73,14 @@
       entry.setAttribute('data-em-styled', '');
 
       // Hide all existing children (handles both grid and list view DOM)
+      // but preserve workflow badge elements (Draft/In Review/Ready)
       for (var j = 0; j < entry.children.length; j++) {
-        entry.children[j].style.display = 'none';
+        var child = entry.children[j];
+        var childText = child.textContent.trim().toLowerCase();
+        var isWorkflowBadge = WORKFLOW_LABELS.indexOf(childText) !== -1;
+        if (!isWorkflowBadge) {
+          child.style.display = 'none';
+        }
       }
 
       // Fix parent <li> height for browsers without :has() support
