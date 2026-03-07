@@ -90,8 +90,8 @@ li > a[href*="/collections/"][href*="/entries/"]:hover {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* Hide original CardBody only after JS has injected replacement content */
-a[href*="/collections/"][href*="/entries/"][data-em-styled] > div:first-child {
+/* Hide original CardBody immediately in grid view so old text never shows */
+li > a[href*="/collections/"][href*="/entries/"] > div:first-child {
   display: none !important;
 }
 
@@ -102,11 +102,17 @@ a[href*="/collections/"][href*="/entries/"][data-em-styled] > div:first-child {
 
 /* ── 11. Tile card content (injected by status-badges.js) ── */
 
-/* Card content wrapper */
+@keyframes em-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Card content wrapper — fades in smoothly when JS injects it */
 .em-card-content {
   display: flex !important;
   flex-direction: column !important;
   gap: 8px !important;
+  animation: em-fade-in 0.3s ease !important;
 }
 
 /* Category pill badge (matches .event-badge from live site) */
