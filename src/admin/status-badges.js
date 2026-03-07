@@ -113,8 +113,8 @@
         + 'display:block!important;font-size:1rem!important;font-weight:600!important;'
         + 'color:#1E1810!important;line-height:1.4!important;white-space:normal!important}\n';
 
-      // Date  →  h2::after (prefix with "Published:" on workflow page for clarity)
-      var dateLabel = onWorkflow ? 'Published: ' + fmtDate : fmtDate;
+      // Date  →  h2::after (prefix with "Scheduled For:" on workflow page for clarity)
+      var dateLabel = onWorkflow ? 'Scheduled For: ' + fmtDate : fmtDate;
       css += sel + ' h2::after{content:"' + cssEsc(dateLabel) + '"!important;'
         + 'display:block!important;font-size:.8rem!important;color:#575250!important;'
         + 'font-weight:400!important;margin-top:4px!important}\n';
@@ -184,6 +184,32 @@
     }
   }
 
+  /* ── label workflow modification dates ────────────────── */
+
+  var MONTH_RE = /^(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}$/i;
+
+  function labelWorkflowDates() {
+    if (!isWorkflowPage()) return;
+
+    var entries = document.querySelectorAll(
+      'a[href*="/collections/"][href*="/entries/"]'
+    );
+
+    entries.forEach(function (entry) {
+      var walker = document.createTreeWalker(entry, NodeFilter.SHOW_TEXT);
+      while (walker.nextNode()) {
+        var node = walker.currentNode;
+        // Skip text nodes inside h2 (our content is in pseudo-elements)
+        if (node.parentElement && node.parentElement.closest('h2')) continue;
+
+        var text = node.textContent.trim();
+        if (MONTH_RE.test(text) && text.indexOf('Last Modified') === -1) {
+          node.textContent = 'Last Modified on: ' + text;
+        }
+      }
+    });
+  }
+
   /* ── hide Quick add button ───────────────────────────── */
 
   var quickAddHidden = false;
@@ -219,6 +245,7 @@
     timer = setTimeout(function () {
       updateCardStyles();
       updateBadges();
+      labelWorkflowDates();
       hideQuickAdd();
     }, 500);
   }
@@ -229,6 +256,7 @@
     setTimeout(function () {
       updateCardStyles();
       updateBadges();
+      labelWorkflowDates();
       hideQuickAdd();
     }, 800);
   }
