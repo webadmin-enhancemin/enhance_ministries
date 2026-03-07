@@ -50,6 +50,11 @@
     if (!entries.length) return;
 
     entries.forEach(function (entry) {
+      // Skip list view entries — in list view the <li> has multiple children
+      // (the <a> link plus column elements). Grid view <li> has only the <a>.
+      var parentLi = entry.parentElement;
+      if (!parentLi || parentLi.tagName !== 'LI' || parentLi.children.length > 1) return;
+
       var heading = entry.querySelector('h2');
       if (!heading) return;
 
@@ -69,16 +74,13 @@
       var title = match[2];
       var category = match[3];
 
-      // Mark as processed
+      // Mark as processed — CSS uses this to hide original CardBody
       entry.setAttribute('data-em-styled', '');
 
       // Fix parent <li> height for browsers without :has() support
-      var parentLi = entry.parentElement;
-      if (parentLi && parentLi.tagName === 'LI') {
-        parentLi.style.height = 'auto';
-        parentLi.style.minHeight = '120px';
-        parentLi.style.overflow = 'visible';
-      }
+      parentLi.style.height = 'auto';
+      parentLi.style.minHeight = '120px';
+      parentLi.style.overflow = 'visible';
 
       // Build new card content
       // Workflow badges (Draft/In Review/Ready) are rendered by Decap itself;

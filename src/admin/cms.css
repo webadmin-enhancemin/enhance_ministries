@@ -90,8 +90,8 @@ li > a[href*="/collections/"][href*="/entries/"]:hover {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* Hide original CardBody immediately in grid view so old text never shows */
-li > a[href*="/collections/"][href*="/entries/"] > div:first-child {
+/* Hide original CardBody only after JS confirms it's a grid card */
+a[href*="/collections/"][href*="/entries/"][data-em-styled] > div:first-child {
   display: none !important;
 }
 
