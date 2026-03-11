@@ -24,7 +24,8 @@
       "dropdown": true,
       "children": [
         { "text": "Golf Event", "url": "/golf/" },
-        { "text": "Mission Experiences", "url": "/mission/" }
+        { "text": "Mission Experiences", "url": "/mission/" },
+        { "text": "Care Events", "url": "/care-events/" }
       ]
     },
     {

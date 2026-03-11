@@ -7,6 +7,7 @@ keywords: "mission trips, youth missions, family missions, Twin Cities ministry,
 canonical: "/mission/"
 hasSmoothScroll: true
 hasDropdown: true
+hasCarousel: true
 permalink: /mission/
 ---
 
@@ -57,34 +58,39 @@ permalink: /mission/
 <!-- Trip Selection Cards -->
 <section class="section">
     <div class="container">
-        <div class="trip-cards trip-cards-three">
-            <a href="#student-trip" class="trip-card">
-                <div class="trip-card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                </div>
-                <h3>Student Missions Trip</h3>
-                <p class="trip-card-dates">July 19-25, 2026</p>
-                <p>Middle school and up. A premier short-term missions experience blending customizable ministry with worship, teaching, and leadership development.</p>
-                <span class="trip-card-link">Learn More &rarr;</span>
-            </a>
-            <a href="#family-trip" class="trip-card">
-                <div class="trip-card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                </div>
-                <h3>Family Mission Trip</h3>
-                <p class="trip-card-dates">July 6-12, 2026</p>
-                <p>For families, singles, grandparents, and anyone who wants to serve. A unique experience blending ministry, teaching for all ages, and authentic community.</p>
-                <span class="trip-card-link">Learn More &rarr;</span>
-            </a>
-            <a href="#win-jerusalem" class="trip-card">
-                <div class="trip-card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                </div>
-                <h3>Win Your Jerusalem</h3>
-                <p class="trip-card-dates">Customizable Dates</p>
-                <p>Bring the mission trip experience to your own community. We help churches reach their "Jerusalem" with locally-focused outreach and service.</p>
-                <span class="trip-card-link">Learn More &rarr;</span>
-            </a>
+        <div class="trip-carousel-wrapper">
+            <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&larr;</button>
+            <div class="trip-carousel">
+                <a href="#student-trip" class="trip-card">
+                    <div class="trip-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <h3>Student Missions Trip</h3>
+                    <p class="trip-card-dates">July 19-25, 2026</p>
+                    <p>Middle school and up. A premier short-term missions experience blending customizable ministry with worship, teaching, and leadership development.</p>
+                    <span class="trip-card-link">Learn More &rarr;</span>
+                </a>
+                <a href="#family-trip" class="trip-card">
+                    <div class="trip-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    </div>
+                    <h3>Family Mission Trip</h3>
+                    <p class="trip-card-dates">July 6-12, 2026</p>
+                    <p>For families, singles, grandparents, and anyone who wants to serve. A unique experience blending ministry, teaching for all ages, and authentic community.</p>
+                    <span class="trip-card-link">Learn More &rarr;</span>
+                </a>
+                <a href="#win-jerusalem" class="trip-card">
+                    <div class="trip-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <h3>Win Your Jerusalem</h3>
+                    <p class="trip-card-dates">Customizable Dates</p>
+                    <p>Bring the mission trip experience to your own community. We help churches reach their "Jerusalem" with locally-focused outreach and service.</p>
+                    <span class="trip-card-link">Learn More &rarr;</span>
+                </a>
+            </div>
+            <button class="carousel-btn carousel-btn-next" aria-label="Next">&rarr;</button>
+            <div class="carousel-hint">Swipe to see more</div>
         </div>
     </div>
 </section>
