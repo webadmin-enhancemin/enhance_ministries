@@ -2023,7 +2023,7 @@ h3 { font-size: 1.25rem; }
 
     .nav-dropdown .dropdown-toggle::after {
         content: '▸';
-        font-size: 0.75rem;
+        font-size: 1.5rem;
         transition: transform var(--transition);
     }
 
