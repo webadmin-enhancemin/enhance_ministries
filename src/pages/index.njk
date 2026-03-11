@@ -5,7 +5,7 @@ navStyle: solid
 description: "Enhance Ministries provides coaching, consulting, and care to Pastors for life-long ministry. Supporting pastoral wellness and Kingdom work in Minnesota."
 keywords: "pastoral coaching, ministry support, pastor care, church consulting, nonprofit ministry, Minnesota, pastoral wellness, ministry resources"
 canonical: "/"
-heroPreload: "assets/hero-mountain.webp"
+heroPreload: "assets/hero-mountain-climber.webp"
 hasSmoothScroll: true
 hasCarousel: true
 hasDropdown: true
@@ -49,7 +49,10 @@ permalink: /
 
 <!-- Hero Section -->
 <header class="hero">
-    <img src="/assets/hero-mountain.webp" alt="" class="hero-bg-img" width="1920" height="1080" fetchpriority="high">
+    <picture>
+        <source media="(max-width: 767px)" srcset="/assets/hero-mountain-climber-mobile.webp">
+        <img src="/assets/hero-mountain-climber.webp" alt="" class="hero-bg-img" width="1778" height="1000" fetchpriority="high">
+    </picture>
     <div class="container">
         <h1 class="hero-vision">Cultivating Healthy Leaders and Fruitful Ministries</h1>
         <div class="hero-cta">
