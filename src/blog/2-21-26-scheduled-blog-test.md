@@ -4,6 +4,7 @@ date: 2026-02-21
 author: Tait Hoglund
 category: Leadership
 description: Will this post around 8am on 2/20/26?
+featuredImage: https://res.cloudinary.com/dudif9y8i/image/upload/v1773194361/pastor_you_are_not_alone_b3om6a.png
 ---
 To those of you who read this, and to all the non-pastors who may come across it as well, I want to be very clear on something from the outset. What I have written here is 0% political and 100% pastoral. \
 \
