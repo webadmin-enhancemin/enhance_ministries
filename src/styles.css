@@ -1623,6 +1623,11 @@ h3 { font-size: 1.25rem; }
     border-radius: 4px;
     flex-shrink: 0;
     font-style: normal;
+    transition: background-color var(--transition);
+}
+
+.social-links a:hover .zeffy-logo-icon {
+    background: var(--color-primary);
 }
 
 .contact-form {

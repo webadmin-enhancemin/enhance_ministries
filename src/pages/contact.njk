@@ -56,12 +56,11 @@ permalink: /connect/
             </form>
             <div class="contact-info">
                 <div class="contact-item">
-                    <h3>Subscribe to Receive Updates</h3>
+                    <h3>Stay Connected to Enhance Ministries</h3>
                     <div class="social-links">
-                        <!-- TODO: Replace href="#" with Zeffy newsletter subscription URL when available -->
-                        <a href="#" class="social-link-row" aria-label="Subscribe to Zeffy Newsletter">
+                        <a href="#" class="social-link-row" id="open-prayer-partner-modal" aria-label="Become a Prayer Partner on Zeffy">
                             <span class="zeffy-logo-icon">Z</span>
-                            <span>Subscribe to Newsletter</span>
+                            <span>Become a Prayer Partner</span>
                         </a>
                         <a href="/feed.xml" target="_blank" class="social-link-row" aria-label="RSS Feed">
                             <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -85,6 +84,10 @@ permalink: /connect/
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                             <span>Instagram</span>
                         </a>
+                        <a href="https://www.linkedin.com/company/enhance-ministries/" target="_blank" class="social-link-row" aria-label="Enhance Ministries on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                            <span>LinkedIn</span>
+                        </a>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -104,3 +107,53 @@ permalink: /connect/
         </div>
     </div>
 </section>
+
+<!-- Prayer Partner Modal -->
+<style>
+    #prayer-partner-modal .modal-content {
+        height: auto;
+        max-height: none;
+        padding: 48px 24px 24px;
+    }
+    #prayer-partner-modal iframe {
+        width: 100%;
+        height: 280px;
+        border: 0;
+    }
+</style>
+<div id="prayer-partner-modal" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" id="prayer-partner-close" aria-label="Close">&times;</button>
+        <iframe
+            title="Signup form powered by Zeffy"
+            src="https://www.zeffy.com/en-US/embed/newsletter-form/sign-up-to-be-an-enhance-ministry-prayer-partner"
+            allowTransparency="true">
+        </iframe>
+    </div>
+</div>
+
+<script>
+(function() {
+    const modal = document.getElementById('prayer-partner-modal');
+    const openBtn = document.getElementById('open-prayer-partner-modal');
+    const closeBtn = document.getElementById('prayer-partner-close');
+
+    openBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.addEventListener('click', function() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+})();
+</script>
