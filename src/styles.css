@@ -3610,47 +3610,8 @@ h3 { font-size: 1.25rem; }
 }
 
 /* Messages Section Background */
-.messages-section {
-    position: relative;
-}
-
-.messages-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/assets/hero-mountain.webp');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.08;
-    z-index: 0;
-}
-
-.messages-section .container {
-    position: relative;
-    z-index: 1;
-}
 
 /* Podcasts Section Background */
-.podcasts-section {
-    position: relative;
-    border-top: 12px solid rgba(255, 122, 61, 0.25);
-}
-
-.podcasts-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/assets/hero-mountain.webp');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.08;
-    z-index: 0;
-}
-
-.podcasts-section .container {
-    position: relative;
-    z-index: 1;
-}
 
 /* Podcasts Carousel */
 .podcasts-carousel-wrapper {
