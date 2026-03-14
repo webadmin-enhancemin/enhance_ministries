@@ -12,11 +12,11 @@ html, body, input, textarea, button, select, * {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
 }
 
-/* ── 2. Links ────────────────────────────────── */
-a {
+/* ── 2. Links (scoped to content area, not top nav) ──── */
+main a, section a, [role="main"] a {
   color: #FF7A3D !important;
 }
-a:hover {
+main a:hover, section a:hover, [role="main"] a:hover {
   color: #FF5100 !important;
 }
 
@@ -123,4 +123,75 @@ a[href*="/collections/"][href*="/entries/"]::after {
   top: 16px !important;
   right: 16px !important;
   transform: none !important;
+}
+
+/* ── 11. Hide "Back to site" link until DNS is live ────── */
+header a[href="https://enhancemin.com"] {
+  display: none !important;
+}
+
+/* ── 12. Top nav bar: Content / Workflow / Media ───────── */
+/* Default icon+text color: grey (matching Media tab default) */
+header a,
+header a svg,
+header nav a {
+  color: #798291 !important;
+  fill: #798291 !important;
+}
+/* Active/selected tab: dark charcoal (from Enhance logo), not blue */
+header a[aria-current],
+header a[aria-current] svg,
+header nav a[aria-current],
+header nav a[aria-current] svg,
+header a:where([href$="/collections/blog"], [href$="/workflow"], [href$="/media"]):not(:hover)[aria-current],
+header a:where([href$="/collections/blog"], [href$="/workflow"], [href$="/media"]):not(:hover)[aria-current] svg {
+  color: #333333 !important;
+  fill: #333333 !important;
+}
+/* Hover state: same dark charcoal */
+header a:hover,
+header a:hover svg,
+header nav a:hover,
+header nav a:hover svg {
+  color: #333333 !important;
+  fill: #333333 !important;
+}
+
+/* ── 12. "New Blog Post" button ────────────────────────── */
+header a[href*="new"],
+a[href*="/collections/blog/new"],
+a[href*="/new"] {
+  background-color: #FF7A3D !important;
+  color: #fff !important;
+  border-color: #FF7A3D !important;
+}
+a[href*="/collections/blog/new"]:hover,
+a[href*="/new"]:hover {
+  background-color: #FF5100 !important;
+  border-color: #FF5100 !important;
+  color: #fff !important;
+}
+
+/* ── 13. Replace default user avatar with mountain logo ── */
+/* Decap CMS renders a small avatar img in the top-right toolbar.
+   Target by size/position since emotion hashes class names. */
+img[src*="netlify-identity"][src*="avatar"],
+img[class*="Avatar"],
+div[class*="Avatar"] img,
+img[alt="avatar"],
+img[src=""] {
+  content: url('/assets/logo-mountain.png') !important;
+  object-fit: contain !important;
+  border-radius: 50% !important;
+}
+
+/* Fallback: any gravatar default or blank avatar in the app bar */
+header img[src*="gravatar"],
+header img[src=""],
+header img:not([src]),
+nav img[src*="gravatar"],
+nav img[src=""],
+nav img:not([src]) {
+  content: url('/assets/logo-mountain.png') !important;
+  object-fit: contain !important;
 }
