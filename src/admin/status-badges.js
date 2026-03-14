@@ -11,6 +11,10 @@
  *
  * 3. Hide Quick add – removes the redundant "Quick add" dropdown from
  *    the top navigation bar.
+ *
+ * 4. Auto-save – periodically saves editor field values to localStorage
+ *    every 4 minutes. Shows a restore banner if unsaved content is found
+ *    when reopening a post. Drafts expire after 7 days.
  */
 (function () {
   'use strict';
@@ -217,10 +221,9 @@
 
   /* ── replace avatar SVG with mountain logo ─────────────── */
 
-  var avatarReplaced = false;
   function replaceAvatar() {
-    if (avatarReplaced) return;
-    // The avatar is a 32x32 SVG with a path fill="#1E2532" (Decap's default user icon)
+    // The avatar is a 32x32 SVG with a path fill="#1E2532" (Decap's default user icon).
+    // Runs on every mutation because React re-renders the SVG on navigation.
     var svgs = document.querySelectorAll('svg[width="32"][height="32"]');
     svgs.forEach(function (svg) {
       var path = svg.querySelector('path[fill="#1E2532"]');
@@ -230,7 +233,20 @@
       img.alt = 'User';
       img.style.cssText = 'width:32px;height:32px;border-radius:50%;object-fit:contain;';
       svg.replaceWith(img);
-      avatarReplaced = true;
+    });
+  }
+
+  /* ── hide "Back to site" link ──────────────────────────── */
+
+  function hideSiteLink() {
+    // Decap renders the site_url as a link in the header. Hide it on every view.
+    var links = document.querySelectorAll('header a');
+    links.forEach(function (a) {
+      var text = a.textContent.trim().toLowerCase();
+      if (text === 'enhancemin.com' || text === 'enhancemin.netlify.app'
+          || a.href.indexOf('enhancemin') !== -1) {
+        a.style.display = 'none';
+      }
     });
   }
 
@@ -262,6 +278,220 @@
     }
   }
 
+  /* ── localStorage auto-save for editor ──────────────────── */
+
+  var AUTOSAVE_PREFIX = 'em-autosave-';
+  var AUTOSAVE_INTERVAL = 240000; // 4 minutes
+  var autosaveTimer = null;
+  var lastSavedHash = '';
+
+  function getEditorKey() {
+    // Build a storage key from the current hash route
+    // e.g. #/collections/blog/entries/my-post → em-autosave-blog-my-post
+    var hash = location.hash;
+    var entryMatch = hash.match(/#\/collections\/([^/]+)\/entries\/([^/]+)/);
+    var newMatch = hash.match(/#\/collections\/([^/]+)\/new$/);
+    if (entryMatch) return AUTOSAVE_PREFIX + entryMatch[1] + '-' + entryMatch[2];
+    if (newMatch) return AUTOSAVE_PREFIX + newMatch[1] + '-new';
+    return null;
+  }
+
+  function isEditorPage() {
+    var hash = location.hash;
+    return hash.indexOf('/entries/') !== -1 || hash.match(/#\/collections\/[^/]+\/new$/);
+  }
+
+  function captureEditorState() {
+    var fields = {};
+    // Capture all text inputs and textareas
+    var inputs = document.querySelectorAll('input[type="text"], textarea, [contenteditable="true"]');
+    inputs.forEach(function (el, i) {
+      var label = el.getAttribute('id') || el.getAttribute('name') || el.getAttribute('placeholder') || ('field-' + i);
+      if (el.getAttribute('contenteditable') === 'true') {
+        fields[label] = el.innerHTML;
+      } else {
+        fields[label] = el.value;
+      }
+    });
+    // Capture select/dropdown values
+    var selects = document.querySelectorAll('select');
+    selects.forEach(function (el, i) {
+      var label = el.getAttribute('id') || el.getAttribute('name') || ('select-' + i);
+      fields[label] = el.value;
+    });
+    return fields;
+  }
+
+  function hashFields(fields) {
+    return JSON.stringify(fields);
+  }
+
+  function autoSave() {
+    var key = getEditorKey();
+    if (!key) return;
+
+    var fields = captureEditorState();
+    var currentHash = hashFields(fields);
+
+    // Only save if content has changed and there's actual content
+    if (currentHash === lastSavedHash || Object.keys(fields).length === 0) return;
+
+    // Don't save if all fields are empty
+    var hasContent = false;
+    for (var k in fields) {
+      if (fields[k] && fields[k].trim()) { hasContent = true; break; }
+    }
+    if (!hasContent) return;
+
+    lastSavedHash = currentHash;
+    localStorage.setItem(key, JSON.stringify({
+      fields: fields,
+      timestamp: Date.now(),
+      url: location.hash
+    }));
+    showAutoSaveIndicator();
+  }
+
+  function showAutoSaveIndicator() {
+    var now = new Date();
+    var time = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    var text = 'Auto-saved at ' + time;
+
+    // Try to place next to Decap's own "Changes saved" status in the toolbar
+    var el = document.getElementById('em-autosave-indicator');
+    if (el) {
+      el.textContent = text;
+      return;
+    }
+
+    // Find the "Changes saved" span by walking text nodes in the top toolbar
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      var node = walker.currentNode;
+      if (node.textContent.trim().toLowerCase() === 'changes saved'
+          || node.textContent.trim().toLowerCase() === 'unsaved changes') {
+        var parent = node.parentElement;
+        if (parent) {
+          el = document.createElement('span');
+          el.id = 'em-autosave-indicator';
+          el.style.cssText = 'margin-left:12px;font-size:12px;color:#575250;font-weight:400;';
+          el.textContent = text;
+          parent.parentElement.appendChild(el);
+          return;
+        }
+      }
+    }
+
+    // Fallback: fixed position near the top-left toolbar area
+    el = document.createElement('div');
+    el.id = 'em-autosave-indicator';
+    el.style.cssText = 'position:fixed;top:12px;left:220px;z-index:10000;'
+      + 'font-family:Inter,sans-serif;font-size:12px;color:#575250;';
+    el.textContent = text;
+    document.body.appendChild(el);
+  }
+
+  function showRestoreBanner(key, data) {
+    var existing = document.getElementById('em-autosave-banner');
+    if (existing) return; // already showing
+
+    var age = Date.now() - data.timestamp;
+    var minutes = Math.floor(age / 60000);
+    var timeAgo = minutes < 1 ? 'less than a minute ago'
+      : minutes < 60 ? minutes + ' minute' + (minutes === 1 ? '' : 's') + ' ago'
+      : Math.floor(minutes / 60) + ' hour' + (Math.floor(minutes / 60) === 1 ? '' : 's') + ' ago';
+
+    var banner = document.createElement('div');
+    banner.id = 'em-autosave-banner';
+    banner.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:10000;'
+      + 'background:#fff;border:2px solid #FF7A3D;border-radius:8px;padding:16px 20px;'
+      + 'box-shadow:0 4px 12px rgba(0,0,0,0.15);max-width:360px;font-family:Inter,sans-serif;';
+    banner.innerHTML = '<div style="font-weight:600;margin-bottom:6px;color:#1E1810;">Unsaved draft found</div>'
+      + '<div style="font-size:13px;color:#575250;margin-bottom:12px;">Auto-saved ' + timeAgo + '</div>'
+      + '<div style="display:flex;gap:8px;">'
+      + '<button id="em-autosave-restore" style="background:#FF7A3D;color:#fff;border:none;padding:6px 16px;border-radius:4px;cursor:pointer;font-weight:600;font-size:13px;">Restore</button>'
+      + '<button id="em-autosave-dismiss" style="background:#e8e6e3;color:#575250;border:none;padding:6px 16px;border-radius:4px;cursor:pointer;font-weight:600;font-size:13px;">Dismiss</button>'
+      + '</div>';
+
+    document.body.appendChild(banner);
+
+    document.getElementById('em-autosave-restore').addEventListener('click', function () {
+      restoreFields(data.fields);
+      banner.remove();
+    });
+
+    document.getElementById('em-autosave-dismiss').addEventListener('click', function () {
+      localStorage.removeItem(key);
+      banner.remove();
+    });
+  }
+
+  function restoreFields(fields) {
+    var inputs = document.querySelectorAll('input[type="text"], textarea, [contenteditable="true"]');
+    inputs.forEach(function (el, i) {
+      var label = el.getAttribute('id') || el.getAttribute('name') || el.getAttribute('placeholder') || ('field-' + i);
+      if (fields[label] !== undefined) {
+        if (el.getAttribute('contenteditable') === 'true') {
+          el.innerHTML = fields[label];
+        } else {
+          // Trigger React's change detection
+          var nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+            window.HTMLInputElement.prototype, 'value'
+          ) || Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value');
+          if (nativeInputValueSetter && nativeInputValueSetter.set) {
+            nativeInputValueSetter.set.call(el, fields[label]);
+          } else {
+            el.value = fields[label];
+          }
+          el.dispatchEvent(new Event('input', { bubbles: true }));
+          el.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+    });
+  }
+
+  function checkForSavedDraft() {
+    var key = getEditorKey();
+    if (!key) return;
+
+    var raw = localStorage.getItem(key);
+    if (!raw) return;
+
+    try {
+      var data = JSON.parse(raw);
+      // Expire after 24 hours
+      if (Date.now() - data.timestamp > 604800000) {
+        localStorage.removeItem(key);
+        return;
+      }
+      // Wait for editor to load before showing banner
+      setTimeout(function () { showRestoreBanner(key, data); }, 1500);
+    } catch (e) {
+      localStorage.removeItem(key);
+    }
+  }
+
+  function startAutoSave() {
+    if (autosaveTimer) clearInterval(autosaveTimer);
+    if (isEditorPage()) {
+      autosaveTimer = setInterval(autoSave, AUTOSAVE_INTERVAL);
+      checkForSavedDraft();
+    }
+  }
+
+  // Clean up expired auto-saves (older than 24h)
+  function cleanupAutoSaves() {
+    for (var i = localStorage.length - 1; i >= 0; i--) {
+      var k = localStorage.key(i);
+      if (k && k.indexOf(AUTOSAVE_PREFIX) === 0) {
+        try {
+          var d = JSON.parse(localStorage.getItem(k));
+          if (Date.now() - d.timestamp > 604800000) localStorage.removeItem(k);
+        } catch (e) { localStorage.removeItem(k); }
+      }
+    }
+  }
+
   /* ── observer ─────────────────────────────────────────── */
 
   function debouncedUpdate() {
@@ -272,9 +502,11 @@
       labelWorkflowDates();
       hideQuickAdd();
       replaceAvatar();
+      hideSiteLink();
     }, 500);
   }
 
+  var lastHash = location.hash;
   function init() {
     new MutationObserver(debouncedUpdate)
       .observe(document.body, { childList: true, subtree: true });
@@ -284,7 +516,19 @@
       labelWorkflowDates();
       hideQuickAdd();
       replaceAvatar();
+      hideSiteLink();
+      cleanupAutoSaves();
+      startAutoSave();
     }, 800);
+
+    // Restart auto-save when navigating between views
+    window.addEventListener('hashchange', function () {
+      if (location.hash !== lastHash) {
+        lastHash = location.hash;
+        lastSavedHash = '';
+        startAutoSave();
+      }
+    });
   }
 
   if (document.readyState === 'complete') {
