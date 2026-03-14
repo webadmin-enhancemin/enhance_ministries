@@ -226,3 +226,7 @@ The `.event-badge` class renders a small orange pill/chip label that appears abo
 - **Jotform** — student mission trip registration on `/mission/`
 - **Web3Forms** — contact form (access key hardcoded in contact form HTML; key: `ff5f576c-...`)
 - **Google Fonts** — Inter (400/500/600/700), loaded via `<link>` in base layout
+
+## Quality Check
+
+Codex is going to check your engineering work.
