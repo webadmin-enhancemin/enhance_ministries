@@ -172,26 +172,6 @@ a[href*="/new"]:hover {
   color: #fff !important;
 }
 
-/* ── 13. Replace default user avatar with mountain logo ── */
-/* Decap CMS renders a small avatar img in the top-right toolbar.
-   Target by size/position since emotion hashes class names. */
-img[src*="netlify-identity"][src*="avatar"],
-img[class*="Avatar"],
-div[class*="Avatar"] img,
-img[alt="avatar"],
-img[src=""] {
-  content: url('/assets/logo-mountain.png') !important;
-  object-fit: contain !important;
-  border-radius: 50% !important;
-}
-
-/* Fallback: any gravatar default or blank avatar in the app bar */
-header img[src*="gravatar"],
-header img[src=""],
-header img:not([src]),
-nav img[src*="gravatar"],
-nav img[src=""],
-nav img:not([src]) {
-  content: url('/assets/logo-mountain.png') !important;
-  object-fit: contain !important;
-}
+/* ── 13. Avatar replacement handled by status-badges.js ──
+   The default avatar is an SVG icon, not an <img>.
+   JS replaces it with /assets/logo-mountain.png at runtime. */

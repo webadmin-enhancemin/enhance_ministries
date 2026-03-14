@@ -215,6 +215,25 @@
     });
   }
 
+  /* ── replace avatar SVG with mountain logo ─────────────── */
+
+  var avatarReplaced = false;
+  function replaceAvatar() {
+    if (avatarReplaced) return;
+    // The avatar is a 32x32 SVG with a path fill="#1E2532" (Decap's default user icon)
+    var svgs = document.querySelectorAll('svg[width="32"][height="32"]');
+    svgs.forEach(function (svg) {
+      var path = svg.querySelector('path[fill="#1E2532"]');
+      if (!path) return;
+      var img = document.createElement('img');
+      img.src = '/assets/logo-mountain.png';
+      img.alt = 'User';
+      img.style.cssText = 'width:32px;height:32px;border-radius:50%;object-fit:contain;';
+      svg.replaceWith(img);
+      avatarReplaced = true;
+    });
+  }
+
   /* ── hide Quick add button ───────────────────────────── */
 
   var quickAddHidden = false;
@@ -252,6 +271,7 @@
       updateBadges();
       labelWorkflowDates();
       hideQuickAdd();
+      replaceAvatar();
     }, 500);
   }
 
@@ -263,6 +283,7 @@
       updateBadges();
       labelWorkflowDates();
       hideQuickAdd();
+      replaceAvatar();
     }, 800);
   }
 
