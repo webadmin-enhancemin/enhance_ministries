@@ -126,7 +126,10 @@ a[href*="/collections/"][href*="/entries/"]::after {
 }
 
 /* ── 11. Hide "Back to site" link until DNS is live ────── */
-header a[href="https://enhancemin.com"] {
+a[href="https://enhancemin.com"],
+a[href="https://enhancemin.com/"],
+a[href*="enhancemin.com"],
+[class*="AppHeaderSiteLink"] {
   display: none !important;
 }
 

@@ -239,12 +239,10 @@
   /* ── hide "Back to site" link ──────────────────────────── */
 
   function hideSiteLink() {
-    // Decap renders the site_url as a link in the header. Hide it on every view.
-    var links = document.querySelectorAll('header a');
+    // Decap renders the site_url as a link in header and editor views. Hide everywhere.
+    var links = document.querySelectorAll('a');
     links.forEach(function (a) {
-      var text = a.textContent.trim().toLowerCase();
-      if (text === 'enhancemin.com' || text === 'enhancemin.netlify.app'
-          || a.href.indexOf('enhancemin') !== -1) {
+      if (a.href && a.href.indexOf('enhancemin.com') !== -1) {
         a.style.display = 'none';
       }
     });
