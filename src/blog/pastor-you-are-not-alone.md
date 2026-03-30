@@ -27,23 +27,23 @@ So with that said, I’ve got 5 items I would offer as the core communication an
 
 I have seen far too many people whose passions, attitudes, words and actions are clearly more informed by what they are reading in their algorithm-fueled echo chambers online and unfortunately, based on their fruit, not on what Scripture says. Over the years I've used the analogy of a steak marinating in a delicious sauce to describe how Scripture needs to affect our lives. Once that steak is grilled up, no matter where you cut into it, it tastes like that marinade! *That* is how our and our peoples’ lives need to be. We need to marinate in God's Word so much so that wherever the world or circumstances 'cut' into us it is God's Word that flows out! This isn’t cheesy Sunday School stuff here, this is real life!
 
->"For out of the overflow of the heart, the mouth speaks* (and the life acts) (my emphasis added)"
+> "For out of the overflow of the heart, the mouth speaks* (and the life acts) (my emphasis added)"
 > — Matthew 12:34 & Luke 6:45
 
 Furthermore, being founded on and guided by Scripture is the only way through this journey of life.
 
->"Your Word is a lamp unto my feet and a light unto >my path."
+> "Your Word is a lamp unto my feet and a light unto >my path."
 > —Psalm 119:105
-
+>
 > "All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness, so that the servant of God\[a] may be thoroughly equipped for every good work."
->—2 Timothy 3:16-17
+> —2 Timothy 3:16-17
 
 Don’t forget, what was Jesus’ response to temptation? Quoting Scripture! (Matthew 4 & Luke 4)
 
 I pray you and I, and the churches we are a part of are so hungry for God's Word that we are filled with it 
 
->Man does not live on bread alone, but on every word that flows from the mouth of God*) to the point where we are able to correctly discern in each moment what is and is not aligned with it. 
->—Matthew 4:4
+> Man does not live on bread alone, but on every word that flows from the mouth of God*) to the point where we are able to correctly discern in each moment what is and is not aligned with it. 
+> —Matthew 4:4
 
 Pastor, I pray you are doing well in this area, well beyond sermon prep. Then, are your people doing well in this? Is your leadership, teaching and shepherding growing their Biblical literacy, their ability to feed themselves, to discern what is not Biblical in the world around them and the conviction to act on it?
 
@@ -53,15 +53,15 @@ For your people, hearing or knowing God's Word is not enough. It must drive ever
 
 We cannot and must not think and act like the world does! The passage I quote every time I do a microphone check before a speaking engagement:
 
->"I urge you brothers and sisters, in view of God's mercy, offer your bodies as living sacrifices, holy and pleasing to God. This is your spiritual act of worship. Do not conform any longer to the pattern of this world but be transformed by the renewing of your minds. Then you will be able to test and approve what God's will is - His good, pleasing and perfect will."
->—Romans 12:1-2
+> "I urge you brothers and sisters, in view of God's mercy, offer your bodies as living sacrifices, holy and pleasing to God. This is your spiritual act of worship. Do not conform any longer to the pattern of this world but be transformed by the renewing of your minds. Then you will be able to test and approve what God's will is - His good, pleasing and perfect will."
+> —Romans 12:1-2
 
 Unfortunately if we throw our tube in the "Lazy River" (More to come on that soon!) of life and even church life and allow our minds to be filled with whatever voice is yelling the loudest, almost never the Holy Spirit (see 1 Kings 19), we will be conformed to those things rather than Scripture. 
 
 May we be like the tree planted by streams of water we read about in Psalm 1:
 
 > Blessed is the one who does not walk in step with the wicked or stand in the way that sinners take or sit in the company of mockers, but whose delight is in the law of the Lord, and who meditates on his law day and night. That person is like a tree planted by streams of water, which yields its fruit in season and whose leaf does not wither—whatever they do prospers. Not so the wicked! They are like chaff that the wind blows away
-
+>
 > Therefore the wicked will not stand in the judgment, nor sinners in the assembly of the righteous. For the Lord watches over the way of the righteous, but the way of the wicked leads to destruction.
 
 While this point is probably going to be pretty universally accepted by all sides of the spectrum, my challenge to be theologically driven has less to do with the stance taken and more to do with how it is taken and communicated. 
@@ -99,7 +99,7 @@ Is it consistent with Scripture?! Well, no...and yes. 
 (Pastor, feel free to play this card with your church one of these days!)
 
 > “You have heard that it was said, ‘Love your neighbor and hate your enemy.’  But I tell you, **love your enemies and pray for those who persecute you**, that you may be children of your Father in heaven. He causes his sun to rise on the evil and the good, and sends rain on the righteous and the unrighteous. If you love those who love you, what reward will you get? Are not even the tax collectors doing that? And if you greet only your own people, what are you doing more than others? Do not even pagans do that? Be perfect, therefore, as your heavenly Father is perfect.
->-Matthew 5:43-48
+> -Matthew 5:43-48
 
 So, yea, if a follower of Jesus simply cannot figure this out then let's be grounded and driven by this passage where Jesus on the sermon on the mount turned the world upside down. 
 
