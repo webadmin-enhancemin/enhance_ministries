@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:enhancemin.netlify.app)",
+      "Read(//tmp/**)",
+      "Read(//s/tmp/**)",
+      "Bash(cygpath -w /tmp/website-design.png)",
+      "Bash(npx --yes @aspect-build/cwebp --version)",
+      "Bash(pip show Pillow)",
+      "Bash(tasklist)",
+      "Bash(npx --yes sharp-cli -i \"S:/Users/Dad/Downloads/golf/golf_course.png\" -o \"S:/Users/Dad/enhance_ministries/src/assets/golf-course-hero.webp\" -- webp --quality 80)",
+      "Bash(pip3 show:*)",
+      "Bash(pkill -f \"eleventy\")",
+      "Bash(taskkill //F //IM \"node.exe\" //FI \"WINDOWTITLE eq *eleventy*\")",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //F //PID 21756)",
+      "Read(//c/Users/Dad/OneDrive/Desktop/**)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(gh api:*)",
+      "Bash(gh search:*)",
+      "WebFetch(domain:unpkg.com)"
+    ],
+    "additionalDirectories": [
+      "\\tmp",
+      "C:\\Users\\Dad\\OneDrive\\Desktop"
+    ]
+  }
+}

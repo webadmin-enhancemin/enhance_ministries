@@ -34,9 +34,6 @@ Log into the DNS management panel at onestoneweb3.com and update these records f
 3. Netlify auto-provisions SSL once DNS is verified
 4. Confirm both `enhancemin.com` and `www.enhancemin.com` load with HTTPS
 
-
-
-
 ### Tasks
 
 - [ ] Contact Tom Stark to update DNS records (Option A or B above)

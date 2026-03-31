@@ -78,20 +78,17 @@ permalink: /page/
 | `events.njk` | `/events/` | Events hub |
 | `golf.njk` | `/golf/` | Golf fundraiser + Zeffy registration iframe |
 | `mission.njk` | `/mission/` | Student + Family + Win Your Jerusalem trips |
-| `book.njk` | `/book/` | Matt's book |
-| `media.njk` | `/media/` | Messages, podcasts, articles |
-| `partners.njk` | `/partners/` | Ministry partners |
+| `resources.njk` | `/resources/` | Blog, Matt's book, media, and ministry partners |
 | `leadership.njk` | `/leadership/` | Team carousel |
 | `contact.njk` | `/contact/` | Contact form (Web3Forms) |
-| `blog.njk` | `/blog/` | Blog listing page (reads `collections.blog`) |
 
-**Old `.html` URL redirects** are in `src/_redirects` (Netlify rules, copied to `_site/` at build time).
+**URL redirects** are in `src/_redirects` (Netlify rules, copied to `_site/` at build time). The old `/blog/`, `/book/`, `/media/`, and `/partners/` URLs all redirect to `/resources/`.
 
 ## Blog & CMS
 
 ### How It Works
 
-Blog posts are Markdown files in `src/blog/`. Eleventy reads them as a collection (`tags: blog`) and renders each through `src/_includes/layouts/post.njk` at `/blog/post-slug/`. The blog listing page at `/blog/` iterates over `collections.blog | reverse`.
+Blog posts are Markdown files in `src/blog/`. Eleventy reads them as a collection (`tags: blog`) and renders each through `src/_includes/layouts/post.njk` at `/blog/post-slug/`. The blog listing is part of `resources.njk` at `/resources/` (old `/blog/` URL redirects there).
 
 The **Decap CMS** admin at `/admin/` is a web UI that lets editors write and publish posts without touching code. When a post is published, Decap CMS commits the Markdown file to GitHub, which triggers the GitHub Actions deploy pipeline.
 
@@ -108,10 +105,13 @@ date: 2026-02-15
 author: "Matt Swigart"
 category: "Coaching"
 description: "1–2 sentence summary for post cards and SEO."
+image: "/assets/blog/optional-featured-image.jpg"
 ---
 
 Post body in Markdown...
 ```
+
+The `image` field is optional (stored in `src/assets/blog/`).
 
 The `layout`, `tags: blog`, and permalink are set automatically by `src/blog/blog.11tydata.js` — don't add them to individual posts.
 
@@ -163,7 +163,7 @@ Netlify auto-builds are **disabled** — GitHub Actions is the sole deploy trigg
 ## CSS
 
 All styles in `src/styles.css`. CSS custom properties in `:root`:
-- Colors: `--color-primary` (#FF7A3D), `--color-primary-dark` (#FF5100)
+- Colors: `--color-primary` (#FF7A3D), `--color-primary-dark` (#FF5100), accessible orange (#C54500) for WCAG AA text/buttons on white
 - Spacing: `--spacing-xs` through `--spacing-2xl`
 - Layout: `--max-width` (1200px)
 
