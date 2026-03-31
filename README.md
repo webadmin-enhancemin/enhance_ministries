@@ -186,9 +186,7 @@ Throughout the site, small orange pill/chip labels appear above certain section 
 
 ## Contact
 
-- **Email:** matt@enhancemin.com
-- **Phone:** (651) 503-0934
-- **Location:** Woodbury, MN
+- **Email:** webadmin@enhancemin.com
 
 ---
 
